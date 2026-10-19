@@ -1,113 +1,134 @@
-# HỆ THỐNG QUẢN LÝ NHÂN SỰ
+# HỆ THỐNG QUẢN LÝ NHÂN SỰ — BẢN KHUNG GIAO DIỆN
 
-Bài báo cáo môn **Lập trình Windows Form** — ứng dụng WinForms (.NET 9) quản lý nhân sự,
-chấm công và tính lương.
+> **Đây là bản "khung giao diện" để chia việc cho nhóm.**
+> Toàn bộ giao diện (8 màn hình) đã được thiết kế bằng **Windows Forms Designer** và
+> nằm nguyên trong các file `*.Designer.cs`. Phần **lập trình (code xử lý sự kiện) đã được
+> để trống** — mỗi thành viên nhận màn hình nào thì mở file `.cs` tương ứng và điền code
+> vào các hàm có ghi `// TODO:`.
 
-## 1. Cách mở và chạy
+Chương trình **vẫn build và chạy được** ngay (0 lỗi, 0 cảnh báo), chỉ là bấm nút chưa có gì xảy ra.
 
-1. Mở tập tin **`QuanLyNhanSu.sln`** bằng **Visual Studio 2022** (bản 17.12 trở lên).
-2. Chọn cấu hình `Debug` — `Any CPU`, nhấn **F5** để chạy.
-3. Yêu cầu máy đã cài **.NET SDK 9** (`dotnet --list-sdks`).
+---
 
-Chạy bằng dòng lệnh:
+## 1. Mở và chạy
 
-```
-dotnet build
-dotnet run --project QuanLyNhanSu
-```
+1. Mở file `QuanLyNhanSu.sln` bằng **Visual Studio 2022**.
+2. Nhấn `F5` (hoặc `Ctrl + F5`) để chạy. Yêu cầu **.NET 9 SDK**.
+3. Mặc định chương trình mở màn hình chính `frmMain`.
 
-> Toàn bộ giao diện được thiết kế bằng **Windows Forms Designer** (các tập tin
-> `*.Designer.cs`). Có thể mở từng form trong VS rồi kéo/thả, chỉnh sửa trực tiếp.
+### Chạy nhanh 1 màn hình để lập trình / kiểm tra giao diện
 
-## 2. Tài khoản dùng thử
+Mỗi thành viên nên test riêng màn hình mình làm, không cần chờ các màn hình khác:
 
-| Tên đăng nhập | Mật khẩu | Vai trò |
+- **Trong Visual Studio:** chuột phải project `QuanLyNhanSu` → `Properties` → `Debug` →
+  `Open debug launch profiles UI` → ô **Command line arguments**, gõ tên form, ví dụ: `frmEmployee`
+- **Hoặc ở dòng lệnh:** `dotnet run -- frmEmployee`
+
+Tên form hợp lệ: `frmLogin`, `frmMain`, `frmDashboard`, `frmEmployee`, `frmAttendance`,
+`frmSalary`, `frmDepartment`, `frmPosition`.
+
+---
+
+## 2. Quy tắc làm việc với giao diện (quan trọng)
+
+Mỗi màn hình gồm **3 file**, không được xóa file nào:
+
+| File | Nội dung | Ai sửa |
 |---|---|---|
-| `admin` | `admin123` | Quản trị (toàn quyền) |
-| `nv01`  | `123456`   | Nhân viên |
-| `nv02`  | `123456`   | Nhân viên |
+| `frmX.Designer.cs` | Giao diện do Designer sinh ra (control, vị trí, màu, font...) | **Chỉ sửa bằng cách kéo–thả trong Designer**, không gõ tay vào file này |
+| `frmX.resx` | Tài nguyên của form (VS tự quản lý) | Không sửa |
+| `frmX.cs` | **Phần lập trình**: các hàm xử lý sự kiện (đang để trống) | Thành viên phụ trách điền code |
 
-- Nhập sai 3 lần sẽ bị **khoá đăng nhập** trong 60 giây.
-- Tùy chọn **Ghi nhớ đăng nhập** lưu tên đăng nhập vào Registry
-  `HKEY_CURRENT_USER\Software\QuanLyNhanSu` (mật khẩu không lưu).
-- Vai trò *Nhân viên* bị vô hiệu hoá các chức năng: Quản lý phòng ban, chức vụ,
-  sao lưu và phục hồi dữ liệu.
+> ⚠️ **Không dựng thêm control bằng code** (không viết `new Label()`, `new Button()`,
+> `Controls.Add(...)`). Cần thêm/sửa control thì mở form trong **Designer** rồi kéo–thả.
+>
+> ⚠️ Tên hàm trong `frmX.cs` **phải giữ đúng như Designer đang gán sự kiện** — xóa hoặc
+> đổi tên là chương trình **không build được**.
 
-## 3. Chức năng chính
+Cách mở Designer: trong Solution Explorer bấm đúp vào `frmX.cs` (hoặc `frmX.Designer.cs`)
+là VS mở giao diện để kéo–thả.
 
-### Yêu cầu 1 — Hồ sơ nhân viên (frmEmployee)
-- Sơ đồ tổ chức dạng **TreeView** (Công ty → Phòng ban → Nhân viên), chọn nút để lọc.
-- Lọc theo phòng ban, tìm kiếm theo tên / mã nhân viên.
-- Thông tin chi tiết: mã, họ tên, giới tính, ngày sinh, điện thoại, email, địa chỉ,
-  phòng ban, chức vụ, ngày vào làm, lương cơ bản, phép năm, trạng thái.
-- Ảnh nhân viên: **Đổi ảnh…** / **Xóa ảnh** (ảnh lưu kèm trong dữ liệu).
-- Danh sách dạng **ListView**, các nút **Thêm / Sửa / Xóa / Lưu / Hủy / Làm mới**.
-- Kiểm tra dữ liệu: ô sai được **báo đỏ**, có **tooltip** giải thích và tự focus vào ô lỗi
-  (ví dụ: *Mã nhân viên không được để trống*, *Ngày sinh phải nhỏ hơn ngày hiện tại*).
+**Riêng `frmLogin.Designer.cs`** có dùng logo từ `Properties/Resources.resx` (ảnh `ảnh_icon`)
+→ **không xóa thư mục `Properties/`**, nếu không sẽ lỗi build.
 
-### Yêu cầu 2 — Chấm công hằng ngày (frmAttendance)
-- Chọn ngày chấm công (**DatePicker không cho chọn ngày tương lai**), lọc theo phòng ban.
-- **Nhập từ CSV…** để nạp bảng chấm công từ tập tin.
-- Danh sách có **CheckBox** (chọn nhân viên có mặt), nút **Chọn tất cả / Bỏ chọn tất cả**.
-- **Nhấn chuột phải** vào danh sách để đổi trạng thái: Đi làm, Đi trễ, Nghỉ phép,
-  Nghỉ không phép và nhập số giờ tăng ca.
-- **Lưu bảng công** để ghi lại bảng chấm công của ngày đang chọn.
+---
 
-### Yêu cầu 3 — Tính lương và phiếu lương (frmSalary)
-- Lọc theo **tháng / năm / phòng ban**, nhấn **Tính lương**.
-- Bảng lương: Mã NV, Tên NV, Lương cơ bản, Ngày làm thực tế, Số lần đi trễ,
-  Số giờ tăng ca, Phép năm còn lại, **TỔNG LƯƠNG**.
-- **Xuất Bảng Lương (CSV)** mở hộp thoại lưu tập tin (UTF-8, mở được bằng Excel).
-- **Xuất Phiếu Lương (TXT)** cho nhân viên đang chọn (phiếu lương in dạng văn bản).
+## 3. Chia việc theo yêu cầu của bài
 
-### Tiện ích khác (frmMain)
-- Menu **Hệ thống**: Sao lưu dữ liệu, Phục hồi dữ liệu, Đổi màu giao diện,
-  Đổi font chữ, Đăng xuất, Thoát.
-- Menu **Quản lý**: Hồ sơ nhân viên, Phòng ban, Chức vụ.
-- Menu **Nghiệp vụ**: Chấm công hằng ngày, Tính lương và phiếu lương.
-- Dashboard: thống kê số nhân viên / phòng ban / chức vụ và **danh sách sinh nhật**
-  trong tháng, nhấp đúp một dòng để mở hồ sơ nhân viên.
-- Thanh trạng thái: người dùng, vai trò và **đồng hồ cập nhật mỗi giây**.
+| Yêu cầu | Màn hình | File cần lập trình | Số hàm cần làm |
+|---|---|---|---|
+| Đăng nhập + ghi nhớ + khóa sau 3 lần sai | `frmLogin` | `Forms/frmLogin.cs` | 6 |
+| Màn hình chính MDI + menu + đồng hồ + đổi màu/font + sao lưu | `frmMain` | `Forms/frmMain.cs` | 20 |
+| Bảng điều khiển (thống kê + sinh nhật trong tháng) | `frmDashboard` | `Forms/frmDashboard.cs` | 1 |
+| **Yêu cầu 1 — Hồ sơ nhân viên** (cây tổ chức, ảnh, tìm kiếm, kiểm tra dữ liệu) | `frmEmployee` | `Forms/frmEmployee.cs` | 14 |
+| **Yêu cầu 2 — Chấm công** (chặn ngày tương lai, menu trạng thái, nhập CSV) | `frmAttendance` | `Forms/frmAttendance.cs` | 17 |
+| **Yêu cầu 3 — Tính lương** (tính lương, xuất CSV/TXT) | `frmSalary` | `Forms/frmSalary.cs` | 8 |
+| Danh mục phòng ban | `frmDepartment` | `Forms/frmDepartment.cs` | 8 |
+| Danh mục chức vụ | `frmPosition` | `Forms/frmPosition.cs` | 8 |
 
-Phím tắt: `Ctrl+H` hồ sơ nhân viên, `Ctrl+M` chấm công, `Ctrl+L` tính lương,
-`Ctrl+D` dashboard, `Ctrl+Shift+P` phòng ban, `Ctrl+Shift+C` chức vụ.
+Mỗi file `.cs` đã ghi rõ từng hàm cần làm việc gì ở dòng `// TODO:`.
 
-## 4. Tham số nghiệp vụ (App.config)
+---
 
-| Khoá | Ý nghĩa | Giá trị |
+## 4. Tầng dữ liệu (cả nhóm tự tạo)
+
+Bản này **đã xóa** các thư mục `Models/`, `Data/`, `Services/` để nhóm tự làm. Gợi ý cấu trúc
+chung (nên thống nhất trước khi chia việc):
+
+```
+Models/NhanVien.cs      MaNV, HoTen, GioiTinh, NgaySinh, DienThoai, Email, DiaChi,
+                        MaPhong, MaChucVu, HeSoLuong, LuongCoBan, NgayVaoLam,
+                        TrangThai, PhepNam, Anh (chuỗi Base64)
+Models/PhongBan.cs      MaPhong, TenPhong, MoTa
+Models/ChucVu.cs        MaChucVu, TenChucVu, HeSoLuong
+Models/ChamCong.cs      MaNV, Ngay, TrangThai, SoPhutTre, SoGioTangCa
+Models/TaiKhoan.cs      TenDangNhap, MatKhau, VaiTro
+Data/DataStore.cs       Đọc/ghi danh sách trên ra file JSON và nạp dữ liệu mẫu lần đầu
+Services/...            Các hàm dùng chung: tính lương, tìm kiếm, xử lý ảnh, đọc App.config
+```
+
+Gợi ý lưu dữ liệu: đối tượng → **JSON** (`System.Text.Json`) tại
+`%AppData%\QuanLyNhanSu\data.json`; ảnh nhân viên lưu dạng **chuỗi Base64**.
+
+Tài khoản mẫu: `admin / admin123` (Quản trị), `nv01 / 123456`, `nv02 / 123456`.
+
+---
+
+## 5. Tham số nghiệp vụ trong `App.config`
+
+| Khóa | Giá trị | Ý nghĩa |
 |---|---|---|
-| `TenDonVi` | Tên đơn vị hiển thị trên tiêu đề và phiếu lương | CÔNG TY TNHH GIẢI PHÁP ABC |
-| `NgayCongChuan` | Số ngày công chuẩn trong tháng | 26 |
-| `MucTruDiTre` | Số tiền trừ cho mỗi lần đi trễ (VNĐ) | 100000 |
-| `HeSoTangCa` | Hệ số tiền tăng ca | 1.5 |
-| `SoGioLamChuan` | Số giờ làm việc chuẩn mỗi ngày | 8 |
+| `TenDonVi` | CÔNG TY TNHH GIẢI PHÁP ABC | Tên đơn vị in trên phiếu lương |
+| `NgayCongChuan` | 26 | Số ngày công chuẩn trong tháng |
+| `MucTruDiTre` | 100000 | Số tiền trừ cho mỗi lần đi trễ (VNĐ) |
+| `HeSoTangCa` | 1.5 | Hệ số tiền tăng ca |
+| `SoGioLamChuan` | 8 | Số giờ làm việc chuẩn 1 ngày |
 
-Công thức: lương theo ngày công = lương cơ bản / `NgayCongChuan` × ngày làm thực tế;
-tiền tăng ca = lương cơ bản / (`NgayCongChuan` × `SoGioLamChuan`) × `HeSoTangCa` × giờ tăng ca;
-trừ đi trễ = số lần đi trễ × `MucTruDiTre`.
+Đọc bằng `ConfigurationManager.AppSettings["TênKhóa"]`.
 
-## 5. Nơi lưu dữ liệu
-
-- Dữ liệu: `%AppData%\QuanLyNhanSu\data.json` (JSON, gồm phòng ban, chức vụ, nhân viên,
-  tài khoản, chấm công và ảnh nhân viên dạng base64). Lần chạy đầu sẽ tự sinh dữ liệu mẫu.
-- Tùy chỉnh giao diện & ghi nhớ đăng nhập: Registry `HKCU\Software\QuanLyNhanSu`.
-
-## 6. Cấu trúc thư mục
+**Công thức tính lương gợi ý:**
 
 ```
-QuanLyNhanSu/
-├─ Program.cs                 điểm khởi động, cấu hình văn hoá vi-VN
-├─ App.config                 tham số nghiệp vụ
-├─ Models/                    Enums, PhongBan, ChucVu, NhanVien, ChamCong, TaiKhoan
-├─ Data/DataStore.cs          đọc/ghi dữ liệu JSON + dữ liệu mẫu
-├─ Services/
-│   ├─ CauHinh.cs             đọc App.config
-│   ├─ PhienLamViec.cs        người dùng đang đăng nhập
-│   ├─ TuyChinh.cs            màu/font giao diện + Registry
-│   ├─ HinhAnh.cs             xử lý ảnh (bo góc, base64, logo)
-│   ├─ NghiepVu.cs            tính lương, sinh nhật, tra cứu
-│   └─ CotDanhSach.cs         giãn độ rộng cột ListView theo DPI
-└─ Forms/                     frmLogin, frmMain, frmDashboard, frmEmployee,
-                              frmAttendance, frmSalary, frmDepartment, frmPosition
-                              (mỗi form gồm .cs và .Designer.cs)
+Lương ngày       = Lương cơ bản / NgayCongChuan
+Lương theo công  = Lương ngày * số ngày công thực tế
+Trừ đi trễ       = số lần đi trễ * MucTruDiTre
+Tiền tăng ca     = (Lương ngày / SoGioLamChuan) * số giờ tăng ca * HeSoTangCa
+Thực lĩnh        = Lương theo công - Trừ đi trễ + Tiền tăng ca
 ```
+
+---
+
+## 6. Ghi chú kỹ thuật
+
+- Target framework: `net9.0-windows`, `UseWindowsForms = true`.
+- Ngôn ngữ/định dạng ngày giờ được đặt theo `vi-VN` trong `Program.cs`.
+- `Program.cs` có sẵn phần chạy nhanh một màn hình khi lập trình (xem mục 1) và chỗ để
+  bật lại luồng đăng nhập khi `frmLogin` đã làm xong.
+- Màu nền / font giao diện lưu trong Registry tại `HKCU\Software\QuanLyNhanSu`.
+- **Bản chạy hoàn chỉnh trước đây** (đã có đủ code) vẫn nằm trong lịch sử Git. Muốn xem lại:
+
+  ```bash
+  git log --oneline          # tìm commit cũ
+  git show <mã-commit> --stat
+  git checkout <mã-commit> -- QuanLyNhanSu   # lấy lại toàn bộ code cũ
+  ```

@@ -1,343 +1,139 @@
 using System;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using QuanLyNhanSu.Data;
-using QuanLyNhanSu.Services;
 
 namespace QuanLyNhanSu.Forms
 {
     /// <summary>
-    /// Màn hình chính (MDI Parent): chứa thanh menu, thanh trạng thái, đồng hồ thời gian thực
-    /// và là nơi mở các Form con.
+    /// MÀN HÌNH CHÍNH (frmMain) – form cha MDI chứa thanh MenuStrip và StatusStrip.
+    ///
+    /// Giao diện đã có sẵn trong frmMain.Designer.cs: 5 menu (Hệ thống, Quản lý,
+    /// Nghiệp vụ, Cửa sổ, Trợ giúp), StatusStrip có lblNguoiDung, lblVaiTro, lblDongHo.
+    /// File này chỉ chứa phần LẬP TRÌNH.
+    ///
+    /// CÁC VIỆC CẦN LÀM:
+    ///   1. Mở các màn hình con (Dashboard, Hồ sơ, Phòng ban, Chức vụ, Chấm công, Tính lương).
+    ///   2. Đồng hồ thời gian thực trên StatusStrip.
+    ///   3. Đổi màu / đổi font giao diện và lưu lại (Registry).
+    ///   4. Sao lưu / phục hồi dữ liệu.
+    ///   5. Xếp các cửa sổ con, đăng xuất, giới thiệu, thoát.
     /// </summary>
     public partial class frmMain : Form
     {
-        private bool dangDangXuat;
-
         public frmMain()
         {
             InitializeComponent();
         }
 
-        // ------------------------------------------------------------------
-        // Khởi động
-        // ------------------------------------------------------------------
+        // =====================================================================
+        //  CÁC HÀM CẦN LẬP TRÌNH
+        // =====================================================================
+
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Text = CauHinh.TenDonVi + " - Hệ thống quản lý nhân sự";
-
-            lblNguoiDung.Text = "Người dùng: " + PhienLamViec.TenHienThi
-                + " (" + (PhienLamViec.NguoiDung == null ? "" : PhienLamViec.NguoiDung.TenDangNhap) + ")";
-            lblVaiTro.Text = "Vai trò: " + PhienLamViec.TenVaiTro;
-
-            PhanQuyenTheoVaiTro();
-
-            timerDongHo.Start();
-            CapNhatDongHo(null, EventArgs.Empty);
-
-            LamMoiGiaoDien();
-
-            // Màn hình nền: mở ngay bảng điều khiển
-            MoFormCon(typeof(frmDashboard));
-        }
-
-        private void PhanQuyenTheoVaiTro()
-        {
-            bool laQuanTri = PhienLamViec.LaQuanTri;
-
-            // Nhân viên không được quản lý phòng ban, chức vụ và không được sao lưu / phục hồi
-            mnuPhongBan.Enabled = laQuanTri;
-            mnuChucVu.Enabled = laQuanTri;
-            mnuSaoLuu.Enabled = laQuanTri;
-            mnuPhucHoi.Enabled = laQuanTri;
-        }
-
-        // ------------------------------------------------------------------
-        // Quản lý Form con (không mở trùng lặp)
-        // ------------------------------------------------------------------
-        private Form MoFormCon(Type kieuForm)
-        {
-            foreach (Form f in MdiChildren)
-            {
-                if (f.GetType() == kieuForm)
-                {
-                    if (f.WindowState == FormWindowState.Minimized)
-                    {
-                        f.WindowState = FormWindowState.Normal;
-                    }
-
-                    f.Activate();
-                    return f;
-                }
-            }
-
-            Form con = (Form)Activator.CreateInstance(kieuForm);
-            con.MdiParent = this;
-            con.Show();
-            return con;
-        }
-
-        private void MoFormConVaDong(Type kieuForm)
-        {
-            Form f = MoFormCon(kieuForm);
-            if (f != null)
-            {
-                f.BringToFront();
-            }
-        }
-
-        /// <summary>Áp dụng lại màu sắc / font chữ cho Form này và mọi Form con đang mở.</summary>
-        private void LamMoiGiaoDien()
-        {
-            TuyChinh.ApDung(this);
-            foreach (Form f in MdiChildren)
-            {
-                TuyChinh.ApDung(f);
-            }
+            // TODO: - Đặt tiêu đề form (Text) theo tên đơn vị đọc từ App.config.
+            //       - Hiện tên người đăng nhập ở lblNguoiDung và quyền ở lblVaiTro.
+            //       - Bật timerDongHo để cập nhật đồng hồ.
+            //       - Mở form Dashboard làm cửa sổ con đầu tiên (xem mnuBangDieuKhien_Click).
+            //       - Áp dụng màu nền / font chữ đã lưu trong Registry (xem mnuDoiMau_Click).
         }
 
         private void timerDongHo_Tick(object sender, EventArgs e)
         {
-            CapNhatDongHo(sender, e);
+            // TODO: lblDongHo.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
-        private void CapNhatDongHo(object sender, EventArgs e)
-        {
-            lblDongHo.Text = DateTime.Now.ToString("dddd, dd/MM/yyyy HH:mm:ss");
-        }
-
-        // ------------------------------------------------------------------
-        // Menu: Hệ thống
-        // ------------------------------------------------------------------
         private void mnuBangDieuKhien_Click(object sender, EventArgs e)
         {
-            MoFormConVaDong(typeof(frmDashboard));
+            // TODO: Mở form Dashboard (frmDashboard) dưới dạng form con MDI.
         }
 
-        private void mnuDangXuat_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Bạn có chắc muốn đăng xuất khỏi hệ thống?", "Xác nhận đăng xuất",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-            {
-                return;
-            }
-
-            dangDangXuat = true;
-            PhienLamViec.YeuCauDangXuat = true;
-            DongTatCaFormCon();
-            Close();
-        }
-
-        private void mnuDoiMau_Click(object sender, EventArgs e)
-        {
-            using (ColorDialog cd = new ColorDialog())
-            {
-                cd.Color = TuyChinh.MauChinh;
-                cd.FullOpen = true;
-                if (cd.ShowDialog(this) != DialogResult.OK)
-                {
-                    return;
-                }
-
-                TuyChinh.MauChinh = cd.Color;
-                TuyChinh.Save();       // Lưu vào Registry
-                LamMoiGiaoDien();
-            }
-        }
-
-        private void mnuDoiFont_Click(object sender, EventArgs e)
-        {
-            using (FontDialog fd = new FontDialog())
-            {
-                fd.Font = TuyChinh.FontGiaoDien;
-                fd.ShowColor = false;
-                if (fd.ShowDialog(this) != DialogResult.OK)
-                {
-                    return;
-                }
-
-                TuyChinh.TenFont = fd.Font.Name;
-                TuyChinh.CoFont = fd.Font.Size;
-                TuyChinh.Save();       // Lưu vào Registry
-                LamMoiGiaoDien();
-            }
-        }
-
-        private void mnuMacDinh_Click(object sender, EventArgs e)
-        {
-            TuyChinh.MauChinh = Color.FromArgb(45, 108, 223);
-            TuyChinh.TenFont = "Segoe UI";
-            TuyChinh.CoFont = 9F;
-            TuyChinh.Save();
-            LamMoiGiaoDien();
-            MessageBox.Show("Đã khôi phục giao diện mặc định.", "Tùy chỉnh giao diện",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void mnuSaoLuu_Click(object sender, EventArgs e)
-        {
-            using (SaveFileDialog sfd = new SaveFileDialog())
-            {
-                sfd.Title = "Sao lưu dữ liệu hệ thống";
-                sfd.Filter = "Tập tin dữ liệu (*.json)|*.json|Tất cả tập tin (*.*)|*.*";
-                sfd.FileName = "sao_luu_nhan_su_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".json";
-
-                if (sfd.ShowDialog(this) != DialogResult.OK)
-                {
-                    return;
-                }
-
-                try
-                {
-                    Store.Save();
-                    File.Copy(Store.DataFile, sfd.FileName, true);
-                    MessageBox.Show("Sao lưu dữ liệu thành công!\n" + sfd.FileName, "Sao lưu dữ liệu",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Sao lưu thất bại: " + ex.Message, "Sao lưu dữ liệu",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void mnuPhucHoi_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Title = "Chọn tập tin sao lưu để phục hồi";
-                ofd.Filter = "Tập tin dữ liệu (*.json)|*.json|Tất cả tập tin (*.*)|*.*";
-
-                if (ofd.ShowDialog(this) != DialogResult.OK)
-                {
-                    return;
-                }
-
-                if (MessageBox.Show("Toàn bộ dữ liệu hiện tại sẽ bị thay thế bằng dữ liệu trong tập tin này.\nTiếp tục?",
-                        "Xác nhận phục hồi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
-                {
-                    return;
-                }
-
-                try
-                {
-                    Directory.CreateDirectory(Store.Folder);
-                    File.Copy(ofd.FileName, Store.DataFile, true);
-                    Store.Reload();
-
-                    DongTatCaFormCon();
-                    MoFormConVaDong(typeof(frmDashboard));
-
-                    MessageBox.Show("Phục hồi dữ liệu thành công!", "Phục hồi dữ liệu",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Phục hồi thất bại: " + ex.Message, "Phục hồi dữ liệu",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void mnuThoat_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void DongTatCaFormCon()
-        {
-            foreach (Form f in MdiChildren)
-            {
-                f.Close();
-            }
-        }
-
-        // ------------------------------------------------------------------
-        // Menu: Quản lý
-        // ------------------------------------------------------------------
         private void mnuHoSo_Click(object sender, EventArgs e)
         {
-            MoFormConVaDong(typeof(frmEmployee));
+            // TODO: Mở màn hình Quản lý hồ sơ nhân viên (frmEmployee).
         }
 
         private void mnuPhongBan_Click(object sender, EventArgs e)
         {
-            MoFormConVaDong(typeof(frmDepartment));
+            // TODO: Mở màn hình Quản lý phòng ban (frmDepartment).
         }
 
         private void mnuChucVu_Click(object sender, EventArgs e)
         {
-            MoFormConVaDong(typeof(frmPosition));
+            // TODO: Mở màn hình Quản lý chức vụ (frmPosition).
         }
 
-        // ------------------------------------------------------------------
-        // Menu: Nghiệp vụ
-        // ------------------------------------------------------------------
         private void mnuChamCong_Click(object sender, EventArgs e)
         {
-            MoFormConVaDong(typeof(frmAttendance));
+            // TODO: Mở màn hình Chấm công (frmAttendance).
         }
 
         private void mnuTinhLuong_Click(object sender, EventArgs e)
         {
-            MoFormConVaDong(typeof(frmSalary));
+            // TODO: Mở màn hình Tính lương (frmSalary).
         }
 
-        // ------------------------------------------------------------------
-        // Menu: Cửa sổ
-        // ------------------------------------------------------------------
+        private void mnuDangXuat_Click(object sender, EventArgs e)
+        {
+            // TODO: Đóng tất cả form con, ẩn frmMain rồi mở lại frmLogin (ShowDialog);
+            //       nếu đăng nhập lại thành công thì hiện frmMain trở lại.
+        }
+
+        private void mnuDoiMau_Click(object sender, EventArgs e)
+        {
+            // TODO: Mở ColorDialog cho người dùng chọn màu, áp dụng cho menuStrip1/statusStrip1
+            //       (và các form con đang mở) rồi lưu màu vào Registry để lần sau tự nạp lại.
+        }
+
+        private void mnuDoiFont_Click(object sender, EventArgs e)
+        {
+            // TODO: Mở FontDialog, áp dụng font cho toàn bộ form và các form con, lưu vào Registry.
+        }
+
+        private void mnuMacDinh_Click(object sender, EventArgs e)
+        {
+            // TODO: Trả giao diện về màu và font mặc định, xóa giá trị đã lưu trong Registry.
+        }
+
+        private void mnuSaoLuu_Click(object sender, EventArgs e)
+        {
+            // TODO: SaveFileDialog -> sao chép file dữ liệu (JSON) ra nơi người dùng chọn.
+            //       (Gợi ý: dùng File.Copy)
+        }
+
+        private void mnuPhucHoi_Click(object sender, EventArgs e)
+        {
+            // TODO: OpenFileDialog chọn file sao lưu -> hỏi xác nhận -> ghi đè file dữ liệu -> nạp lại.
+        }
+
+        private void mnuThoat_Click(object sender, EventArgs e)
+        {
+            // TODO: Hỏi xác nhận rồi đóng ứng dụng: Close();
+        }
+
         private void mnuXepChong_Click(object sender, EventArgs e)
         {
-            LayoutMdi(MdiLayout.Cascade);
+            // TODO: LayoutMdi(MdiLayout.Cascade);
         }
 
         private void mnuXepNgang_Click(object sender, EventArgs e)
         {
-            LayoutMdi(MdiLayout.TileHorizontal);
+            // TODO: LayoutMdi(MdiLayout.TileHorizontal);
         }
 
         private void mnuXepDoc_Click(object sender, EventArgs e)
         {
-            LayoutMdi(MdiLayout.TileVertical);
+            // TODO: LayoutMdi(MdiLayout.TileVertical);
         }
 
-        // ------------------------------------------------------------------
-        // Menu: Trợ giúp
-        // ------------------------------------------------------------------
         private void mnuGioiThieu_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "HỆ THỐNG QUẢN LÝ NHÂN SỰ" + Environment.NewLine + Environment.NewLine +
-                "Đơn vị: " + CauHinh.TenDonVi + Environment.NewLine +
-                "Ngày công chuẩn: " + CauHinh.NgayCongChuan + " ngày/tháng" + Environment.NewLine +
-                "Mức trừ đi trễ: " + CauHinh.MucTruDiTre.ToString("#,##0") + " VNĐ/lần" + Environment.NewLine +
-                "Hệ số tăng ca: " + CauHinh.HeSoTangCa.ToString("0.##") + Environment.NewLine + Environment.NewLine +
-                "Dữ liệu lưu tại: " + Store.DataFile,
-                "Giới thiệu phần mềm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // TODO: Hộp thoại giới thiệu chương trình (MessageBox.Show với tên bài, tên nhóm, phiên bản).
         }
 
-        // ------------------------------------------------------------------
-        // Đóng chương trình
-        // ------------------------------------------------------------------
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (dangDangXuat)
-            {
-                return;
-            }
-
-            DialogResult kq = MessageBox.Show("Bạn có chắc muốn thoát khỏi chương trình?",
-                "Xác nhận thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (kq != DialogResult.Yes)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            PhienLamViec.YeuCauDangXuat = false;
+            // TODO: Hỏi "Bạn có chắc muốn thoát?" – nếu chọn Không thì e.Cancel = true;
         }
     }
 }

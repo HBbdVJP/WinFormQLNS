@@ -1,278 +1,93 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
-using QuanLyNhanSu.Data;
-using QuanLyNhanSu.Models;
-using QuanLyNhanSu.Services;
 
 namespace QuanLyNhanSu.Forms
 {
     /// <summary>
-    /// Màn hình Tính lương &amp; Phiếu lương: tính lương theo tháng, xuất phiếu lương cá nhân
-    /// ra tập tin .txt và xuất toàn bộ bảng lương ra tập tin .csv.
+    /// YÊU CẦU 3 – TÍNH LƯƠNG (frmSalary).
+    ///
+    /// Giao diện đã có sẵn trong frmSalary.Designer.cs:
+    ///   - panelTop : chọn tháng (cboThang), năm (nudNam), phòng ban (cboPhong),
+    ///                nút Xem (btnXem)
+    ///   - lvLuong  : bảng lương (dòng cuối là TỔNG LƯƠNG)
+    ///   - panelBottom : nút Tính lương, Xuất bảng lương, Xuất phiếu lương
+    ///
+    /// CÁC VIỆC CẦN LÀM:
+    ///   1. Nạp tháng / năm / phòng ban và tính lương theo điều kiện đang chọn.
+    ///   2. Công thức đọc các tham số từ App.config (xem mục appSettings):
+    ///        NgayCongChuan (26), MucTruDiTre (100000), HeSoTangCa (1.5), SoGioLamChuan (8),
+    ///        TenDonVi (tên đơn vị in trên phiếu lương).
+    ///   3. Xuất bảng lương ra file CSV và xuất phiếu lương của một nhân viên ra file TXT.
     /// </summary>
     public partial class frmSalary : Form
     {
-        private bool dangNap;
-
         public frmSalary()
         {
             InitializeComponent();
         }
 
+        // =====================================================================
+        //  NẠP DỮ LIỆU – TÍNH LƯƠNG
+        // =====================================================================
+
         private void frmSalary_Load(object sender, EventArgs e)
         {
-            TuyChinh.ApDung(this);
-
-            dangNap = true;
-
-            cboThang.Items.Clear();
-            for (int i = 1; i <= 12; i++)
-            {
-                cboThang.Items.Add("Tháng " + i);
-            }
-
-            cboThang.SelectedIndex = DateTime.Today.Month - 1;
-            nudNam.Value = DateTime.Today.Year;
-
-            cboPhong.Items.Clear();
-            cboPhong.Items.Add("-- Tất cả phòng ban --");
-            foreach (PhongBan p in Store.Data.PhongBans)
-            {
-                cboPhong.Items.Add(p);
-            }
-
-            cboPhong.SelectedIndex = 0;
-
-            dangNap = false;
-            TinhLuong();
-
-            CotDanhSach.VuaTieuDe(lvLuong);
-        }
-
-        private int ThangDangChon
-        {
-            get { return cboThang.SelectedIndex + 1; }
-        }
-
-        private int NamDangChon
-        {
-            get { return (int)nudNam.Value; }
-        }
-
-        private string MaPhongDangChon
-        {
-            get
-            {
-                PhongBan p = cboPhong.SelectedItem as PhongBan;
-                return p == null ? "" : p.MaPhong;
-            }
-        }
-
-        // ------------------------------------------------------------------
-        // Tính lương
-        // ------------------------------------------------------------------
-        private void TinhLuong()
-        {
-            List<DongLuong> ds = NghiepVu.TinhLuongThang(ThangDangChon, NamDangChon, MaPhongDangChon);
-
-            lvLuong.BeginUpdate();
-            lvLuong.Items.Clear();
-
-            decimal tongQuy = 0;
-            foreach (DongLuong dl in ds)
-            {
-                ListViewItem item = new ListViewItem(dl.MaNV);
-                item.SubItems.Add(dl.HoTen);
-                item.SubItems.Add(dl.LuongCoBan.ToString("#,##0"));
-                item.SubItems.Add(dl.NgayLam.ToString());
-                item.SubItems.Add(dl.SoLanDiTre.ToString());
-                item.SubItems.Add(dl.GioTangCa.ToString("0.##"));
-                item.SubItems.Add(dl.PhepConLai.ToString());
-                item.SubItems.Add(dl.TongLuong.ToString("#,##0"));
-                item.Tag = dl;
-
-                lvLuong.Items.Add(item);
-                tongQuy += dl.TongLuong;
-            }
-
-            lvLuong.EndUpdate();
-
-            lblThongTin.Text = string.Format(
-                "Ngày công chuẩn: {0} | Trừ đi trễ: {1} đ/lần | Tổng quỹ lương: {2} VNĐ",
-                CauHinh.NgayCongChuan,
-                CauHinh.MucTruDiTre.ToString("#,##0"),
-                tongQuy.ToString("#,##0"));
-        }
-
-        private void btnTinhLuong_Click(object sender, EventArgs e)
-        {
-            TinhLuong();
-            MessageBox.Show(string.Format("Đã tính lương tháng {0}/{1} cho {2} nhân viên.",
-                ThangDangChon, NamDangChon, lvLuong.Items.Count),
-                "Tính lương", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // TODO: - Nạp tháng 1..12 vào cboThang (mặc định tháng hiện tại).
+            //       - Nạp năm vào nudNam (MinYear = năm hiện tại - 5, mặc định năm hiện tại).
+            //       - Nạp phòng ban vào cboPhong, thêm mục "Tất cả phòng ban".
+            //       - Đọc các tham số lương từ App.config (ConfigurationManager.AppSettings).
+            //       - Gọi tính lương cho tháng/năm hiện tại.
         }
 
         private void btnXem_Click(object sender, EventArgs e)
         {
-            TinhLuong();
+            // TODO: Tải lại (tính lại) bảng lương theo tháng / năm / phòng ban đang chọn.
         }
 
         private void cboThang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!dangNap && IsHandleCreated)
-            {
-                TinhLuong();
-            }
+            // TODO: Tính lại bảng lương khi đổi tháng.
         }
 
         private void nudNam_ValueChanged(object sender, EventArgs e)
         {
-            if (!dangNap && IsHandleCreated)
-            {
-                TinhLuong();
-            }
+            // TODO: Tính lại bảng lương khi đổi năm.
         }
 
         private void cboPhong_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!dangNap && IsHandleCreated)
-            {
-                TinhLuong();
-            }
+            // TODO: Tính lại bảng lương khi đổi phòng ban.
         }
 
-        // ------------------------------------------------------------------
-        // Xuất phiếu lương (.txt)
-        // ------------------------------------------------------------------
-        private void btnXuatPhieuLuong_Click(object sender, EventArgs e)
+        private void btnTinhLuong_Click(object sender, EventArgs e)
         {
-            if (lvLuong.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("Vui lòng chọn một nhân viên trên danh sách để xuất phiếu lương.",
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            DongLuong dl = lvLuong.SelectedItems[0].Tag as DongLuong;
-            if (dl == null)
-            {
-                return;
-            }
-
-            saveFileDialog1.Filter = "Tập tin văn bản (*.txt)|*.txt|Tất cả tập tin (*.*)|*.*";
-            saveFileDialog1.FileName = string.Format("phieu_luong_{0}_{1:00}_{2}.txt",
-                dl.MaNV, ThangDangChon, NamDangChon);
-
-            if (saveFileDialog1.ShowDialog(this) != DialogResult.OK)
-            {
-                return;
-            }
-
-            try
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(CauHinh.TenDonVi.ToUpper());
-                sb.AppendLine("PHIẾU LƯƠNG NHÂN VIÊN");
-                sb.AppendLine("Tháng " + ThangDangChon + " năm " + NamDangChon);
-                sb.AppendLine(new string('=', 60));
-                sb.AppendLine("Mã nhân viên     : " + dl.MaNV);
-                sb.AppendLine("Họ và tên        : " + dl.HoTen);
-                NhanVien nv = NghiepVu.TimNhanVien(dl.MaNV);
-                if (nv != null)
-                {
-                    sb.AppendLine("Phòng ban        : " + NghiepVu.TenPhong(nv.MaPhong));
-                    sb.AppendLine("Chức vụ          : " + NghiepVu.TenChucVu(nv.MaChucVu));
-                }
-
-                sb.AppendLine(new string('-', 60));
-                sb.AppendLine("Lương cơ bản             : " + dl.LuongCoBan.ToString("#,##0") + " VNĐ");
-                sb.AppendLine("Ngày công chuẩn          : " + CauHinh.NgayCongChuan + " ngày");
-                sb.AppendLine("Ngày làm thực tế         : " + dl.NgayLam + " ngày");
-                sb.AppendLine("Lương theo ngày công     : " + dl.LuongTheoNgayCong.ToString("#,##0") + " VNĐ");
-                sb.AppendLine("Số giờ tăng ca           : " + dl.GioTangCa.ToString("0.##") + " giờ");
-                sb.AppendLine("Tiền tăng ca             : " + dl.TienTangCa.ToString("#,##0") + " VNĐ");
-                sb.AppendLine("Số lần đi trễ            : " + dl.SoLanDiTre);
-                sb.AppendLine("Tiền trừ đi trễ          : -" + dl.TienTruDiTre.ToString("#,##0") + " VNĐ");
-                sb.AppendLine("Ngày nghỉ phép           : " + dl.SoNgayNghiPhep);
-                sb.AppendLine("Ngày nghỉ không phép     : " + dl.SoNgayNghiKhongPhep);
-                sb.AppendLine("Phép năm còn lại         : " + dl.PhepConLai + " ngày");
-                sb.AppendLine(new string('-', 60));
-                sb.AppendLine("TỔNG LƯƠNG               : " + dl.TongLuong.ToString("#,##0") + " VNĐ");
-                sb.AppendLine(new string('=', 60));
-                sb.AppendLine("Ngày lập phiếu: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
-
-                File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), new UTF8Encoding(true));
-
-                MessageBox.Show("Đã xuất phiếu lương:\n" + saveFileDialog1.FileName,
-                    "Xuất phiếu lương", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Xuất phiếu lương thất bại: " + ex.Message, "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            // TODO: Tính lương cho từng nhân viên rồi đổ lên lvLuong, gồm các cột:
+            //         Mã NV | Họ tên | Phòng ban | Lương cơ bản | Ngày công |
+            //         Trừ đi trễ | Tiền tăng ca | Thực lĩnh
+            //       Công thức gợi ý:
+            //         Lương ngày      = Lương cơ bản / NgayCongChuan
+            //         Lương theo công = Lương ngày * số ngày công thực tế
+            //         Trừ đi trễ      = số lần đi trễ * MucTruDiTre
+            //         Tiền tăng ca    = Lương ngày / SoGioLamChuan * số giờ tăng ca * HeSoTangCa
+            //         Thực lĩnh       = Lương theo công - Trừ đi trễ + Tiền tăng ca
+            //       Dòng cuối cùng của ListView là TỔNG LƯƠNG của toàn bộ danh sách.
         }
 
-        // ------------------------------------------------------------------
-        // Xuất bảng lương (.csv)
-        // ------------------------------------------------------------------
+        // =====================================================================
+        //  XUẤT FILE
+        // =====================================================================
+
         private void btnXuatBangLuong_Click(object sender, EventArgs e)
         {
-            if (lvLuong.Items.Count == 0)
-            {
-                MessageBox.Show("Bảng lương đang trống, chưa có gì để xuất.", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            // TODO: SaveFileDialog (bảng lương.csv) -> ghi toàn bộ bảng lương ra file CSV
+            //       (nên ghi theo UTF-8 để không lỗi tiếng Việt trong Excel).
+        }
 
-            saveFileDialog1.Filter = "Tập tin CSV (*.csv)|*.csv|Tất cả tập tin (*.*)|*.*";
-            saveFileDialog1.FileName = string.Format("bang_luong_{0:00}_{1}.csv", ThangDangChon, NamDangChon);
-
-            if (saveFileDialog1.ShowDialog(this) != DialogResult.OK)
-            {
-                return;
-            }
-
-            try
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("Mã NV,Tên NV,Lương cơ bản,Ngày làm thực tế,Số lần đi trễ,Số giờ tăng ca,Phép năm còn lại,Tổng lương");
-
-                foreach (ListViewItem item in lvLuong.Items)
-                {
-                    DongLuong dl = item.Tag as DongLuong;
-                    if (dl == null)
-                    {
-                        continue;
-                    }
-
-                    sb.AppendLine(string.Format(CultureInfo.InvariantCulture,
-                        "{0},{1},{2},{3},{4},{5},{6},{7}",
-                        dl.MaNV,
-                        dl.HoTen.Replace(",", " "),
-                        dl.LuongCoBan,
-                        dl.NgayLam,
-                        dl.SoLanDiTre,
-                        dl.GioTangCa,
-                        dl.PhepConLai,
-                        dl.TongLuong));
-                }
-
-                // Ghi kèm BOM để Excel mở đúng tiếng Việt
-                File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), new UTF8Encoding(true));
-
-                MessageBox.Show("Đã xuất bảng lương:\n" + saveFileDialog1.FileName,
-                    "Xuất bảng lương", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Xuất bảng lương thất bại: " + ex.Message, "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+        private void btnXuatPhieuLuong_Click(object sender, EventArgs e)
+        {
+            // TODO: SaveFileDialog (phiếu lương.txt) -> ghi phiếu lương của nhân viên
+            //       đang chọn trong lvLuong, gồm tên đơn vị (TenDonVi), họ tên, phòng ban,
+            //       tháng/năm, các khoản lương và thực lĩnh.
         }
     }
 }
