@@ -1,7 +1,8 @@
 # HỆ THỐNG QUẢN LÝ NHÂN SỰ
 
 ## 1. Mở và chạy
-Hiện đang lỗi chữ ký ứng dụng nên nhớ tắt window security -> smart app control -> off rồi chạy nếu cần thiết
+Hiện đang lỗi chữ ký ứng dụng nên nhớ tắt window security -> smart app control -> off rồi chạy nếu cần thiết.
+
 Chạy xong bật lại là được
 
 ---
@@ -33,7 +34,9 @@ chứ để 1 người gánh thì hơi kỳ cục
 
 ### 3.A. Nhóm này có ai?
 Đoàn Văn Bảo Minh - Thiết kế UI/UX Window Form
+
 Đỗ Nguyễn Trần Hoài Bắc - Làm logic backend
+
 Nguyễn Đức Sao Biển - Làm logic backend và BA
 
 ### 3.B. Ai làm những gì?
@@ -82,8 +85,11 @@ ai đó hoàn thành cái docs này với làm ơn, tôi quá lười
 
 ### 4.A. Các directory chứa gì?
 Classes/ chứa các lớp
+
 Forms/ chứa các form
+
 Resources/ chứa dummydata text và image và cả temp như remember login
+
 TODO: chộ 4.A này cần giải thích chi tiết hơn
 
 ### 4.B. Những gì cần làm trong các directory
