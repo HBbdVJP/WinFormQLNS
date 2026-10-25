@@ -45,6 +45,7 @@ namespace QuanLyNhanSu.Forms
             mnuChamCong = new ToolStripMenuItem();
             mnuTinhLuong = new ToolStripMenuItem();
             mnuCuaSo = new ToolStripMenuItem();
+            mnuMultiMDIChildView = new ToolStripMenuItem();
             mnuXepChong = new ToolStripMenuItem();
             mnuXepNgang = new ToolStripMenuItem();
             mnuXepDoc = new ToolStripMenuItem();
@@ -157,23 +158,26 @@ namespace QuanLyNhanSu.Forms
             // mnuHoSo
             // 
             mnuHoSo.Name = "mnuHoSo";
-            mnuHoSo.ShortcutKeys = Keys.Control | Keys.H;
-            mnuHoSo.Size = new Size(253, 26);
+            mnuHoSo.ShortcutKeys = Keys.Control | Keys.Alt | Keys.H;
+            mnuHoSo.Size = new Size(280, 26);
             mnuHoSo.Text = "Hồ sơ nhân viên";
+            mnuHoSo.Click += mnuHoSoNhanVien_Click;
             // 
             // mnuPhongBan
             // 
             mnuPhongBan.Name = "mnuPhongBan";
-            mnuPhongBan.ShortcutKeys = Keys.Control | Keys.Shift | Keys.P;
-            mnuPhongBan.Size = new Size(253, 26);
+            mnuPhongBan.ShortcutKeys = Keys.Control | Keys.Alt | Keys.P;
+            mnuPhongBan.Size = new Size(280, 26);
             mnuPhongBan.Text = "Phòng ban";
+            mnuPhongBan.Click += mnuPhongBan_Click;
             // 
             // mnuChucVu
             // 
             mnuChucVu.Name = "mnuChucVu";
-            mnuChucVu.ShortcutKeys = Keys.Control | Keys.Shift | Keys.C;
-            mnuChucVu.Size = new Size(253, 26);
+            mnuChucVu.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
+            mnuChucVu.Size = new Size(280, 26);
             mnuChucVu.Text = "Chức vụ";
+            mnuChucVu.Click += mnuChucVu_Click;
             // 
             // mnuNghiepVu
             // 
@@ -185,41 +189,54 @@ namespace QuanLyNhanSu.Forms
             // mnuChamCong
             // 
             mnuChamCong.Name = "mnuChamCong";
-            mnuChamCong.ShortcutKeys = Keys.Control | Keys.M;
-            mnuChamCong.Size = new Size(295, 26);
+            mnuChamCong.ShortcutKeys = Keys.Alt | Keys.A;
+            mnuChamCong.Size = new Size(288, 26);
             mnuChamCong.Text = "Chấm công hằng ngày";
+            mnuChamCong.Click += mnuChamCong_Click;
             // 
             // mnuTinhLuong
             // 
             mnuTinhLuong.Name = "mnuTinhLuong";
-            mnuTinhLuong.ShortcutKeys = Keys.Control | Keys.L;
-            mnuTinhLuong.Size = new Size(295, 26);
+            mnuTinhLuong.ShortcutKeys = Keys.Alt | Keys.S;
+            mnuTinhLuong.Size = new Size(288, 26);
             mnuTinhLuong.Text = "Tính lương tháng";
+            mnuTinhLuong.Click += mnuLuong_Click;
             // 
             // mnuCuaSo
             // 
-            mnuCuaSo.DropDownItems.AddRange(new ToolStripItem[] { mnuXepChong, mnuXepNgang, mnuXepDoc });
+            mnuCuaSo.DropDownItems.AddRange(new ToolStripItem[] { mnuMultiMDIChildView, mnuXepChong, mnuXepNgang, mnuXepDoc });
             mnuCuaSo.Name = "mnuCuaSo";
             mnuCuaSo.Size = new Size(68, 24);
             mnuCuaSo.Text = "Cửa sổ";
             // 
+            // mnuMultiMDIChildView
+            // 
+            mnuMultiMDIChildView.Name = "mnuMultiMDIChildView";
+            mnuMultiMDIChildView.ShortcutKeys = Keys.Alt | Keys.M;
+            mnuMultiMDIChildView.Size = new Size(272, 26);
+            mnuMultiMDIChildView.Text = "Xem đa cửa sổ(Tắt)";
+            mnuMultiMDIChildView.Click += mnuMultiMDIChildView_Click;
+            // 
             // mnuXepChong
             // 
             mnuXepChong.Name = "mnuXepChong";
-            mnuXepChong.Size = new Size(164, 26);
+            mnuXepChong.Size = new Size(272, 26);
             mnuXepChong.Text = "Xếp chồng";
+            mnuXepChong.Click += mnuXepChong_Click;
             // 
             // mnuXepNgang
             // 
             mnuXepNgang.Name = "mnuXepNgang";
-            mnuXepNgang.Size = new Size(164, 26);
+            mnuXepNgang.Size = new Size(272, 26);
             mnuXepNgang.Text = "Xếp ngang";
+            mnuXepNgang.Click += mnuXepNgang_Click;
             // 
             // mnuXepDoc
             // 
             mnuXepDoc.Name = "mnuXepDoc";
-            mnuXepDoc.Size = new Size(164, 26);
+            mnuXepDoc.Size = new Size(272, 26);
             mnuXepDoc.Text = "Xếp dọc";
+            mnuXepDoc.Click += mnuXepDoc_Click;
             // 
             // mnuTroGiup
             // 
@@ -271,6 +288,7 @@ namespace QuanLyNhanSu.Forms
             // 
             // timerDongHo
             // 
+            timerDongHo.Enabled = true;
             timerDongHo.Interval = 1000;
             timerDongHo.Tick += timerDongHo_Tick;
             // 
@@ -331,5 +349,6 @@ namespace QuanLyNhanSu.Forms
         private System.Windows.Forms.ToolStripStatusLabel lblKhoangTrong;
         private System.Windows.Forms.ToolStripStatusLabel lblDongHo;
         private System.Windows.Forms.Timer timerDongHo;
+        private ToolStripMenuItem mnuMultiMDIChildView;
     }
 }

@@ -78,9 +78,6 @@ namespace QuanLyNhanSu.Forms
                 }
                 //clear temp file manually if not want to remember login
             }
-
-            //debug
-            lblThongBaoLoi.Text = $"Loaded {availableUsers.Count} users from dummy data.";
         }
 
         private void btnThoat_Click(object sender, EventArgs e)

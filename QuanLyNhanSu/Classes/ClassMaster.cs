@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhanSu.Classes
 {
-    internal class PhongBan
+    public class PhongBan
     {
         public string MaPhongBan { get; private set; }
         public string TenPhongBan { get; private set; }
@@ -16,41 +16,72 @@ namespace QuanLyNhanSu.Classes
             TenPhongBan = tenPhongBan;
         }
     }
-    internal class NhanVien
+    public class NhanVien
     {
         public string MaNhanVien { get; private set; }
         public string TenNhanVien { get; private set; }
+        public string GioiTinh { get; private set; }
         public DateTime NgaySinh { get; private set; }
         public string MaChucVu { get; private set; }
         public string MaTaiKhoan { get; private set; }
         public int SoNgayNghiPhep { get; private set; }
         public decimal LuongCoBan { get; private set; }
         public Image AnhNhanVien { get; private set; } // dir ../Image/<tenfileanhNV.kieudulieu>
-        public NhanVien(string maNhanVien, string tenNhanVien, DateTime ngaySinh, string maChucVu, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien)
+        public string DienThoai { get; private set; }
+        public string Email { get; private set; }
+        public string DiaChi { get; private set; }
+
+        //contructor simple
+        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien)
         {
             MaNhanVien = maNhanVien;
             TenNhanVien = tenNhanVien;
+            GioiTinh = gioiTinh;
             NgaySinh = ngaySinh;
             MaChucVu = maChucVu;
             MaTaiKhoan = maTaiKhoan;
             SoNgayNghiPhep = soNgayNghiPhep;
             LuongCoBan = luongCoBan;
             AnhNhanVien = anhNhanVien;
+            DienThoai = "";
+            Email = "";
+            DiaChi = "";
         }
+        //constructor templateholder
         public NhanVien()
         {
             MaNhanVien = "NaN";
             TenNhanVien = "Placeholder";
+            GioiTinh = "NaN";
             NgaySinh = DateTime.MinValue;
             MaChucVu = "NaN";
             MaTaiKhoan = "NaN";
             SoNgayNghiPhep = 0;
             LuongCoBan = 0.0m;
             AnhNhanVien = null;
+            DienThoai = "";
+            Email = "";
+            DiaChi = "";
+        }
+        //constructor full
+        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien, string dienThoai, string email, string diaChi)
+        {
+            MaNhanVien = maNhanVien;
+            TenNhanVien = tenNhanVien;
+            GioiTinh = gioiTinh;
+            NgaySinh = ngaySinh;
+            MaChucVu = maChucVu;
+            MaTaiKhoan = maTaiKhoan;
+            SoNgayNghiPhep = soNgayNghiPhep;
+            LuongCoBan = luongCoBan;
+            AnhNhanVien = anhNhanVien;
+            DienThoai = dienThoai;
+            Email = email;
+            DiaChi = diaChi;
         }
 
     }
-    internal class ChamCong
+    public class ChamCong
     {
         public string MaNhanVien { get; private set; }
         public DateTime NgayCong { get; private set; }
@@ -62,7 +93,7 @@ namespace QuanLyNhanSu.Classes
             TrangThai = trangThai;
         }
     }
-    internal class ChucVu
+    public class ChucVu
     {
         public string MaChucVu { get; private set; }
         public string TenChucVu { get; private set; }
@@ -74,7 +105,7 @@ namespace QuanLyNhanSu.Classes
             PhuCap = phuCap;
         }
     }
-    internal class User
+    public class User
     {
         public string MaTaiKhoan { get; private set; }
         public string TenDangNhap { get; private set; }
@@ -86,7 +117,7 @@ namespace QuanLyNhanSu.Classes
             MatKhau = matKhau;
         }
     }
-    internal class PhieuLuong
+    public class PhieuLuong
     {
         public string MaNhanVien { get; private set; }
         public string TenNhanVien { get; private set; }
