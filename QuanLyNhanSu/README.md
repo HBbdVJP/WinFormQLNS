@@ -1,100 +1,95 @@
-# HỆ THỐNG QUẢN LÝ NHÂN SỰ — BẢN KHUNG GIAO DIỆN
-
-> **Đây là bản "khung giao diện" để chia việc cho nhóm.**
-> Toàn bộ giao diện (8 màn hình) đã được thiết kế bằng **Windows Forms Designer** và
-> nằm nguyên trong các file `*.Designer.cs`. Phần **lập trình (code xử lý sự kiện) đã được
-> để trống** — mỗi thành viên nhận màn hình nào thì mở file `.cs` tương ứng và điền code
-> vào các hàm có ghi `// TODO:`.
-
-Chương trình **vẫn build và chạy được** ngay (0 lỗi, 0 cảnh báo), chỉ là bấm nút chưa có gì xảy ra.
-
----
+# HỆ THỐNG QUẢN LÝ NHÂN SỰ
 
 ## 1. Mở và chạy
+Hiện đang lỗi chữ ký ứng dụng nên nhớ tắt window security -> smart app control -> off rồi chạy nếu cần thiết
+Chạy xong bật lại là được
 
-1. Mở file `QuanLyNhanSu.sln` bằng **Visual Studio 2022**.
-2. Nhấn `F5` (hoặc `Ctrl + F5`) để chạy. Yêu cầu **.NET 9 SDK**.
-3. Mặc định chương trình mở màn hình chính `frmMain`.
+---
+## 2. Trong đây có gì?
+App Winform Quản lý nhân sự là trình quản lý nhân sự có các chức năng quản lý nhân sự cơ bản.
 
-### Chạy nhanh 1 màn hình để lập trình / kiểm tra giao diện
+### 2.A. Scope
+- Có RBAC cơ bản ở Login(phân quyền khả năng CRUD cho các frm như Thông tin nhân viên các thứ)
+- Nạp dữ liệu bằng thư viện IO dùng StreamReader. Lưu dữ liệu thành file txt, csv bằng StreamWriter
+    + Có thể bỏ qua dữ liệu lỗi mà không crash app
+- Xem danh sách nhân viên theo TreeView, CUD Nhân viên tùy RBAC
+    + Danh sách nhân viên có sort theo phòng ban và search theo tên, filter theo property
+    + TreeView nên không có pagination
+- Xem chấm công và chấm công tùy RBAC. Thao tác RBAC admin chỉnh được đi trễ <-> nghỉ phép
+    + Quản lý nghỉ phép năm(có lương)
+- Xem lương và tính lương tùy RBAC.
+    + OT hệ số 1.5x <- magic number
+- Xem sinh nhật nhân viên
+- RBAC có guard khóa acc khi sai 3 lần liên tiếp hay đại loại
+- Test case tối thiểu 15 trường hợp
 
-Mỗi thành viên nên test riêng màn hình mình làm, không cần chờ các màn hình khác:
-
-- **Trong Visual Studio:** chuột phải project `QuanLyNhanSu` → `Properties` → `Debug` →
-  `Open debug launch profiles UI` → ô **Command line arguments**, gõ tên form, ví dụ: `frmEmployee`
-- **Hoặc ở dòng lệnh:** `dotnet run -- frmEmployee`
-
-Tên form hợp lệ: `frmLogin`, `frmMain`, `frmDashboard`, `frmEmployee`, `frmAttendance`,
-`frmSalary`, `frmDepartment`, `frmPosition`.
+### 2.B. Công nghệ
+.NET Core 9.0. chứ còn muốn công nghệ gì nữa?
 
 ---
 
-## 2. Quy tắc làm việc với giao diện (quan trọng)
+## 3. Phân công công việc
+chứ để 1 người gánh thì hơi kỳ cục
 
-Mỗi màn hình gồm **3 file**, không được xóa file nào:
+### 3.A. Nhóm này có ai?
+Đoàn Văn Bảo Minh - Thiết kế UI/UX Window Form
+Đỗ Nguyễn Trần Hoài Bắc - Làm logic backend
+Nguyễn Đức Sao Biển - Làm logic backend và BA
 
-| File | Nội dung | Ai sửa |
-|---|---|---|
-| `frmX.Designer.cs` | Giao diện do Designer sinh ra (control, vị trí, màu, font...) | **Chỉ sửa bằng cách kéo–thả trong Designer**, không gõ tay vào file này |
-| `frmX.resx` | Tài nguyên của form (VS tự quản lý) | Không sửa |
-| `frmX.cs` | **Phần lập trình**: các hàm xử lý sự kiện (đang để trống) | Thành viên phụ trách điền code |
+### 3.B. Ai làm những gì?
+Theo Scope ở mục 2.A, đây là bảng phân công:
 
-> ⚠️ **Không dựng thêm control bằng code** (không viết `new Label()`, `new Button()`,
-> `Controls.Add(...)`). Cần thêm/sửa control thì mở form trong **Designer** rồi kéo–thả.
->
-> ⚠️ Tên hàm trong `frmX.cs` **phải giữ đúng như Designer đang gán sự kiện** — xóa hoặc
-> đổi tên là chương trình **không build được**.
+Sao Biển:
+- Thiết kế Flowchart, Usecase, Activity Node, và Class Diagram
+- Thực hiện logic phần sau của dự án gồm
+    + Chấm công(có RBAC)
+    + Tính lương(có RBAC)
+- Phân chia và kiểm soát tiến độ làm việc của nhóm
 
-Cách mở Designer: trong Solution Explorer bấm đúp vào `frmX.cs` (hoặc `frmX.Designer.cs`)
-là VS mở giao diện để kéo–thả.
+Bảo Minh:
+- Thiết kế Các Form theo phân tích của BA
+- Gán các giá trị và thuộc tính ban đầu cho các Toolbox Item
+- Tạo lập DummyData ban đầu cho Testcase
 
-**Riêng `frmLogin.Designer.cs`** có dùng logo từ `Properties/Resources.resx` (ảnh `ảnh_icon`)
-→ **không xóa thư mục `Properties/`**, nếu không sẽ lỗi build.
+Hoài Bắc:
+- Thực hiện logic phần form login và main để xem hồ sơ nhân viên các thứ
+- Thực hiện logic phần cuối là xem sinh nhật và quản lý nghỉ phép năm(có tính lương)
+- Thực hiện QA/QC/Testing:
+    + Kiểm tra và nâng cấp/hoàn thiện dummydata(nếu cần)
+    + Kiểm thử các chức năng trong Scope và ngoài Scope của App, check các vulnerability và mò bug để fix
 
----
+TODO: Cần thêm Definition of Done để scale, mục 3.C đang hơi không có benchmark
 
-## 3. Chia việc theo yêu cầu của bài
+### 3.C. Làm đến đâu rồi?
+Bảo Minh:
+- Thiết kế xong các Form UI hoàn chỉnh
+- Gắn giá trị phù hợp
+- Đã có một lượng dummydata tương đối
+tiến độ: hoàn thành 92%
 
-| Yêu cầu | Màn hình | File cần lập trình | Số hàm cần làm |
-|---|---|---|---|
-| Đăng nhập + ghi nhớ + khóa sau 3 lần sai | `frmLogin` | `Forms/frmLogin.cs` | 6 |
-| Màn hình chính MDI + menu + đồng hồ + đổi màu/font + sao lưu | `frmMain` | `Forms/frmMain.cs` | 20 |
-| Bảng điều khiển (thống kê + sinh nhật trong tháng) | `frmDashboard` | `Forms/frmDashboard.cs` | 1 |
-| **Yêu cầu 1 — Hồ sơ nhân viên** (cây tổ chức, ảnh, tìm kiếm, kiểm tra dữ liệu) | `frmEmployee` | `Forms/frmEmployee.cs` | 14 |
-| **Yêu cầu 2 — Chấm công** (chặn ngày tương lai, menu trạng thái, nhập CSV) | `frmAttendance` | `Forms/frmAttendance.cs` | 17 |
-| **Yêu cầu 3 — Tính lương** (tính lương, xuất CSV/TXT) | `frmSalary` | `Forms/frmSalary.cs` | 8 |
-| Danh mục phòng ban | `frmDepartment` | `Forms/frmDepartment.cs` | 8 |
-| Danh mục chức vụ | `frmPosition` | `Forms/frmPosition.cs` | 8 |
+Hoài Bắc:
+- xong login và gần xong main
+tiến độ: hoàn thành 35% 
 
-Mỗi file `.cs` đã ghi rõ từng hàm cần làm việc gì ở dòng `// TODO:`.
-
----
-
-## 4. Tầng dữ liệu (cả nhóm tự tạo)
-
-Bản này **đã xóa** các thư mục `Models/`, `Data/`, `Services/` để nhóm tự làm. Gợi ý cấu trúc
-chung (nên thống nhất trước khi chia việc):
-
-```
-Models/NhanVien.cs      MaNV, HoTen, GioiTinh, NgaySinh, DienThoai, Email, DiaChi,
-                        MaPhong, MaChucVu, HeSoLuong, LuongCoBan, NgayVaoLam,
-                        TrangThai, PhepNam, Anh (chuỗi Base64)
-Models/PhongBan.cs      MaPhong, TenPhong, MoTa
-Models/ChucVu.cs        MaChucVu, TenChucVu, HeSoLuong
-Models/ChamCong.cs      MaNV, Ngay, TrangThai, SoPhutTre, SoGioTangCa
-Models/TaiKhoan.cs      TenDangNhap, MatKhau, VaiTro
-Data/DataStore.cs       Đọc/ghi danh sách trên ra file JSON và nạp dữ liệu mẫu lần đầu
-Services/...            Các hàm dùng chung: tính lương, tìm kiếm, xử lý ảnh, đọc App.config
-```
-
-Gợi ý lưu dữ liệu: đối tượng → **JSON** (`System.Text.Json`) tại
-`%AppData%\QuanLyNhanSu\data.json`; ảnh nhân viên lưu dạng **chuỗi Base64**.
-
-Tài khoản mẫu: `admin / admin123` (Quản trị), `nv01 / 123456`, `nv02 / 123456`.
+Sao Biển:
+- Đã có thiết kế
+tiến độ: hoàn thành 20%
 
 ---
 
-## 5. Tham số nghiệp vụ trong `App.config`
+## 4. Giải thích cấu trúc thư mục dự án
+ai đó hoàn thành cái docs này với làm ơn, tôi quá lười
+
+### 4.A. Các directory chứa gì?
+Classes/ chứa các lớp
+Forms/ chứa các form
+Resources/ chứa dummydata text và image và cả temp như remember login
+TODO: chộ 4.A này cần giải thích chi tiết hơn
+
+### 4.B. Những gì cần làm trong các directory
+TODO: tôi không biết phải ghi gì vào đây nữa
+
+### 4.C. Tham số nghiệp vụ trong `App.config`
 
 | Khóa | Giá trị | Ý nghĩa |
 |---|---|---|
@@ -106,7 +101,7 @@ Tài khoản mẫu: `admin / admin123` (Quản trị), `nv01 / 123456`, `nv02 / 
 
 Đọc bằng `ConfigurationManager.AppSettings["TênKhóa"]`.
 
-**Công thức tính lương gợi ý:**
+**Công thức tính lương:**
 
 ```
 Lương ngày       = Lương cơ bản / NgayCongChuan
@@ -115,20 +110,3 @@ Trừ đi trễ       = số lần đi trễ * MucTruDiTre
 Tiền tăng ca     = (Lương ngày / SoGioLamChuan) * số giờ tăng ca * HeSoTangCa
 Thực lĩnh        = Lương theo công - Trừ đi trễ + Tiền tăng ca
 ```
-
----
-
-## 6. Ghi chú kỹ thuật
-
-- Target framework: `net9.0-windows`, `UseWindowsForms = true`.
-- Ngôn ngữ/định dạng ngày giờ được đặt theo `vi-VN` trong `Program.cs`.
-- `Program.cs` có sẵn phần chạy nhanh một màn hình khi lập trình (xem mục 1) và chỗ để
-  bật lại luồng đăng nhập khi `frmLogin` đã làm xong.
-- Màu nền / font giao diện lưu trong Registry tại `HKCU\Software\QuanLyNhanSu`.
-- **Bản chạy hoàn chỉnh trước đây** (đã có đủ code) vẫn nằm trong lịch sử Git. Muốn xem lại:
-
-  ```bash
-  git log --oneline          # tìm commit cũ
-  git show <mã-commit> --stat
-  git checkout <mã-commit> -- QuanLyNhanSu   # lấy lại toàn bộ code cũ
-  ```
