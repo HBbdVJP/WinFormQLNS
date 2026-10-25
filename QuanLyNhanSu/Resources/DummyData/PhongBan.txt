@@ -1,0 +1,21 @@
+MaPhongBan: PBIT001
+TenPhongBan: Phòng Ban IT 1
+---
+MaPhongBan: PBTC001B
+TenPhongBan: Phòng Ban Tài Chính 1 Khu B
+---
+MaPhongBan: PBHR031
+TenPhongBan: Phòng Ban Nhân Sự 31
+---
+MaPhongBan: PBMK7F01
+TenPhongBan: Phòng Ban Marketing Lầu 7 Khu 1
+---
+MaPhongBan: PBMK7F02
+TenPhongBan: Phòng Ban Marketing Lầu 7 Khu 2
+---
+MaPhongBan: PBPR001
+TenPhongBan: Phòng Ban Quan Hệ Công Chúng 1
+---
+MaPhongBan: PBIT005E
+TenPhongBan: Phòng Ban IT 5 Khu E
+---

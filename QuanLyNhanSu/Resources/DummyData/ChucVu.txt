@@ -1,0 +1,80 @@
+MaChucVu: CVJrBE
+TenChucVu: Junior Backend Engineer
+PhuCap: 1200000
+---
+MaChucVu: CVSrBE
+TenChucVu: Senior Backend Engineer
+PhuCap: 1800000
+---
+MaChucVu: CVJrFE
+TenChucVu: Junior Frontend Engineer
+PhuCap: 1150000
+---
+MaChucVu: CVSrFE
+TenChucVu: Senior Frontend Engineer
+PhuCap: 1650000
+---
+MaChucVu: CVJrDB
+TenChucVu: Junior Database Engineer
+PhuCap: 1250000
+---
+MaChucVu: CVSrDB
+TenChucVu: Senior Database Engineer
+PhuCap: 1900000
+---
+MaChucVu: CVJrDevOps
+TenChucVu: Junior DevOps Engineer
+PhuCap: 1300000
+---
+MaChucVu: CVSrDevOps
+TenChucVu: Senior DevOps Engineer
+PhuCap: 2000000
+---
+MaChucVu: CVJrQA
+TenChucVu: Junior QA Engineer
+PhuCap: 1100000
+---
+MaChucVu: CVSrQA
+TenChucVu: Senior QA Engineer
+PhuCap: 1700000
+---
+MaChucVu: CVPM
+TenChucVu: Project Manager
+PhuCap: 2500000
+---
+MaChucVu: CVBA
+TenChucVu: Business Analyst
+PhuCap: 2200000
+---
+MaChucVu: CVKT
+TenChucVu: Kế Toán Viên
+PhuCap: 2400000
+---
+MaChucVu: CVNS
+TenChucVu: Nhân Viên Nhân Sự
+PhuCap: 1400000
+---
+MaChucVu: CVJrMKT
+TenChucVu: Junior Marketing Specialist
+PhuCap: 1700000
+---
+MaChucVu: CVSrMKT
+TenChucVu: Senior Marketing Specialist
+PhuCap: 2500000
+---
+MaChucVu: CVJrPR
+TenChucVu: Junior Public Relations Specialist
+PhuCap: 1800000
+---
+MaChucVu: CVSrPR
+TenChucVu: Senior Public Relations Specialist
+PhuCap: 2600000
+---
+MaChucVu: CVTC
+TenChucVu: Trưởng Phòng Tài Chính
+PhuCap: 3000000
+---
+MaChucVu: CVKTT
+TenChucVu: Kế Toán Trưởng
+PhuCap: 3500000
+---

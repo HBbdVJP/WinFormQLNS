@@ -17,10 +17,7 @@ namespace QuanLyNhanSu.Forms
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Phương thức bắt buộc của trình thiết kế - không sửa bằng tay nội dung
-        /// bên trong, hãy dùng cửa sổ Designer của Visual Studio.
-        /// </summary>
+        
         private void InitializeComponent()
         {
             System.Windows.Forms.ColumnHeader colMa;
@@ -150,7 +147,6 @@ namespace QuanLyNhanSu.Forms
             this.lvPhongBan.TabIndex = 1;
             this.lvPhongBan.UseCompatibleStateImageBehavior = false;
             this.lvPhongBan.View = System.Windows.Forms.View.Details;
-            this.lvPhongBan.SelectedIndexChanged += new System.EventHandler(this.lvPhongBan_SelectedIndexChanged);
             // 
             // panelBottom
             // 
@@ -174,7 +170,6 @@ namespace QuanLyNhanSu.Forms
             this.btnLamMoi.TabIndex = 5;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.UseVisualStyleBackColor = true;
-            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnHuy
             // 
@@ -184,7 +179,6 @@ namespace QuanLyNhanSu.Forms
             this.btnHuy.TabIndex = 4;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.UseVisualStyleBackColor = true;
-            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // btnLuu
             // 
@@ -194,7 +188,6 @@ namespace QuanLyNhanSu.Forms
             this.btnLuu.TabIndex = 3;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = true;
-            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnXoa
             // 
@@ -204,7 +197,6 @@ namespace QuanLyNhanSu.Forms
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
@@ -214,7 +206,6 @@ namespace QuanLyNhanSu.Forms
             this.btnSua.TabIndex = 1;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -224,7 +215,6 @@ namespace QuanLyNhanSu.Forms
             this.btnThem.TabIndex = 0;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // errorProvider1
             // 
@@ -243,7 +233,6 @@ namespace QuanLyNhanSu.Forms
             this.Name = "frmDepartment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý phòng ban";
-            this.Load += new System.EventHandler(this.frmDepartment_Load);
             this.grpThongTin.ResumeLayout(false);
             this.grpThongTin.PerformLayout();
             this.panelBottom.ResumeLayout(false);

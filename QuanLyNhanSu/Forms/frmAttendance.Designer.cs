@@ -17,10 +17,6 @@ namespace QuanLyNhanSu.Forms
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Phương thức bắt buộc của trình thiết kế - không sửa bằng tay nội dung
-        /// bên trong, hãy dùng cửa sổ Designer của Visual Studio.
-        /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
@@ -128,7 +124,6 @@ namespace QuanLyNhanSu.Forms
             btnTaiDanhSach.TabIndex = 5;
             btnTaiDanhSach.Text = "Tải danh sách";
             btnTaiDanhSach.UseVisualStyleBackColor = true;
-            btnTaiDanhSach.Click += btnTaiDanhSach_Click;
             // 
             // btnNhapCSV
             // 
@@ -139,8 +134,6 @@ namespace QuanLyNhanSu.Forms
             btnNhapCSV.TabIndex = 4;
             btnNhapCSV.Text = "Nhập từ CSV...";
             btnNhapCSV.UseVisualStyleBackColor = true;
-            btnNhapCSV.Click += btnNhapCSV_Click;
-            // 
             // cboPhong
             // 
             cboPhong.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -150,7 +143,6 @@ namespace QuanLyNhanSu.Forms
             cboPhong.Name = "cboPhong";
             cboPhong.Size = new Size(445, 45);
             cboPhong.TabIndex = 3;
-            cboPhong.SelectedIndexChanged += cboPhong_SelectedIndexChanged;
             // 
             // lblPhong
             // 
@@ -171,7 +163,6 @@ namespace QuanLyNhanSu.Forms
             dtpNgay.Name = "dtpNgay";
             dtpNgay.Size = new Size(317, 43);
             dtpNgay.TabIndex = 1;
-            dtpNgay.ValueChanged += dtpNgay_ValueChanged;
             // 
             // lblNgay
             // 
@@ -198,9 +189,6 @@ namespace QuanLyNhanSu.Forms
             lvChamCong.TabIndex = 1;
             lvChamCong.UseCompatibleStateImageBehavior = false;
             lvChamCong.View = View.Details;
-            lvChamCong.ItemChecked += lvChamCong_ItemChecked;
-            lvChamCong.SelectedIndexChanged += lvChamCong_SelectedIndexChanged;
-            lvChamCong.MouseDown += lvChamCong_MouseDown;
             // 
             // cmsTrangThai
             // 
@@ -208,35 +196,30 @@ namespace QuanLyNhanSu.Forms
             cmsTrangThai.Items.AddRange(new ToolStripItem[] { mnuDiLam, mnuNghiPhep, mnuNghiKhongPhep, mnuDiTre, sepTrangThai, mnuTangCa });
             cmsTrangThai.Name = "cmsTrangThai";
             cmsTrangThai.Size = new Size(415, 230);
-            cmsTrangThai.Opening += cmsTrangThai_Opening;
             // 
             // mnuDiLam
             // 
             mnuDiLam.Name = "mnuDiLam";
             mnuDiLam.Size = new Size(414, 44);
             mnuDiLam.Text = "Đánh dấu Đi làm";
-            mnuDiLam.Click += mnuDiLam_Click;
             // 
             // mnuNghiPhep
             // 
             mnuNghiPhep.Name = "mnuNghiPhep";
             mnuNghiPhep.Size = new Size(414, 44);
             mnuNghiPhep.Text = "Đổi sang Nghỉ phép";
-            mnuNghiPhep.Click += mnuNghiPhep_Click;
             // 
             // mnuNghiKhongPhep
             // 
             mnuNghiKhongPhep.Name = "mnuNghiKhongPhep";
             mnuNghiKhongPhep.Size = new Size(414, 44);
             mnuNghiKhongPhep.Text = "Đổi sang Nghỉ không phép";
-            mnuNghiKhongPhep.Click += mnuNghiKhongPhep_Click;
             // 
             // mnuDiTre
             // 
             mnuDiTre.Name = "mnuDiTre";
             mnuDiTre.Size = new Size(414, 44);
             mnuDiTre.Text = "Đổi sang Đi trễ";
-            mnuDiTre.Click += mnuDiTre_Click;
             // 
             // sepTrangThai
             // 
@@ -248,7 +231,6 @@ namespace QuanLyNhanSu.Forms
             mnuTangCa.Name = "mnuTangCa";
             mnuTangCa.Size = new Size(414, 44);
             mnuTangCa.Text = "Đánh dấu Tăng ca...";
-            mnuTangCa.Click += mnuTangCa_Click;
             // 
             // panelBottom
             // 
@@ -272,7 +254,6 @@ namespace QuanLyNhanSu.Forms
             btnLuuBangCong.TabIndex = 3;
             btnLuuBangCong.Text = "Lưu bảng công";
             btnLuuBangCong.UseVisualStyleBackColor = true;
-            btnLuuBangCong.Click += btnLuuBangCong_Click;
             // 
             // lblTong
             // 
@@ -293,7 +274,6 @@ namespace QuanLyNhanSu.Forms
             btnBoChon.TabIndex = 1;
             btnBoChon.Text = "Bỏ chọn tất cả";
             btnBoChon.UseVisualStyleBackColor = true;
-            btnBoChon.Click += btnBoChon_Click;
             // 
             // btnChonTatCa
             // 
@@ -304,7 +284,6 @@ namespace QuanLyNhanSu.Forms
             btnChonTatCa.TabIndex = 0;
             btnChonTatCa.Text = "Chọn tất cả";
             btnChonTatCa.UseVisualStyleBackColor = true;
-            btnChonTatCa.Click += btnChonTatCa_Click;
             // 
             // openFileDialogCSV
             // 
@@ -325,7 +304,6 @@ namespace QuanLyNhanSu.Forms
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Chấm công hằng ngày";
             WindowState = FormWindowState.Maximized;
-            Load += frmAttendance_Load;
             panelTop.ResumeLayout(false);
             panelTop.PerformLayout();
             cmsTrangThai.ResumeLayout(false);

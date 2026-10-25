@@ -1,69 +1,132 @@
 using System;
 using System.Windows.Forms;
+using System.IO;
+using QuanLyNhanSu.Classes;
 
 namespace QuanLyNhanSu.Forms
 {
-    /// <summary>
-    /// MÀN HÌNH ĐĂNG NHẬP (frmLogin) – form không viền (FormBorderStyle = None).
-    ///
-    /// Giao diện đã được thiết kế sẵn bằng Windows Forms Designer và nằm nguyên trong
-    /// file frmLogin.Designer.cs (logo, ô tên đăng nhập, ô mật khẩu, các nút...).
-    /// File này CHỈ chứa phần LẬP TRÌNH – không dựng thêm control bằng code.
-    ///
-    /// CÁC VIỆC CẦN LÀM (xem chú thích TODO ở từng hàm):
-    ///   1. Đọc tài khoản đã "ghi nhớ" trong Registry khi mở form.
-    ///   2. Kiểm tra đăng nhập, sai 3 lần thì khóa 30 giây (đếm ngược bằng timerKhoa).
-    ///   3. Hiện/ẩn mật khẩu, thoát chương trình, kéo form bằng chuột nếu cần.
-    ///
-    /// Tài khoản mẫu để thử: admin / admin123 ; nv01 / 123456 ; nv02 / 123456
-    /// </summary>
     public partial class frmLogin : Form
     {
         public frmLogin()
         {
             InitializeComponent();
         }
+        List<User> availableUsers = new List<User>();
 
-        // =====================================================================
-        //  CÁC HÀM CẦN LẬP TRÌNH (tên hàm do Designer gán sẵn cho sự kiện)
-        // =====================================================================
+        string rememberLoginFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "RememberLogin", "GhiNhoDangNhapTemp.txt");
+        string userDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "DummyData", "User.txt");
+
+
+        private void pnlRight_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            // TODO: Đọc tài khoản đã "Ghi nhớ đăng nhập" từ Registry
-            //       (khóa HKCU\Software\QuanLyNhanSu: Tên đăng nhập / Mật khẩu đã lưu)
-            //       rồi điền sẵn vào txtUsername, txtPassword và tick chkGhiNho.
-            //       Nhớ xóa dòng cảnh báo lblLoi và đưa con trỏ vào txtUsername.
-        }
+            // import dummy from file
+            availableUsers.Clear();
 
-        private void btnDangNhap_Click(object sender, EventArgs e)
-        {
-            // TODO: Lấy txtUsername.Text và txtPassword.Text rồi kiểm tra với danh sách tài khoản.
-            //   - Đúng  : (nếu chkGhiNho được tick thì lưu tài khoản vào Registry, ngược lại thì xóa),
-            //             đặt DialogResult = DialogResult.OK và đóng form để mở frmMain.
-            //   - Sai   : đếm số lần sai; hiện thông báo ở lblLoi (tô đỏ);
-            //             sai đủ 3 lần thì khóa: tắt btnDangNhap, bật timerKhoa (30 giây).
-        }
+            using (StreamReader sr = new StreamReader(userDataFilePath))
+            {
+                string maTaiKhoan = "";
+                string tenDangNhap = "";
+                string matKhau = "";
 
-        private void chkHienMatKhau_CheckedChanged(object sender, EventArgs e)
-        {
-            // TODO: Cho phép hiện mật khẩu: txtPassword.UseSystemPasswordChar = !chkHienMatKhau.Checked;
-        }
+                string? line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if(line.StartsWith("MaTaiKhoan: "))
+                    {
+                        maTaiKhoan = line.Substring("MaTaiKhoan: ".Length);
+                    }
+                    else if (line.StartsWith("TenDangNhap: "))
+                    {
+                        tenDangNhap = line.Substring("TenDangNhap: ".Length);
+                    }
+                    else if (line.StartsWith("MatKhau: "))
+                    {
+                        matKhau = line.Substring("MatKhau: ".Length);
+                    }
+                    else if (line == "---") //File dummy phải kết thúc bằng "---"
+                    {
+                        availableUsers.Add(new User(maTaiKhoan, tenDangNhap, matKhau));
+                        maTaiKhoan = "";
+                        tenDangNhap = "";
+                        matKhau = "";
+                    }
+                }
+            }
 
-        private void timerKhoa_Tick(object sender, EventArgs e)
-        {
-            // TODO: Đếm ngược thời gian khóa (30 -> 0) và hiện lên lblLoi,
-            //       khi hết giờ thì dừng timer, mở lại btnDangNhap và xóa lblLoi.
+            // auto-load remember login
+            if(File.Exists(rememberLoginFilePath))
+            {
+                using (StreamReader sr = new StreamReader(rememberLoginFilePath))
+                {
+                    string? line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (line.StartsWith("TenDangNhap: "))
+                        {
+                            txtUsername.Text = line.Substring("TenDangNhap: ".Length);
+                        }
+                        else if (line.StartsWith("MatKhau: "))
+                        {
+                            txtPassword.Text = line.Substring("MatKhau: ".Length);
+                        }
+                    }
+                }
+                //clear temp file manually if not want to remember login
+            }
+
+            //debug
+            lblThongBaoLoi.Text = $"Loaded {availableUsers.Count} users from dummy data.";
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            // TODO: Đóng form đăng nhập (DialogResult = DialogResult.Cancel; Close();)
+            Application.Exit();
+        }
+
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+            User tryingLogin = new User("NaN", txtUsername.Text, txtPassword.Text);
+            foreach (User user in availableUsers)
+            {
+                if (user.TenDangNhap == tryingLogin.TenDangNhap && user.MatKhau == tryingLogin.MatKhau)
+                {
+                    // Open main form
+                    frmMain mainForm = new frmMain();
+                    mainForm.Show();
+                    this.Hide();
+                    return;
+                }
+            }
+            lblThongBaoLoi.ForeColor = System.Drawing.Color.Red;
+            lblThongBaoLoi.Text = "Tên đăng nhập hoặc mật khẩu không đúng";
+        }
+
+        private void chkHienMatKhau_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = !chkHienMatKhau.Checked;
+        }
+
+        private void chkGhiNho_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkGhiNho.Checked)
+            {
+                // Save the username and password to a temporary file
+                using (StreamWriter sw = new StreamWriter(rememberLoginFilePath))
+                {
+                    sw.WriteLine($"TenDangNhap: {txtUsername.Text}");
+                    sw.WriteLine($"MatKhau: {txtPassword.Text}");
+                }
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            // TODO: Thoát hẳn chương trình: Application.Exit();
+            Application.Exit();
         }
     }
 }

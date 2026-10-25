@@ -1,0 +1,36 @@
+MaTaiKhoan: TKDN01
+TenDangNhap: SaoBienIT
+MatKhau: it123
+---
+MaTaiKhoan: TKDN02
+TenDangNhap: SaoBienDevOps
+MatKhau: pass123
+---
+MaTaiKhoan: TKDN03
+TenDangNhap: BacDoQATester
+MatKhau: test123
+---
+MaTaiKhoan: TKDN04
+TenDangNhap: BacDoBE
+MatKhau: be123
+---
+MaTaiKhoan: TKDN05
+TenDangNhap: BaoMinhFE
+MatKhau: fe123
+---
+MaTaiKhoan: TKDN06
+TenDangNhap: BaoMinhUX
+MatKhau: ux123
+---
+MaTaiKhoan: TKDN07
+TenDangNhap: SaoBienPM
+MatKhau: pm123
+---
+MaTaiKhoan: TKDN08
+TenDangNhap: BacDoKT
+MatKhau: kt123
+---
+MaTaiKhoan: TKDN09
+TenDangNhap: BacDoPR
+MatKhau: pr123
+---

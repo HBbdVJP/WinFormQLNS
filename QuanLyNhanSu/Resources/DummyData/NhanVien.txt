@@ -1,0 +1,27 @@
+MaNhanVien: MNV01
+TenNhanVien: Sao Biển Thích DevOps
+NgaySinh: 15-05-1990
+MaChucVu: CVSrDevOps
+MaTaiKhoan: TKDN02
+SoNgayNghiPhep: 1
+LuongCoBan: 20000000
+AnhNhanVien: ../Image/SaoBienThichDevOps.png
+---
+MaNhanVien: MNV02
+TenNhanVien: Sao Biển Làm IT
+NgaySinh: 22-08-1992
+MaChucVu: CVIT
+MaTaiKhoan: TKDN01
+SoNgayNghiPhep: 1
+LuongCoBan: 18000000
+AnhNhanVien: ../Image/SaoBienLamIT.png
+---
+MaNhanVien: MNV03
+TenNhanVien: Sao Biển Thích PM
+NgaySinh: 10-12-1985
+MaChucVu: CVPM
+MaTaiKhoan: TKDN07
+SoNgayNghiPhep: 0
+LuongCoBan: 25000000
+AnhNhanVien: ../Image/SaoBienLenPM.png
+---

@@ -123,7 +123,6 @@ namespace QuanLyNhanSu.Forms
             this.tvToChuc.Name = "tvToChuc";
             this.tvToChuc.Size = new System.Drawing.Size(252, 700);
             this.tvToChuc.TabIndex = 0;
-            this.tvToChuc.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvToChuc_AfterSelect);
             // 
             // lvNhanVien
             // 
@@ -175,7 +174,6 @@ namespace QuanLyNhanSu.Forms
             this.lvNhanVien.TabIndex = 0;
             this.lvNhanVien.UseCompatibleStateImageBehavior = false;
             this.lvNhanVien.View = System.Windows.Forms.View.Details;
-            this.lvNhanVien.SelectedIndexChanged += new System.EventHandler(this.lvNhanVien_SelectedIndexChanged);
             // 
             // panelBottom
             // 
@@ -199,7 +197,6 @@ namespace QuanLyNhanSu.Forms
             this.btnLamMoi.TabIndex = 5;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.UseVisualStyleBackColor = true;
-            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnHuy
             // 
@@ -209,7 +206,6 @@ namespace QuanLyNhanSu.Forms
             this.btnHuy.TabIndex = 4;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.UseVisualStyleBackColor = true;
-            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // btnLuu
             // 
@@ -219,7 +215,6 @@ namespace QuanLyNhanSu.Forms
             this.btnLuu.TabIndex = 3;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = true;
-            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnXoa
             // 
@@ -229,7 +224,6 @@ namespace QuanLyNhanSu.Forms
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnSua
             // 
@@ -239,7 +233,6 @@ namespace QuanLyNhanSu.Forms
             this.btnSua.TabIndex = 1;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -249,7 +242,6 @@ namespace QuanLyNhanSu.Forms
             this.btnThem.TabIndex = 0;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // panelInfo
             // 
@@ -332,7 +324,6 @@ namespace QuanLyNhanSu.Forms
             this.btnXoaAnh.TabIndex = 24;
             this.btnXoaAnh.Text = "Xóa ảnh";
             this.btnXoaAnh.UseVisualStyleBackColor = true;
-            this.btnXoaAnh.Click += new System.EventHandler(this.btnXoaAnh_Click);
             // 
             // btnDoiAnh
             // 
@@ -342,7 +333,6 @@ namespace QuanLyNhanSu.Forms
             this.btnDoiAnh.TabIndex = 23;
             this.btnDoiAnh.Text = "Đổi ảnh...";
             this.btnDoiAnh.UseVisualStyleBackColor = true;
-            this.btnDoiAnh.Click += new System.EventHandler(this.btnDoiAnh_Click);
             // 
             // picAnh
             // 
@@ -563,7 +553,6 @@ namespace QuanLyNhanSu.Forms
             this.btnTimKiem.TabIndex = 4;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = true;
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // txtTimKiem
             // 
@@ -571,7 +560,6 @@ namespace QuanLyNhanSu.Forms
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(220, 23);
             this.txtTimKiem.TabIndex = 3;
-            this.txtTimKiem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimKiem_KeyDown);
             // 
             // lblTimKiem
             // 
@@ -590,7 +578,6 @@ namespace QuanLyNhanSu.Forms
             this.cboLocPhong.Name = "cboLocPhong";
             this.cboLocPhong.Size = new System.Drawing.Size(220, 23);
             this.cboLocPhong.TabIndex = 1;
-            this.cboLocPhong.SelectedIndexChanged += new System.EventHandler(this.cboLocPhong_SelectedIndexChanged);
             // 
             // lblLocPhong
             // 
@@ -622,7 +609,6 @@ namespace QuanLyNhanSu.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý hồ sơ nhân viên";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmEmployee_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

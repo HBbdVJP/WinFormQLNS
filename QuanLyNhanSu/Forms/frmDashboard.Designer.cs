@@ -237,7 +237,6 @@ namespace QuanLyNhanSu.Forms
             this.Name = "frmDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bảng điều khiển";
-            this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.pnlThe1.ResumeLayout(false);
             this.pnlThe2.ResumeLayout(false);
             this.pnlThe3.ResumeLayout(false);

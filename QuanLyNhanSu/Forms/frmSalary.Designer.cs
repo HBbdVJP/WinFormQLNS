@@ -116,7 +116,6 @@ namespace QuanLyNhanSu.Forms
             btnXem.TabIndex = 6;
             btnXem.Text = "Xem bảng lương";
             btnXem.UseVisualStyleBackColor = true;
-            btnXem.Click += btnXem_Click;
             // 
             // cboPhong
             // 
@@ -127,7 +126,6 @@ namespace QuanLyNhanSu.Forms
             cboPhong.Name = "cboPhong";
             cboPhong.Size = new Size(467, 45);
             cboPhong.TabIndex = 5;
-            cboPhong.SelectedIndexChanged += cboPhong_SelectedIndexChanged;
             // 
             // lblPhong
             // 
@@ -149,7 +147,6 @@ namespace QuanLyNhanSu.Forms
             nudNam.Size = new Size(193, 43);
             nudNam.TabIndex = 3;
             nudNam.Value = new decimal(new int[] { 2026, 0, 0, 0 });
-            nudNam.ValueChanged += nudNam_ValueChanged;
             // 
             // lblNam
             // 
@@ -170,7 +167,6 @@ namespace QuanLyNhanSu.Forms
             cboThang.Name = "cboThang";
             cboThang.Size = new Size(210, 45);
             cboThang.TabIndex = 1;
-            cboThang.SelectedIndexChanged += cboThang_SelectedIndexChanged;
             // 
             // lblThang
             // 
@@ -229,7 +225,6 @@ namespace QuanLyNhanSu.Forms
             btnXuatBangLuong.TabIndex = 2;
             btnXuatBangLuong.Text = "Xuất Bảng Lương (CSV)...";
             btnXuatBangLuong.UseVisualStyleBackColor = true;
-            btnXuatBangLuong.Click += btnXuatBangLuong_Click;
             // 
             // btnXuatPhieuLuong
             // 
@@ -240,7 +235,6 @@ namespace QuanLyNhanSu.Forms
             btnXuatPhieuLuong.TabIndex = 1;
             btnXuatPhieuLuong.Text = "Xuất Phiếu Lương (TXT)...";
             btnXuatPhieuLuong.UseVisualStyleBackColor = true;
-            btnXuatPhieuLuong.Click += btnXuatPhieuLuong_Click;
             // 
             // btnTinhLuong
             // 
@@ -251,7 +245,6 @@ namespace QuanLyNhanSu.Forms
             btnTinhLuong.TabIndex = 0;
             btnTinhLuong.Text = "Tính lương";
             btnTinhLuong.UseVisualStyleBackColor = true;
-            btnTinhLuong.Click += btnTinhLuong_Click;
             // 
             // saveFileDialog1
             // 
