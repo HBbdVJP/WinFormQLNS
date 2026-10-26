@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Drawing;
 
 namespace QuanLyNhanSu.Classes
 {
@@ -28,12 +30,13 @@ namespace QuanLyNhanSu.Classes
         public int? SoNgayNghiPhep { get; private set; }
         public decimal? LuongCoBan { get; private set; }
         public Image? AnhNhanVien { get; private set; } // dir ../Image/<tenfileanhNV.kieudulieu>
+        public string? DuongDanAnh { get; private set;} //để thực hiện lưu data thành file txt
         public string? DienThoai { get; private set; }
         public string? Email { get; private set; }
         public string? DiaChi { get; private set; }
 
         //contructor simple
-        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maPhongBan, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien)
+        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maPhongBan, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, string duongdananh)
         {
             MaNhanVien = maNhanVien;
             TenNhanVien = tenNhanVien;
@@ -44,7 +47,8 @@ namespace QuanLyNhanSu.Classes
             MaTaiKhoan = maTaiKhoan;
             SoNgayNghiPhep = soNgayNghiPhep;
             LuongCoBan = luongCoBan;
-            AnhNhanVien = anhNhanVien;
+            AnhNhanVien = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongdananh));
+            DuongDanAnh = duongdananh;
             DienThoai = "";
             Email = "";
             DiaChi = "";
@@ -62,12 +66,13 @@ namespace QuanLyNhanSu.Classes
             SoNgayNghiPhep = 0;
             LuongCoBan = 0.0m;
             AnhNhanVien = null;
+            DuongDanAnh = "";
             DienThoai = "";
             Email = "";
             DiaChi = "";
         }
         //constructor full
-        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maPhongBan, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien, string dienThoai, string email, string diaChi)
+        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maPhongBan, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, string duongdananh, string dienThoai, string email, string diaChi)
         {
             MaNhanVien = maNhanVien;
             TenNhanVien = tenNhanVien;
@@ -78,7 +83,7 @@ namespace QuanLyNhanSu.Classes
             MaTaiKhoan = maTaiKhoan;
             SoNgayNghiPhep = soNgayNghiPhep;
             LuongCoBan = luongCoBan;
-            AnhNhanVien = anhNhanVien;
+            AnhNhanVien = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongdananh)); DuongDanAnh = duongdananh;
             DienThoai = dienThoai;
             Email = email;
             DiaChi = diaChi;
@@ -99,9 +104,15 @@ namespace QuanLyNhanSu.Classes
         {
             MaTaiKhoan = maTaiKhoan;
         }
-        public void UpdateAnhNV(Image anhNhanVien)
+        public void UpdateAnhNV(string duongdananh)
         {
-            AnhNhanVien = anhNhanVien;
+            AnhNhanVien = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongdananh));
+            DuongDanAnh = duongdananh;
+        }
+        public void RemoveAnhNV()
+        {
+            AnhNhanVien = null;
+            DuongDanAnh = null;
         }
         public void initMaNhanVien(string manv)
         {

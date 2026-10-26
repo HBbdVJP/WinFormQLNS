@@ -31,6 +31,7 @@ namespace QuanLyNhanSu.Forms
             tvToChuc = new TreeView();
             lvNhanVien = new ListView();
             panelBottom = new Panel();
+            btnLoadFromFile = new Button();
             btnSaveImediately = new Button();
             btnLamMoi = new Button();
             btnHuy = new Button();
@@ -172,9 +173,11 @@ namespace QuanLyNhanSu.Forms
             lvNhanVien.TabIndex = 0;
             lvNhanVien.UseCompatibleStateImageBehavior = false;
             lvNhanVien.View = View.Details;
+            lvNhanVien.SelectedIndexChanged += lvNhanVien_SelectedIndexChanged;
             // 
             // panelBottom
             // 
+            panelBottom.Controls.Add(btnLoadFromFile);
             panelBottom.Controls.Add(btnSaveImediately);
             panelBottom.Controls.Add(btnLamMoi);
             panelBottom.Controls.Add(btnHuy);
@@ -188,6 +191,17 @@ namespace QuanLyNhanSu.Forms
             panelBottom.Size = new Size(1020, 72);
             panelBottom.TabIndex = 2;
             // 
+            // btnLoadFromFile
+            // 
+            btnLoadFromFile.Location = new Point(746, 14);
+            btnLoadFromFile.Margin = new Padding(3, 4, 3, 4);
+            btnLoadFromFile.Name = "btnLoadFromFile";
+            btnLoadFromFile.Size = new Size(126, 45);
+            btnLoadFromFile.TabIndex = 7;
+            btnLoadFromFile.Text = "Nạp dữ liệu";
+            btnLoadFromFile.UseVisualStyleBackColor = true;
+            btnLoadFromFile.Click += btnLoadFromFile_Click;
+            // 
             // btnSaveImediately
             // 
             btnSaveImediately.Enabled = false;
@@ -198,6 +212,7 @@ namespace QuanLyNhanSu.Forms
             btnSaveImediately.TabIndex = 6;
             btnSaveImediately.Text = "Lưu Vào File";
             btnSaveImediately.UseVisualStyleBackColor = true;
+            btnSaveImediately.Click += btnSaveImediately_Click;
             // 
             // btnLamMoi
             // 
@@ -208,6 +223,7 @@ namespace QuanLyNhanSu.Forms
             btnLamMoi.TabIndex = 5;
             btnLamMoi.Text = "Làm mới";
             btnLamMoi.UseVisualStyleBackColor = true;
+            btnLamMoi.Click += btnLamMoi_Click;
             // 
             // btnHuy
             // 
@@ -219,6 +235,7 @@ namespace QuanLyNhanSu.Forms
             btnHuy.TabIndex = 4;
             btnHuy.Text = "Hủy";
             btnHuy.UseVisualStyleBackColor = true;
+            btnHuy.Click += btnHuy_Click;
             // 
             // btnLuu
             // 
@@ -330,6 +347,7 @@ namespace QuanLyNhanSu.Forms
             btnXoaAnh.TabIndex = 24;
             btnXoaAnh.Text = "Xóa ảnh";
             btnXoaAnh.UseVisualStyleBackColor = true;
+            btnXoaAnh.Click += btnXoaAnh_Click;
             // 
             // btnDoiAnh
             // 
@@ -341,6 +359,7 @@ namespace QuanLyNhanSu.Forms
             btnDoiAnh.TabIndex = 23;
             btnDoiAnh.Text = "Đổi ảnh...";
             btnDoiAnh.UseVisualStyleBackColor = true;
+            btnDoiAnh.Click += btnDoiAnh_Click;
             // 
             // picAnh
             // 
@@ -566,6 +585,7 @@ namespace QuanLyNhanSu.Forms
             btnTimKiem.TabIndex = 4;
             btnTimKiem.Text = "Tìm kiếm";
             btnTimKiem.UseVisualStyleBackColor = true;
+            btnTimKiem.Click += btnTimKiem_Click;
             // 
             // txtTimKiem
             // 
@@ -697,5 +717,6 @@ namespace QuanLyNhanSu.Forms
         private ComboBox cboGioiTinh;
         private Button btnUpdateNhanVien;
         private Button btnSaveImediately;
+        private Button btnLoadFromFile;
     }
 }
