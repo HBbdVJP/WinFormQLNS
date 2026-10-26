@@ -31,6 +31,7 @@ namespace QuanLyNhanSu.Forms
             tvToChuc = new TreeView();
             lvNhanVien = new ListView();
             panelBottom = new Panel();
+            btnExport = new Button();
             btnLoadFromFile = new Button();
             btnSaveImediately = new Button();
             btnLamMoi = new Button();
@@ -177,6 +178,7 @@ namespace QuanLyNhanSu.Forms
             // 
             // panelBottom
             // 
+            panelBottom.Controls.Add(btnExport);
             panelBottom.Controls.Add(btnLoadFromFile);
             panelBottom.Controls.Add(btnSaveImediately);
             panelBottom.Controls.Add(btnLamMoi);
@@ -190,6 +192,17 @@ namespace QuanLyNhanSu.Forms
             panelBottom.Name = "panelBottom";
             panelBottom.Size = new Size(1020, 72);
             panelBottom.TabIndex = 2;
+            // 
+            // btnExport
+            // 
+            btnExport.Location = new Point(882, 14);
+            btnExport.Margin = new Padding(3, 4, 3, 4);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(126, 45);
+            btnExport.TabIndex = 8;
+            btnExport.Text = "Xuất thành file";
+            btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += btnExport_Click;
             // 
             // btnLoadFromFile
             // 
@@ -646,6 +659,7 @@ namespace QuanLyNhanSu.Forms
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý hồ sơ nhân viên";
             WindowState = FormWindowState.Maximized;
+            FormClosing += frmEmployee_FormClosing;
             Load += frmEmployee_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
@@ -718,5 +732,6 @@ namespace QuanLyNhanSu.Forms
         private Button btnUpdateNhanVien;
         private Button btnSaveImediately;
         private Button btnLoadFromFile;
+        private Button btnExport;
     }
 }

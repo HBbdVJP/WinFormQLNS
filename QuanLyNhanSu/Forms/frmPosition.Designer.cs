@@ -29,21 +29,24 @@ namespace QuanLyNhanSu.Forms
             colPhuCap = new ColumnHeader();
             colSoNV = new ColumnHeader();
             grpThongTin = new GroupBox();
+            txtPhuCapThang = new TextBox();
             lblPhuCap = new Label();
             txtTenChucVu = new TextBox();
             lblTenChucVu = new Label();
+            btnSua = new Button();
             txtMaChucVu = new TextBox();
             lblMaChucVu = new Label();
             lvChucVu = new ListView();
             panelBottom = new Panel();
+            btnImport = new Button();
+            btnExport = new Button();
+            btnSaveImmediately = new Button();
             btnLamMoi = new Button();
             btnHuy = new Button();
             btnLuu = new Button();
             btnXoa = new Button();
-            btnSua = new Button();
             btnThem = new Button();
             errorProvider1 = new ErrorProvider(components);
-            txtPhuCapThang = new TextBox();
             grpThongTin.SuspendLayout();
             panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
@@ -75,6 +78,7 @@ namespace QuanLyNhanSu.Forms
             grpThongTin.Controls.Add(lblPhuCap);
             grpThongTin.Controls.Add(txtTenChucVu);
             grpThongTin.Controls.Add(lblTenChucVu);
+            grpThongTin.Controls.Add(btnSua);
             grpThongTin.Controls.Add(txtMaChucVu);
             grpThongTin.Controls.Add(lblMaChucVu);
             grpThongTin.Dock = DockStyle.Top;
@@ -87,6 +91,13 @@ namespace QuanLyNhanSu.Forms
             grpThongTin.TabIndex = 0;
             grpThongTin.TabStop = false;
             grpThongTin.Text = "Thông tin chức vụ";
+            // 
+            // txtPhuCapThang
+            // 
+            txtPhuCapThang.Location = new Point(137, 108);
+            txtPhuCapThang.Name = "txtPhuCapThang";
+            txtPhuCapThang.Size = new Size(194, 29);
+            txtPhuCapThang.TabIndex = 5;
             // 
             // lblPhuCap
             // 
@@ -116,6 +127,18 @@ namespace QuanLyNhanSu.Forms
             lblTenChucVu.Size = new Size(89, 20);
             lblTenChucVu.TabIndex = 2;
             lblTenChucVu.Text = "Tên chức vụ:";
+            // 
+            // btnSua
+            // 
+            btnSua.Font = new Font("Segoe UI", 9.75F);
+            btnSua.Location = new Point(480, 100);
+            btnSua.Margin = new Padding(3, 4, 3, 4);
+            btnSua.Name = "btnSua";
+            btnSua.Size = new Size(114, 45);
+            btnSua.TabIndex = 1;
+            btnSua.Text = "Sửa";
+            btnSua.UseVisualStyleBackColor = true;
+            btnSua.Click += btnSua_Click;
             // 
             // txtMaChucVu
             // 
@@ -150,14 +173,17 @@ namespace QuanLyNhanSu.Forms
             lvChucVu.TabIndex = 1;
             lvChucVu.UseCompatibleStateImageBehavior = false;
             lvChucVu.View = View.Details;
+            lvChucVu.SelectedIndexChanged += lvChucVu_SelectedIndexChanged;
             // 
             // panelBottom
             // 
+            panelBottom.Controls.Add(btnImport);
+            panelBottom.Controls.Add(btnExport);
+            panelBottom.Controls.Add(btnSaveImmediately);
             panelBottom.Controls.Add(btnLamMoi);
             panelBottom.Controls.Add(btnHuy);
             panelBottom.Controls.Add(btnLuu);
             panelBottom.Controls.Add(btnXoa);
-            panelBottom.Controls.Add(btnSua);
             panelBottom.Controls.Add(btnThem);
             panelBottom.Dock = DockStyle.Bottom;
             panelBottom.Location = new Point(0, 568);
@@ -166,55 +192,82 @@ namespace QuanLyNhanSu.Forms
             panelBottom.Size = new Size(1029, 72);
             panelBottom.TabIndex = 2;
             // 
+            // btnImport
+            // 
+            btnImport.Location = new Point(878, 14);
+            btnImport.Margin = new Padding(3, 4, 3, 4);
+            btnImport.Name = "btnImport";
+            btnImport.Size = new Size(126, 45);
+            btnImport.TabIndex = 8;
+            btnImport.Text = "Nhập từ File";
+            btnImport.UseVisualStyleBackColor = true;
+            btnImport.Click += btnImport_Click;
+            // 
+            // btnExport
+            // 
+            btnExport.Location = new Point(746, 13);
+            btnExport.Margin = new Padding(3, 4, 3, 4);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(126, 45);
+            btnExport.TabIndex = 7;
+            btnExport.Text = "Xuất ra File";
+            btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += btnExport_Click;
+            // 
+            // btnSaveImmediately
+            // 
+            btnSaveImmediately.Location = new Point(374, 14);
+            btnSaveImmediately.Margin = new Padding(3, 4, 3, 4);
+            btnSaveImmediately.Name = "btnSaveImmediately";
+            btnSaveImmediately.Size = new Size(114, 45);
+            btnSaveImmediately.TabIndex = 6;
+            btnSaveImmediately.Text = "Lưu vào File";
+            btnSaveImmediately.UseVisualStyleBackColor = true;
+            btnSaveImmediately.Click += btnSaveImmediately_Click;
+            // 
             // btnLamMoi
             // 
-            btnLamMoi.Location = new Point(642, 13);
+            btnLamMoi.Location = new Point(614, 14);
             btnLamMoi.Margin = new Padding(3, 4, 3, 4);
             btnLamMoi.Name = "btnLamMoi";
             btnLamMoi.Size = new Size(126, 45);
             btnLamMoi.TabIndex = 5;
             btnLamMoi.Text = "Làm mới";
             btnLamMoi.UseVisualStyleBackColor = true;
+            btnLamMoi.Click += btnLamMoi_Click;
             // 
             // btnHuy
             // 
-            btnHuy.Location = new Point(517, 13);
+            btnHuy.Location = new Point(494, 14);
             btnHuy.Margin = new Padding(3, 4, 3, 4);
             btnHuy.Name = "btnHuy";
             btnHuy.Size = new Size(114, 45);
             btnHuy.TabIndex = 4;
             btnHuy.Text = "Hủy";
             btnHuy.UseVisualStyleBackColor = true;
+            btnHuy.Click += btnHuy_Click;
             // 
             // btnLuu
             // 
-            btnLuu.Location = new Point(391, 13);
+            btnLuu.Location = new Point(254, 14);
             btnLuu.Margin = new Padding(3, 4, 3, 4);
             btnLuu.Name = "btnLuu";
             btnLuu.Size = new Size(114, 45);
             btnLuu.TabIndex = 3;
             btnLuu.Text = "Lưu";
             btnLuu.UseVisualStyleBackColor = true;
+            btnLuu.Click += btnLuu_Click;
             // 
             // btnXoa
             // 
-            btnXoa.Location = new Point(265, 13);
+            btnXoa.Location = new Point(134, 14);
             btnXoa.Margin = new Padding(3, 4, 3, 4);
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(114, 45);
             btnXoa.TabIndex = 2;
             btnXoa.Text = "Xóa";
             btnXoa.UseVisualStyleBackColor = true;
-            // 
-            // btnSua
-            // 
-            btnSua.Location = new Point(139, 13);
-            btnSua.Margin = new Padding(3, 4, 3, 4);
-            btnSua.Name = "btnSua";
-            btnSua.Size = new Size(114, 45);
-            btnSua.TabIndex = 1;
-            btnSua.Text = "Sửa";
-            btnSua.UseVisualStyleBackColor = true;
+            btnXoa.Click += btnXoa_Click;
             // 
             // btnThem
             // 
@@ -225,18 +278,12 @@ namespace QuanLyNhanSu.Forms
             btnThem.TabIndex = 0;
             btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = true;
+            btnThem.Click += btnThem_Click;
             // 
             // errorProvider1
             // 
             errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
-            // 
-            // txtPhuCapThang
-            // 
-            txtPhuCapThang.Location = new Point(137, 108);
-            txtPhuCapThang.Name = "txtPhuCapThang";
-            txtPhuCapThang.Size = new Size(194, 29);
-            txtPhuCapThang.TabIndex = 5;
             // 
             // frmPosition
             // 
@@ -251,6 +298,8 @@ namespace QuanLyNhanSu.Forms
             Name = "frmPosition";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý chức vụ";
+            WindowState = FormWindowState.Maximized;
+            FormClosing += frmEmployee_FormClosing;
             Load += frmPosition_Load;
             grpThongTin.ResumeLayout(false);
             grpThongTin.PerformLayout();
@@ -281,5 +330,8 @@ namespace QuanLyNhanSu.Forms
         private ColumnHeader colPhuCap;
         private ColumnHeader colSoNV;
         private TextBox txtPhuCapThang;
+        private Button btnImport;
+        private Button btnExport;
+        private Button btnSaveImmediately;
     }
 }

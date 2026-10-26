@@ -156,11 +156,10 @@ namespace QuanLyNhanSu.Forms
                     else if (line.StartsWith("AnhNhanVien: "))
                     {
                         pathAnhNhanVien = line.Substring("AnhNhanVien: ".Length);
-                        anhNhanVien = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathAnhNhanVien));
                     }
                     else if (line == "---")
                     {
-                        nhanVienList.Add(new NhanVien(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, maChucVu, maPhongBan, maTaiKhoan, soNgayNghiPhep, luongCoBan, anhNhanVien));
+                        nhanVienList.Add(new NhanVien(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, maChucVu, maPhongBan, maTaiKhoan, soNgayNghiPhep, luongCoBan, pathAnhNhanVien));
                         maNhanVien = "";
                         tenNhanVien = "";
                         gioiTinh = "";
@@ -188,7 +187,7 @@ namespace QuanLyNhanSu.Forms
             attendanceForm.MdiParent = this;
             attendanceForm.Hide();
 
-            frmDepartment departmentForm = new frmDepartment();
+            frmDepartment departmentForm = new frmDepartment(phongBanList, nhanVienList, nvdangnhap);
             departmentForm.MdiParent = this;
             departmentForm.Hide();
 
@@ -196,7 +195,7 @@ namespace QuanLyNhanSu.Forms
             employeeForm.MdiParent = this;
             employeeForm.Show();
 
-            frmPosition positionForm = new frmPosition();
+            frmPosition positionForm = new frmPosition(chucVuList,nhanVienList,nvdangnhap);
             positionForm.MdiParent = this;
             positionForm.Hide();
 

@@ -122,3 +122,5 @@ Thực lĩnh        = Lương theo công - Trừ đi trễ + Tiền tăng ca
 
 
 Note: Biển ơi m làm CHấm công xong m chỉnh trong employee cái nudPhepNam cho t
+
+Note 2: Cần sửa frm Main gọi frm MDI child đang lỗi tắt đi không bật lại được

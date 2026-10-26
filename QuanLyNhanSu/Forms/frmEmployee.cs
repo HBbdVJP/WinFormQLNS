@@ -22,11 +22,9 @@ namespace QuanLyNhanSu.Forms
             NVDangNhap = sessionlogin;
         }
         private readonly string nhanVienFilePath = Path.Combine(
-    AppDomain.CurrentDomain.BaseDirectory,
-    "Resources",
-    "DummyData",
-    "NhanVien.txt"
-);
+        AppDomain.CurrentDomain.BaseDirectory,
+        "Resources","DummyData","NhanVien.txt"
+        );
 
         public List<NhanVien> DanhSachNhanVien { get; private set; } = new List<NhanVien>();
         public List<ChucVu> DanhSachChucVu { get; private set; } = new List<ChucVu>();
@@ -872,6 +870,78 @@ namespace QuanLyNhanSu.Forms
                         MessageBoxIcon.Error
                     );
                 }
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Title = "Xuất danh sách nhân viên";
+                sfd.Filter = "Text Files (*.txt)|*.txt";
+                sfd.DefaultExt = "txt";
+                sfd.AddExtension = true;
+                sfd.FileName = "NhanVien.txt";
+                sfd.OverwritePrompt = true;
+
+                // Thư mục mở đầu tiên, người dùng vẫn có thể chọn nơi khác.
+                sfd.InitialDirectory = Environment.GetFolderPath(
+                    Environment.SpecialFolder.MyDocuments
+                );
+
+                if (sfd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter(
+                        sfd.FileName, false, System.Text.Encoding.UTF8))
+                    {
+                        foreach (NhanVien nv in DanhSachNhanVien)
+                        {
+                            sw.WriteLine($"MaNhanVien: {nv.MaNhanVien}");
+                            sw.WriteLine($"TenNhanVien: {nv.TenNhanVien}");
+                            sw.WriteLine($"GioiTinh: {nv.GioiTinh}");
+                            sw.WriteLine($"NgaySinh: {nv.NgaySinh:dd/MM/yyyy}");
+                            sw.WriteLine($"MaChucVu: {nv.MaChucVu}");
+                            sw.WriteLine($"MaPhongBan: {nv.MaPhongBan}");
+                            sw.WriteLine($"MaTaiKhoan: {nv.MaTaiKhoan}");
+                            sw.WriteLine($"SoNgayNghiPhep: {nv.SoNgayNghiPhep}");
+                            sw.WriteLine($"LuongCoBan: {nv.LuongCoBan}");
+                            sw.WriteLine($"AnhNhanVien: {nv.DuongDanAnh}");
+
+                            sw.WriteLine($"DienThoai: {nv.DienThoai}");
+                            sw.WriteLine($"Email: {nv.Email}");
+                            sw.WriteLine($"DiaChi: {nv.DiaChi}");
+
+                            sw.WriteLine("---");
+                        }
+                    }
+
+                    MessageBox.Show(
+                        $"Đã xuất {DanhSachNhanVien.Count} nhân viên thành công.",
+                        "Xuất dữ liệu",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Không thể xuất dữ liệu.\nChi tiết: {ex.Message}",
+                        "Lỗi xuất file",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                }
+            }
+        }
+        private void frmEmployee_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;   // huỷ việc đóng
+                this.Hide();       // chỉ ẩn đi
             }
         }
     }
