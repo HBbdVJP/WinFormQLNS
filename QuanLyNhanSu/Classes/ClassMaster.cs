@@ -19,26 +19,28 @@ namespace QuanLyNhanSu.Classes
     public class NhanVien
     {
         public string MaNhanVien { get; private set; }
-        public string TenNhanVien { get; private set; }
-        public string GioiTinh { get; private set; }
-        public DateTime NgaySinh { get; private set; }
-        public string MaChucVu { get; private set; }
-        public string MaTaiKhoan { get; private set; }
-        public int SoNgayNghiPhep { get; private set; }
-        public decimal LuongCoBan { get; private set; }
-        public Image AnhNhanVien { get; private set; } // dir ../Image/<tenfileanhNV.kieudulieu>
-        public string DienThoai { get; private set; }
-        public string Email { get; private set; }
-        public string DiaChi { get; private set; }
+        public string? TenNhanVien { get; private set; }
+        public string? GioiTinh { get; private set; }
+        public DateTime? NgaySinh { get; private set; }
+        public string? MaChucVu { get; private set; }
+        public string? MaPhongBan { get; private set; }
+        public string? MaTaiKhoan { get; private set; }
+        public int? SoNgayNghiPhep { get; private set; }
+        public decimal? LuongCoBan { get; private set; }
+        public Image? AnhNhanVien { get; private set; } // dir ../Image/<tenfileanhNV.kieudulieu>
+        public string? DienThoai { get; private set; }
+        public string? Email { get; private set; }
+        public string? DiaChi { get; private set; }
 
         //contructor simple
-        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien)
+        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maPhongBan, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien)
         {
             MaNhanVien = maNhanVien;
             TenNhanVien = tenNhanVien;
             GioiTinh = gioiTinh;
             NgaySinh = ngaySinh;
             MaChucVu = maChucVu;
+            MaPhongBan = maPhongBan;
             MaTaiKhoan = maTaiKhoan;
             SoNgayNghiPhep = soNgayNghiPhep;
             LuongCoBan = luongCoBan;
@@ -55,6 +57,7 @@ namespace QuanLyNhanSu.Classes
             GioiTinh = "NaN";
             NgaySinh = DateTime.MinValue;
             MaChucVu = "NaN";
+            MaPhongBan = "NaN";
             MaTaiKhoan = "NaN";
             SoNgayNghiPhep = 0;
             LuongCoBan = 0.0m;
@@ -64,13 +67,14 @@ namespace QuanLyNhanSu.Classes
             DiaChi = "";
         }
         //constructor full
-        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien, string dienThoai, string email, string diaChi)
+        public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maPhongBan, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, Image anhNhanVien, string dienThoai, string email, string diaChi)
         {
             MaNhanVien = maNhanVien;
             TenNhanVien = tenNhanVien;
             GioiTinh = gioiTinh;
             NgaySinh = ngaySinh;
             MaChucVu = maChucVu;
+            MaPhongBan = maPhongBan;
             MaTaiKhoan = maTaiKhoan;
             SoNgayNghiPhep = soNgayNghiPhep;
             LuongCoBan = luongCoBan;
@@ -78,6 +82,30 @@ namespace QuanLyNhanSu.Classes
             DienThoai = dienThoai;
             Email = email;
             DiaChi = diaChi;
+        }
+        public void UpdateNhanVien(string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maPhongBan, decimal luongCoBan, string dienThoai, string email, string diaChi)
+        {
+            TenNhanVien = tenNhanVien;
+            GioiTinh = gioiTinh;
+            NgaySinh = ngaySinh;
+            MaChucVu = maChucVu;
+            MaPhongBan = maPhongBan;
+            LuongCoBan = luongCoBan;
+            DienThoai = dienThoai;
+            Email = email;
+            DiaChi = diaChi;
+        }
+        public void UpdateTaiKhoanNV(string maTaiKhoan)
+        {
+            MaTaiKhoan = maTaiKhoan;
+        }
+        public void UpdateAnhNV(Image anhNhanVien)
+        {
+            AnhNhanVien = anhNhanVien;
+        }
+        public void initMaNhanVien(string manv)
+        {
+            MaNhanVien = manv;
         }
 
     }
@@ -98,11 +126,27 @@ namespace QuanLyNhanSu.Classes
         public string MaChucVu { get; private set; }
         public string TenChucVu { get; private set; }
         public decimal PhuCap { get; private set; }
+        public bool QuyenCRUD { get; private set; }
+        public ChucVu(string maChucVu, string tenChucVu, decimal phuCap, bool quyenHanHeThong)
+        {
+            MaChucVu = maChucVu;
+            TenChucVu = tenChucVu;
+            PhuCap = phuCap;
+            QuyenCRUD = quyenHanHeThong;
+        }
+        public ChucVu()
+        {
+            MaChucVu = "NaN";
+            TenChucVu = "NaN";
+            PhuCap = 0;
+            QuyenCRUD = false;
+        }
         public ChucVu(string maChucVu, string tenChucVu, decimal phuCap)
         {
             MaChucVu = maChucVu;
             TenChucVu = tenChucVu;
             PhuCap = phuCap;
+            QuyenCRUD = false;
         }
     }
     public class User
@@ -133,6 +177,40 @@ namespace QuanLyNhanSu.Classes
             PhuCap = phuCap;
             PhatDiTre = phatDiTre;
             ThucLanh = thucLanh;
+        }
+    }
+    public class SessionLogin
+    {
+        public string dummyloginkey = "wjbicber";
+        public string MaTaiKhoan { get; private set; }
+        public string TenNhanVien { get; private set; }
+        public string TenChucVu {  get; private set; }
+        public bool nvDangNhapQuyenHan { get; private set; }
+        public SessionLogin(string maTaiKhoan) //trong login form truyền mã
+        {
+            MaTaiKhoan = maTaiKhoan;
+        }
+        public SessionLogin()
+        {
+
+        }
+        public void RBACAuth(List<NhanVien> dsnv, List<ChucVu> dscv) //chạy đầu load main
+        {
+            foreach(NhanVien nv in dsnv)
+            {
+                if(nv.MaTaiKhoan == MaTaiKhoan)
+                {
+                    TenNhanVien = nv.TenNhanVien;
+                    foreach(ChucVu cv in dscv)
+                    {
+                        if (cv.MaChucVu == nv.MaChucVu)
+                        {
+                            nvDangNhapQuyenHan = cv.QuyenCRUD;
+                            TenChucVu = cv.TenChucVu;
+                        }
+                    }
+                }
+            }
         }
     }
 }

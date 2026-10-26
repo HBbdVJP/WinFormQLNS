@@ -68,14 +68,17 @@ Bảo Minh:
 - Thiết kế xong các Form UI hoàn chỉnh
 - Gắn giá trị phù hợp
 - Đã có một lượng dummydata tương đối
+
 tiến độ: hoàn thành 92%
 
 Hoài Bắc:
 - xong login và gần xong main
+
 tiến độ: hoàn thành 35% 
 
 Sao Biển:
 - Đã có thiết kế
+
 tiến độ: hoàn thành 20%
 
 ---
@@ -116,3 +119,6 @@ Trừ đi trễ       = số lần đi trễ * MucTruDiTre
 Tiền tăng ca     = (Lương ngày / SoGioLamChuan) * số giờ tăng ca * HeSoTangCa
 Thực lĩnh        = Lương theo công - Trừ đi trễ + Tiền tăng ca
 ```
+
+
+Note: Biển ơi m làm CHấm công xong m chỉnh trong employee cái nudPhepNam cho t

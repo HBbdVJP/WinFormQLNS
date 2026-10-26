@@ -3,6 +3,7 @@ TenNhanVien: Sao Biển Thích DevOps
 GioiTinh: Nam
 NgaySinh: 15-05-1990
 MaChucVu: CVSrDevOps
+MaPhongBan: PBIT001
 MaTaiKhoan: TKDN02
 SoNgayNghiPhep: 1
 LuongCoBan: 20000000
@@ -12,7 +13,8 @@ MaNhanVien: MNV02
 TenNhanVien: Sao Biển Làm IT
 GioiTinh: Nam
 NgaySinh: 22-08-1992
-MaChucVu: CVIT
+MaChucVu: CVSrDB
+MaPhongBan: PBIT005E
 MaTaiKhoan: TKDN01
 SoNgayNghiPhep: 1
 LuongCoBan: 18000000
@@ -23,8 +25,42 @@ TenNhanVien: Sao Biển Thích PM
 GioiTinh: Nam
 NgaySinh: 10-12-1985
 MaChucVu: CVPM
+MaPhongBan: PBIT001
 MaTaiKhoan: TKDN07
 SoNgayNghiPhep: 0
 LuongCoBan: 25000000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+---
+MaNhanVien: MNV04
+TenNhanVien: Bảo Minh HR
+GioiTinh: Nam
+NgaySinh: 15-02-1992
+MaChucVu: CVNS
+MaPhongBan: PBHR031
+MaTaiKhoan: TKDN06
+SoNgayNghiPhep: 8
+LuongCoBan: 19000000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV05
+TenNhanVien: Bảo Minh làm UI
+GioiTinh: Nam
+NgaySinh: 18-04-1991
+MaChucVu: CVSrFE
+MaPhongBan: PBIT001
+MaTaiKhoan: TKDN05
+SoNgayNghiPhep: 3
+LuongCoBan: 14500000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV06
+TenNhanVien: Bảo Minh múc Trưởng Phòng
+GioiTinh: Nam
+NgaySinh: 11-09-1999
+MaChucVu: CVTC
+MaPhongBan: PBTC001B
+MaTaiKhoan: TKDN10
+SoNgayNghiPhep: 0
+LuongCoBan: 35000000
+AnhNhanVien: Resources/Image/BMTruongPhong.png
 ---

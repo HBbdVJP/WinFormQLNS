@@ -7,11 +7,13 @@ namespace QuanLyNhanSu.Forms
 {
     public partial class frmMain : Form
     {
-        public frmMain()
+        public frmMain(string maTK)
         {
             InitializeComponent();
+            maTaiKhoan = maTK;
         }
-
+        public string maTaiKhoan;
+        
         //filepath string comp
         public string phongBanFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "DummyData", "PhongBan.txt");
         public string chucVuFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "DummyData", "ChucVu.txt");
@@ -53,26 +55,49 @@ namespace QuanLyNhanSu.Forms
                 string maChucVu = "";
                 string tenChucVu = "";
                 decimal phuCap = 0;
+                bool quyenHan = false;
+                int constructorIndicator = 0;
                 while ((line = sr.ReadLine()) != null)
                 {
                     if (line.StartsWith("MaChucVu: "))
                     {
+                        constructorIndicator++;
                         maChucVu = line.Substring("MaChucVu: ".Length);
                     }
                     else if (line.StartsWith("TenChucVu: "))
                     {
+                        constructorIndicator++;
                         tenChucVu = line.Substring("TenChucVu: ".Length);
                     }
                     else if (line.StartsWith("PhuCap: "))
                     {
+                        constructorIndicator++;
                         phuCap = decimal.Parse(line.Substring("PhuCap: ".Length));
+                    }
+                    else if (line.StartsWith("QuyenHan: "))
+                    {
+                        constructorIndicator++;
+                        quyenHan = bool.Parse(line.Substring("QuyenHan: ".Length));
                     }
                     else if (line == "---")
                     {
-                        chucVuList.Add(new ChucVu(maChucVu, tenChucVu, phuCap));
-                        maChucVu = "";
-                        tenChucVu = "";
-                        phuCap = 0;
+                        if (constructorIndicator == 4)
+                        {
+                            chucVuList.Add(new ChucVu(maChucVu, tenChucVu, phuCap, quyenHan));
+                            maChucVu = "";
+                            tenChucVu = "";
+                            phuCap = 0;
+                            quyenHan = false;
+                            constructorIndicator = 0;
+                        }
+                        else
+                        {
+                            chucVuList.Add(new ChucVu(maChucVu, tenChucVu, phuCap));
+                            maChucVu = "";
+                            tenChucVu = "";
+                            phuCap = 0;
+                            constructorIndicator = 0;
+                        }
                     }
                 }
             }
@@ -84,10 +109,11 @@ namespace QuanLyNhanSu.Forms
                 string gioiTinh = "";
                 DateTime ngaySinh = DateTime.MinValue;
                 string maChucVu = "";
+                string maPhongBan = "";
                 string maTaiKhoan = "";
                 int soNgayNghiPhep = 0;
                 decimal luongCoBan = 0;
-                Image anhNhanVien = null;
+                Image? anhNhanVien = null;
                 string pathAnhNhanVien = "";
                 while ((line = sr.ReadLine()) != null)
                 {
@@ -111,6 +137,10 @@ namespace QuanLyNhanSu.Forms
                     {
                         maChucVu = line.Substring("MaChucVu: ".Length);
                     }
+                    else if (line.StartsWith("MaPhongBan: "))
+                    {
+                        maPhongBan = line.Substring("MaPhongBan: ".Length);
+                    }
                     else if (line.StartsWith("MaTaiKhoan: "))
                     {
                         maTaiKhoan = line.Substring("MaTaiKhoan: ".Length);
@@ -130,12 +160,13 @@ namespace QuanLyNhanSu.Forms
                     }
                     else if (line == "---")
                     {
-                        nhanVienList.Add(new NhanVien(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, maChucVu, maTaiKhoan, soNgayNghiPhep, luongCoBan, anhNhanVien));
+                        nhanVienList.Add(new NhanVien(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, maChucVu, maPhongBan, maTaiKhoan, soNgayNghiPhep, luongCoBan, anhNhanVien));
                         maNhanVien = "";
                         tenNhanVien = "";
                         gioiTinh = "";
                         ngaySinh = DateTime.MinValue;
                         maChucVu = "";
+                        maPhongBan = "";
                         maTaiKhoan = "";
                         soNgayNghiPhep = 0;
                         luongCoBan = 0;
@@ -144,6 +175,14 @@ namespace QuanLyNhanSu.Forms
                     }
                 }
             }
+
+            //init session login
+            SessionLogin nvdangnhap = new SessionLogin(maTaiKhoan);
+            nvdangnhap.RBACAuth(nhanVienList, chucVuList);
+            lblNguoiDungName.Text = nvdangnhap.TenNhanVien;
+            lblVaiTroName.Text = nvdangnhap.TenChucVu;
+
+
             //mặc định khởi tạo các tab form và mở form employee và ẩn các form khác
             frmAttendance attendanceForm = new frmAttendance();
             attendanceForm.MdiParent = this;
@@ -153,7 +192,7 @@ namespace QuanLyNhanSu.Forms
             departmentForm.MdiParent = this;
             departmentForm.Hide();
 
-            frmEmployee employeeForm = new frmEmployee(nhanVienList, chucVuList, phongBanList);
+            frmEmployee employeeForm = new frmEmployee(nhanVienList, chucVuList, phongBanList, nvdangnhap);
             employeeForm.MdiParent = this;
             employeeForm.Show();
 
@@ -184,7 +223,7 @@ namespace QuanLyNhanSu.Forms
         }
         private void mnuMultiMDIChildView_Click(object sender, EventArgs e)
         {
-            mnuMultiMDIChildView.Text = mnuMultiMDIChildView.Text!.Contains("Bật")? "Xem đa cửa sổ(Tắt)" : "Xem đa cửa sổ(Bật)";
+            mnuMultiMDIChildView.Text = mnuMultiMDIChildView.Text!.Contains("Bật") ? "Xem đa cửa sổ(Tắt)" : "Xem đa cửa sổ(Bật)";
         }
         private void mnuHoSoNhanVien_Click(object sender, EventArgs e)
         {
@@ -266,13 +305,23 @@ namespace QuanLyNhanSu.Forms
         {
             this.LayoutMdi(MdiLayout.Cascade);
         }
-        private void mnuXepNgang_Click(object sender, EventArgs e) 
+        private void mnuXepNgang_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.TileHorizontal);
         }
         private void mnuXepDoc_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.TileVertical);
+        }
+
+        private void frmMain_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -93,7 +93,7 @@ namespace QuanLyNhanSu.Forms
                 if (user.TenDangNhap == tryingLogin.TenDangNhap && user.MatKhau == tryingLogin.MatKhau)
                 {
                     // Open main form
-                    frmMain mainForm = new frmMain();
+                    frmMain mainForm = new frmMain(user.MaTaiKhoan);
                     mainForm.Show();
                     this.Hide();
                     return;

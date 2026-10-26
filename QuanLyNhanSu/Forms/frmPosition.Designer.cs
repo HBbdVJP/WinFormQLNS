@@ -23,231 +23,240 @@ namespace QuanLyNhanSu.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ColumnHeader colMa;
-            System.Windows.Forms.ColumnHeader colTen;
-            System.Windows.Forms.ColumnHeader colHeSo;
-            System.Windows.Forms.ColumnHeader colSoNV;
-            this.components = new System.ComponentModel.Container();
-            this.grpThongTin = new System.Windows.Forms.GroupBox();
-            this.nudHeSoLuong = new System.Windows.Forms.NumericUpDown();
-            this.lblHeSoLuong = new System.Windows.Forms.Label();
-            this.txtTenChucVu = new System.Windows.Forms.TextBox();
-            this.lblTenChucVu = new System.Windows.Forms.Label();
-            this.txtMaChucVu = new System.Windows.Forms.TextBox();
-            this.lblMaChucVu = new System.Windows.Forms.Label();
-            this.lvChucVu = new System.Windows.Forms.ListView();
-            this.panelBottom = new System.Windows.Forms.Panel();
-            this.btnLamMoi = new System.Windows.Forms.Button();
-            this.btnHuy = new System.Windows.Forms.Button();
-            this.btnLuu = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.grpThongTin.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeSoLuong)).BeginInit();
-            this.panelBottom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            colMa = new ColumnHeader();
+            colTen = new ColumnHeader();
+            colPhuCap = new ColumnHeader();
+            colSoNV = new ColumnHeader();
+            grpThongTin = new GroupBox();
+            lblPhuCap = new Label();
+            txtTenChucVu = new TextBox();
+            lblTenChucVu = new Label();
+            txtMaChucVu = new TextBox();
+            lblMaChucVu = new Label();
+            lvChucVu = new ListView();
+            panelBottom = new Panel();
+            btnLamMoi = new Button();
+            btnHuy = new Button();
+            btnLuu = new Button();
+            btnXoa = new Button();
+            btnSua = new Button();
+            btnThem = new Button();
+            errorProvider1 = new ErrorProvider(components);
+            txtPhuCapThang = new TextBox();
+            grpThongTin.SuspendLayout();
+            panelBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
+            // 
+            // colMa
+            // 
+            colMa.Text = "Mã chức vụ";
+            colMa.Width = 125;
+            // 
+            // colTen
+            // 
+            colTen.Text = "Tên chức vụ";
+            colTen.Width = 290;
+            // 
+            // colPhuCap
+            // 
+            colPhuCap.Text = "Phụ Cấp Tháng";
+            colPhuCap.Width = 200;
+            // 
+            // colSoNV
+            // 
+            colSoNV.Text = "Số nhân viên";
+            colSoNV.Width = 140;
             // 
             // grpThongTin
             // 
-            this.grpThongTin.Controls.Add(this.nudHeSoLuong);
-            this.grpThongTin.Controls.Add(this.lblHeSoLuong);
-            this.grpThongTin.Controls.Add(this.txtTenChucVu);
-            this.grpThongTin.Controls.Add(this.lblTenChucVu);
-            this.grpThongTin.Controls.Add(this.txtMaChucVu);
-            this.grpThongTin.Controls.Add(this.lblMaChucVu);
-            this.grpThongTin.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpThongTin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.grpThongTin.Location = new System.Drawing.Point(0, 0);
-            this.grpThongTin.Name = "grpThongTin";
-            this.grpThongTin.Size = new System.Drawing.Size(900, 130);
-            this.grpThongTin.TabIndex = 0;
-            this.grpThongTin.TabStop = false;
-            this.grpThongTin.Text = "Thông tin chức vụ";
+            grpThongTin.Controls.Add(txtPhuCapThang);
+            grpThongTin.Controls.Add(lblPhuCap);
+            grpThongTin.Controls.Add(txtTenChucVu);
+            grpThongTin.Controls.Add(lblTenChucVu);
+            grpThongTin.Controls.Add(txtMaChucVu);
+            grpThongTin.Controls.Add(lblMaChucVu);
+            grpThongTin.Dock = DockStyle.Top;
+            grpThongTin.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            grpThongTin.Location = new Point(0, 0);
+            grpThongTin.Margin = new Padding(3, 4, 3, 4);
+            grpThongTin.Name = "grpThongTin";
+            grpThongTin.Padding = new Padding(3, 4, 3, 4);
+            grpThongTin.Size = new Size(1029, 173);
+            grpThongTin.TabIndex = 0;
+            grpThongTin.TabStop = false;
+            grpThongTin.Text = "Thông tin chức vụ";
             // 
-            // nudHeSoLuong
+            // lblPhuCap
             // 
-            this.nudHeSoLuong.DecimalPlaces = 2;
-            this.nudHeSoLuong.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.nudHeSoLuong.Location = new System.Drawing.Point(120, 80);
-            this.nudHeSoLuong.Maximum = new decimal(new int[] { 20, 0, 0, 0});
-            this.nudHeSoLuong.Minimum = new decimal(new int[] { 1, 0, 0, 0});
-            this.nudHeSoLuong.Name = "nudHeSoLuong";
-            this.nudHeSoLuong.Size = new System.Drawing.Size(120, 23);
-            this.nudHeSoLuong.TabIndex = 5;
-            this.nudHeSoLuong.Value = new decimal(new int[] { 1, 0, 0, 0});
-            // 
-            // lblHeSoLuong
-            // 
-            this.lblHeSoLuong.AutoSize = true;
-            this.lblHeSoLuong.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblHeSoLuong.Location = new System.Drawing.Point(20, 84);
-            this.lblHeSoLuong.Name = "lblHeSoLuong";
-            this.lblHeSoLuong.Size = new System.Drawing.Size(77, 15);
-            this.lblHeSoLuong.TabIndex = 4;
-            this.lblHeSoLuong.Text = "Hệ số lương:";
+            lblPhuCap.AutoSize = true;
+            lblPhuCap.Font = new Font("Segoe UI", 9F);
+            lblPhuCap.Location = new Point(23, 112);
+            lblPhuCap.Name = "lblPhuCap";
+            lblPhuCap.Size = new Size(103, 20);
+            lblPhuCap.TabIndex = 4;
+            lblPhuCap.Text = "Phụ cấp tháng";
             // 
             // txtTenChucVu
             // 
-            this.txtTenChucVu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtTenChucVu.Location = new System.Drawing.Point(420, 36);
-            this.txtTenChucVu.Name = "txtTenChucVu";
-            this.txtTenChucVu.Size = new System.Drawing.Size(300, 23);
-            this.txtTenChucVu.TabIndex = 3;
+            txtTenChucVu.Font = new Font("Segoe UI", 9F);
+            txtTenChucVu.Location = new Point(480, 48);
+            txtTenChucVu.Margin = new Padding(3, 4, 3, 4);
+            txtTenChucVu.Name = "txtTenChucVu";
+            txtTenChucVu.Size = new Size(342, 27);
+            txtTenChucVu.TabIndex = 3;
             // 
             // lblTenChucVu
             // 
-            this.lblTenChucVu.AutoSize = true;
-            this.lblTenChucVu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTenChucVu.Location = new System.Drawing.Point(320, 40);
-            this.lblTenChucVu.Name = "lblTenChucVu";
-            this.lblTenChucVu.Size = new System.Drawing.Size(66, 15);
-            this.lblTenChucVu.TabIndex = 2;
-            this.lblTenChucVu.Text = "Tên chức vụ:";
+            lblTenChucVu.AutoSize = true;
+            lblTenChucVu.Font = new Font("Segoe UI", 9F);
+            lblTenChucVu.Location = new Point(366, 53);
+            lblTenChucVu.Name = "lblTenChucVu";
+            lblTenChucVu.Size = new Size(89, 20);
+            lblTenChucVu.TabIndex = 2;
+            lblTenChucVu.Text = "Tên chức vụ:";
             // 
             // txtMaChucVu
             // 
-            this.txtMaChucVu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtMaChucVu.Location = new System.Drawing.Point(120, 36);
-            this.txtMaChucVu.Name = "txtMaChucVu";
-            this.txtMaChucVu.Size = new System.Drawing.Size(170, 23);
-            this.txtMaChucVu.TabIndex = 1;
+            txtMaChucVu.Font = new Font("Segoe UI", 9F);
+            txtMaChucVu.Location = new Point(137, 48);
+            txtMaChucVu.Margin = new Padding(3, 4, 3, 4);
+            txtMaChucVu.Name = "txtMaChucVu";
+            txtMaChucVu.Size = new Size(194, 27);
+            txtMaChucVu.TabIndex = 1;
             // 
             // lblMaChucVu
             // 
-            this.lblMaChucVu.AutoSize = true;
-            this.lblMaChucVu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblMaChucVu.Location = new System.Drawing.Point(20, 40);
-            this.lblMaChucVu.Name = "lblMaChucVu";
-            this.lblMaChucVu.Size = new System.Drawing.Size(64, 15);
-            this.lblMaChucVu.TabIndex = 0;
-            this.lblMaChucVu.Text = "Mã chức vụ:";
+            lblMaChucVu.AutoSize = true;
+            lblMaChucVu.Font = new Font("Segoe UI", 9F);
+            lblMaChucVu.Location = new Point(23, 53);
+            lblMaChucVu.Name = "lblMaChucVu";
+            lblMaChucVu.Size = new Size(87, 20);
+            lblMaChucVu.TabIndex = 0;
+            lblMaChucVu.Text = "Mã chức vụ:";
             // 
             // lvChucVu
             // 
-            colMa = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            colTen = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            colHeSo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            colSoNV = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            colMa.Text = "Mã chức vụ";
-            colMa.Width = 125;
-            colTen.Text = "Tên chức vụ";
-            colTen.Width = 290;
-            colHeSo.Text = "Hệ số lương";
-            colHeSo.Width = 140;
-            colSoNV.Text = "Số nhân viên";
-            colSoNV.Width = 140;
-            this.lvChucVu.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            colMa,
-            colTen,
-            colHeSo,
-            colSoNV});
-            this.lvChucVu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvChucVu.FullRowSelect = true;
-            this.lvChucVu.GridLines = true;
-            this.lvChucVu.HideSelection = false;
-            this.lvChucVu.Location = new System.Drawing.Point(0, 130);
-            this.lvChucVu.MultiSelect = false;
-            this.lvChucVu.Name = "lvChucVu";
-            this.lvChucVu.Size = new System.Drawing.Size(900, 296);
-            this.lvChucVu.TabIndex = 1;
-            this.lvChucVu.UseCompatibleStateImageBehavior = false;
-            this.lvChucVu.View = System.Windows.Forms.View.Details;
+            lvChucVu.Columns.AddRange(new ColumnHeader[] { colMa, colTen, colPhuCap, colSoNV });
+            lvChucVu.Dock = DockStyle.Fill;
+            lvChucVu.FullRowSelect = true;
+            lvChucVu.GridLines = true;
+            lvChucVu.Location = new Point(0, 173);
+            lvChucVu.Margin = new Padding(3, 4, 3, 4);
+            lvChucVu.MultiSelect = false;
+            lvChucVu.Name = "lvChucVu";
+            lvChucVu.Size = new Size(1029, 395);
+            lvChucVu.TabIndex = 1;
+            lvChucVu.UseCompatibleStateImageBehavior = false;
+            lvChucVu.View = View.Details;
             // 
             // panelBottom
             // 
-            this.panelBottom.Controls.Add(this.btnLamMoi);
-            this.panelBottom.Controls.Add(this.btnHuy);
-            this.panelBottom.Controls.Add(this.btnLuu);
-            this.panelBottom.Controls.Add(this.btnXoa);
-            this.panelBottom.Controls.Add(this.btnSua);
-            this.panelBottom.Controls.Add(this.btnThem);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 426);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(900, 54);
-            this.panelBottom.TabIndex = 2;
+            panelBottom.Controls.Add(btnLamMoi);
+            panelBottom.Controls.Add(btnHuy);
+            panelBottom.Controls.Add(btnLuu);
+            panelBottom.Controls.Add(btnXoa);
+            panelBottom.Controls.Add(btnSua);
+            panelBottom.Controls.Add(btnThem);
+            panelBottom.Dock = DockStyle.Bottom;
+            panelBottom.Location = new Point(0, 568);
+            panelBottom.Margin = new Padding(3, 4, 3, 4);
+            panelBottom.Name = "panelBottom";
+            panelBottom.Size = new Size(1029, 72);
+            panelBottom.TabIndex = 2;
             // 
             // btnLamMoi
             // 
-            this.btnLamMoi.Location = new System.Drawing.Point(562, 10);
-            this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(110, 34);
-            this.btnLamMoi.TabIndex = 5;
-            this.btnLamMoi.Text = "Làm mới";
-            this.btnLamMoi.UseVisualStyleBackColor = true;
+            btnLamMoi.Location = new Point(642, 13);
+            btnLamMoi.Margin = new Padding(3, 4, 3, 4);
+            btnLamMoi.Name = "btnLamMoi";
+            btnLamMoi.Size = new Size(126, 45);
+            btnLamMoi.TabIndex = 5;
+            btnLamMoi.Text = "Làm mới";
+            btnLamMoi.UseVisualStyleBackColor = true;
             // 
             // btnHuy
             // 
-            this.btnHuy.Location = new System.Drawing.Point(452, 10);
-            this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(100, 34);
-            this.btnHuy.TabIndex = 4;
-            this.btnHuy.Text = "Hủy";
-            this.btnHuy.UseVisualStyleBackColor = true;
+            btnHuy.Location = new Point(517, 13);
+            btnHuy.Margin = new Padding(3, 4, 3, 4);
+            btnHuy.Name = "btnHuy";
+            btnHuy.Size = new Size(114, 45);
+            btnHuy.TabIndex = 4;
+            btnHuy.Text = "Hủy";
+            btnHuy.UseVisualStyleBackColor = true;
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new System.Drawing.Point(342, 10);
-            this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(100, 34);
-            this.btnLuu.TabIndex = 3;
-            this.btnLuu.Text = "Lưu";
-            this.btnLuu.UseVisualStyleBackColor = true;
+            btnLuu.Location = new Point(391, 13);
+            btnLuu.Margin = new Padding(3, 4, 3, 4);
+            btnLuu.Name = "btnLuu";
+            btnLuu.Size = new Size(114, 45);
+            btnLuu.TabIndex = 3;
+            btnLuu.Text = "Lưu";
+            btnLuu.UseVisualStyleBackColor = true;
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(232, 10);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(100, 34);
-            this.btnXoa.TabIndex = 2;
-            this.btnXoa.Text = "Xóa";
-            this.btnXoa.UseVisualStyleBackColor = true;
+            btnXoa.Location = new Point(265, 13);
+            btnXoa.Margin = new Padding(3, 4, 3, 4);
+            btnXoa.Name = "btnXoa";
+            btnXoa.Size = new Size(114, 45);
+            btnXoa.TabIndex = 2;
+            btnXoa.Text = "Xóa";
+            btnXoa.UseVisualStyleBackColor = true;
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(122, 10);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(100, 34);
-            this.btnSua.TabIndex = 1;
-            this.btnSua.Text = "Sửa";
-            this.btnSua.UseVisualStyleBackColor = true;
+            btnSua.Location = new Point(139, 13);
+            btnSua.Margin = new Padding(3, 4, 3, 4);
+            btnSua.Name = "btnSua";
+            btnSua.Size = new Size(114, 45);
+            btnSua.TabIndex = 1;
+            btnSua.Text = "Sửa";
+            btnSua.UseVisualStyleBackColor = true;
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(12, 10);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(100, 34);
-            this.btnThem.TabIndex = 0;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.UseVisualStyleBackColor = true;
+            btnThem.Location = new Point(14, 13);
+            btnThem.Margin = new Padding(3, 4, 3, 4);
+            btnThem.Name = "btnThem";
+            btnThem.Size = new Size(114, 45);
+            btnThem.TabIndex = 0;
+            btnThem.Text = "Thêm";
+            btnThem.UseVisualStyleBackColor = true;
             // 
             // errorProvider1
             // 
-            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider1.ContainerControl = this;
+            errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
+            // 
+            // txtPhuCapThang
+            // 
+            txtPhuCapThang.Location = new Point(137, 108);
+            txtPhuCapThang.Name = "txtPhuCapThang";
+            txtPhuCapThang.Size = new Size(194, 29);
+            txtPhuCapThang.TabIndex = 5;
             // 
             // frmPosition
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(900, 480);
-            this.Controls.Add(this.lvChucVu);
-            this.Controls.Add(this.panelBottom);
-            this.Controls.Add(this.grpThongTin);
-            this.Name = "frmPosition";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Quản lý chức vụ";
-            this.Load += new System.EventHandler(this.frmPosition_Load);
-            this.grpThongTin.ResumeLayout(false);
-            this.grpThongTin.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeSoLuong)).EndInit();
-            this.panelBottom.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(1029, 640);
+            Controls.Add(lvChucVu);
+            Controls.Add(panelBottom);
+            Controls.Add(grpThongTin);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "frmPosition";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Quản lý chức vụ";
+            Load += frmPosition_Load;
+            grpThongTin.ResumeLayout(false);
+            grpThongTin.PerformLayout();
+            panelBottom.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -257,8 +266,7 @@ namespace QuanLyNhanSu.Forms
         private System.Windows.Forms.TextBox txtMaChucVu;
         private System.Windows.Forms.Label lblTenChucVu;
         private System.Windows.Forms.TextBox txtTenChucVu;
-        private System.Windows.Forms.Label lblHeSoLuong;
-        private System.Windows.Forms.NumericUpDown nudHeSoLuong;
+        private System.Windows.Forms.Label lblPhuCap;
         private System.Windows.Forms.ListView lvChucVu;
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Button btnThem;
@@ -268,5 +276,10 @@ namespace QuanLyNhanSu.Forms
         private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private ColumnHeader colMa;
+        private ColumnHeader colTen;
+        private ColumnHeader colPhuCap;
+        private ColumnHeader colSoNV;
+        private TextBox txtPhuCapThang;
     }
 }

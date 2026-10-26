@@ -16,11 +16,6 @@ namespace QuanLyNhanSu.Forms
         }
 
         #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Phương thức bắt buộc của trình thiết kế - không sửa bằng tay nội dung
-        /// bên trong, hãy dùng cửa sổ Designer của Visual Studio.
-        /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
@@ -32,18 +27,18 @@ namespace QuanLyNhanSu.Forms
             colPhong = new ColumnHeader();
             colChucVu = new ColumnHeader();
             colLuong = new ColumnHeader();
-            colTrangThai = new ColumnHeader();
             splitContainer1 = new SplitContainer();
             tvToChuc = new TreeView();
             lvNhanVien = new ListView();
             panelBottom = new Panel();
+            btnSaveImediately = new Button();
             btnLamMoi = new Button();
             btnHuy = new Button();
             btnLuu = new Button();
             btnXoa = new Button();
-            btnSua = new Button();
             btnThem = new Button();
             panelInfo = new Panel();
+            btnUpdateNhanVien = new Button();
             nudPhepNam = new NumericUpDown();
             lblPhepNam = new Label();
             btnXoaAnh = new Button();
@@ -51,8 +46,6 @@ namespace QuanLyNhanSu.Forms
             picAnh = new PictureBox();
             txtLuong = new TextBox();
             lblLuong = new Label();
-            dtpNgayVaoLam = new DateTimePicker();
-            lblNgayVaoLam = new Label();
             cboChucVu = new ComboBox();
             lblChucVu = new Label();
             cboPhongBanInfo = new ComboBox();
@@ -65,6 +58,7 @@ namespace QuanLyNhanSu.Forms
             lblDienThoai = new Label();
             dtpNgaySinh = new DateTimePicker();
             lblNgaySinh = new Label();
+            cboGioiTinh = new ComboBox();
             lblGioiTinh = new Label();
             txtHoTen = new TextBox();
             lblHoTen = new Label();
@@ -78,8 +72,6 @@ namespace QuanLyNhanSu.Forms
             lblLocPhong = new Label();
             errorProvider1 = new ErrorProvider(components);
             openFileDialogAnh = new OpenFileDialog();
-            cboGioiTinh = new ComboBox();
-            btnUpdateNhanVien = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -132,11 +124,6 @@ namespace QuanLyNhanSu.Forms
             colLuong.Text = "Lương cơ bản";
             colLuong.Width = 130;
             // 
-            // colTrangThai
-            // 
-            colTrangThai.Text = "Trạng thái";
-            colTrangThai.Width = 110;
-            // 
             // splitContainer1
             // 
             splitContainer1.Dock = DockStyle.Fill;
@@ -169,10 +156,11 @@ namespace QuanLyNhanSu.Forms
             tvToChuc.Name = "tvToChuc";
             tvToChuc.Size = new Size(287, 933);
             tvToChuc.TabIndex = 0;
+            tvToChuc.AfterSelect += tvToChuc_AfterSelection;
             // 
             // lvNhanVien
             // 
-            lvNhanVien.Columns.AddRange(new ColumnHeader[] { colMa, colTen, colGioiTinh, colNgaySinh, colDienThoai, colPhong, colChucVu, colLuong, colTrangThai });
+            lvNhanVien.Columns.AddRange(new ColumnHeader[] { colMa, colTen, colGioiTinh, colNgaySinh, colDienThoai, colPhong, colChucVu, colLuong });
             lvNhanVien.Dock = DockStyle.Fill;
             lvNhanVien.FullRowSelect = true;
             lvNhanVien.GridLines = true;
@@ -187,11 +175,11 @@ namespace QuanLyNhanSu.Forms
             // 
             // panelBottom
             // 
+            panelBottom.Controls.Add(btnSaveImediately);
             panelBottom.Controls.Add(btnLamMoi);
             panelBottom.Controls.Add(btnHuy);
             panelBottom.Controls.Add(btnLuu);
             panelBottom.Controls.Add(btnXoa);
-            panelBottom.Controls.Add(btnSua);
             panelBottom.Controls.Add(btnThem);
             panelBottom.Dock = DockStyle.Bottom;
             panelBottom.Location = new Point(0, 861);
@@ -200,9 +188,20 @@ namespace QuanLyNhanSu.Forms
             panelBottom.Size = new Size(1020, 72);
             panelBottom.TabIndex = 2;
             // 
+            // btnSaveImediately
+            // 
+            btnSaveImediately.Enabled = false;
+            btnSaveImediately.Location = new Point(374, 13);
+            btnSaveImediately.Margin = new Padding(3, 4, 3, 4);
+            btnSaveImediately.Name = "btnSaveImediately";
+            btnSaveImediately.Size = new Size(114, 45);
+            btnSaveImediately.TabIndex = 6;
+            btnSaveImediately.Text = "Lưu Vào File";
+            btnSaveImediately.UseVisualStyleBackColor = true;
+            // 
             // btnLamMoi
             // 
-            btnLamMoi.Location = new Point(642, 13);
+            btnLamMoi.Location = new Point(614, 14);
             btnLamMoi.Margin = new Padding(3, 4, 3, 4);
             btnLamMoi.Name = "btnLamMoi";
             btnLamMoi.Size = new Size(126, 45);
@@ -212,7 +211,8 @@ namespace QuanLyNhanSu.Forms
             // 
             // btnHuy
             // 
-            btnHuy.Location = new Point(517, 13);
+            btnHuy.Enabled = false;
+            btnHuy.Location = new Point(494, 13);
             btnHuy.Margin = new Padding(3, 4, 3, 4);
             btnHuy.Name = "btnHuy";
             btnHuy.Size = new Size(114, 45);
@@ -222,17 +222,20 @@ namespace QuanLyNhanSu.Forms
             // 
             // btnLuu
             // 
-            btnLuu.Location = new Point(391, 13);
+            btnLuu.Enabled = false;
+            btnLuu.Location = new Point(254, 13);
             btnLuu.Margin = new Padding(3, 4, 3, 4);
             btnLuu.Name = "btnLuu";
             btnLuu.Size = new Size(114, 45);
             btnLuu.TabIndex = 3;
             btnLuu.Text = "Lưu";
             btnLuu.UseVisualStyleBackColor = true;
+            btnLuu.Click += btnLuu_Click;
             // 
             // btnXoa
             // 
-            btnXoa.Location = new Point(265, 13);
+            btnXoa.Enabled = false;
+            btnXoa.Location = new Point(134, 14);
             btnXoa.Margin = new Padding(3, 4, 3, 4);
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(114, 45);
@@ -240,18 +243,9 @@ namespace QuanLyNhanSu.Forms
             btnXoa.Text = "Xóa";
             btnXoa.UseVisualStyleBackColor = true;
             // 
-            // btnSua
-            // 
-            btnSua.Location = new Point(139, 13);
-            btnSua.Margin = new Padding(3, 4, 3, 4);
-            btnSua.Name = "btnSua";
-            btnSua.Size = new Size(114, 45);
-            btnSua.TabIndex = 1;
-            btnSua.Text = "Sửa";
-            btnSua.UseVisualStyleBackColor = true;
-            // 
             // btnThem
             // 
+            btnThem.Enabled = false;
             btnThem.Location = new Point(14, 13);
             btnThem.Margin = new Padding(3, 4, 3, 4);
             btnThem.Name = "btnThem";
@@ -259,6 +253,7 @@ namespace QuanLyNhanSu.Forms
             btnThem.TabIndex = 0;
             btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = true;
+            btnThem.Click += btnThem_Click;
             // 
             // panelInfo
             // 
@@ -270,8 +265,6 @@ namespace QuanLyNhanSu.Forms
             panelInfo.Controls.Add(picAnh);
             panelInfo.Controls.Add(txtLuong);
             panelInfo.Controls.Add(lblLuong);
-            panelInfo.Controls.Add(dtpNgayVaoLam);
-            panelInfo.Controls.Add(lblNgayVaoLam);
             panelInfo.Controls.Add(cboChucVu);
             panelInfo.Controls.Add(lblChucVu);
             panelInfo.Controls.Add(cboPhongBanInfo);
@@ -297,21 +290,31 @@ namespace QuanLyNhanSu.Forms
             panelInfo.Size = new Size(1020, 379);
             panelInfo.TabIndex = 1;
             // 
+            // btnUpdateNhanVien
+            // 
+            btnUpdateNhanVien.Enabled = false;
+            btnUpdateNhanVien.Location = new Point(790, 313);
+            btnUpdateNhanVien.Name = "btnUpdateNhanVien";
+            btnUpdateNhanVien.Size = new Size(148, 40);
+            btnUpdateNhanVien.TabIndex = 27;
+            btnUpdateNhanVien.Text = "Cập nhật thông tin";
+            btnUpdateNhanVien.UseVisualStyleBackColor = true;
+            btnUpdateNhanVien.Click += btnUpdateNhanVien_Click;
+            // 
             // nudPhepNam
             // 
-            nudPhepNam.Location = new Point(147, 321);
+            nudPhepNam.Location = new Point(156, 273);
             nudPhepNam.Margin = new Padding(3, 4, 3, 4);
             nudPhepNam.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             nudPhepNam.Name = "nudPhepNam";
             nudPhepNam.ReadOnly = true;
             nudPhepNam.Size = new Size(201, 27);
             nudPhepNam.TabIndex = 26;
-            nudPhepNam.Value = new decimal(new int[] { 12, 0, 0, 0 });
             // 
             // lblPhepNam
             // 
             lblPhepNam.AutoSize = true;
-            lblPhepNam.Location = new Point(17, 323);
+            lblPhepNam.Location = new Point(17, 275);
             lblPhepNam.Name = "lblPhepNam";
             lblPhepNam.Size = new Size(124, 20);
             lblPhepNam.TabIndex = 25;
@@ -319,6 +322,7 @@ namespace QuanLyNhanSu.Forms
             // 
             // btnXoaAnh
             // 
+            btnXoaAnh.Enabled = false;
             btnXoaAnh.Location = new Point(789, 248);
             btnXoaAnh.Margin = new Padding(3, 4, 3, 4);
             btnXoaAnh.Name = "btnXoaAnh";
@@ -329,6 +333,7 @@ namespace QuanLyNhanSu.Forms
             // 
             // btnDoiAnh
             // 
+            btnDoiAnh.Enabled = false;
             btnDoiAnh.Location = new Point(789, 203);
             btnDoiAnh.Margin = new Padding(3, 4, 3, 4);
             btnDoiAnh.Name = "btnDoiAnh";
@@ -367,26 +372,6 @@ namespace QuanLyNhanSu.Forms
             lblLuong.Size = new Size(103, 20);
             lblLuong.TabIndex = 20;
             lblLuong.Text = "Lương cơ bản:";
-            // 
-            // dtpNgayVaoLam
-            // 
-            dtpNgayVaoLam.CustomFormat = "dd/MM/yyyy";
-            dtpNgayVaoLam.Enabled = false;
-            dtpNgayVaoLam.Format = DateTimePickerFormat.Custom;
-            dtpNgayVaoLam.Location = new Point(131, 272);
-            dtpNgayVaoLam.Margin = new Padding(3, 4, 3, 4);
-            dtpNgayVaoLam.Name = "dtpNgayVaoLam";
-            dtpNgayVaoLam.Size = new Size(217, 27);
-            dtpNgayVaoLam.TabIndex = 19;
-            // 
-            // lblNgayVaoLam
-            // 
-            lblNgayVaoLam.AutoSize = true;
-            lblNgayVaoLam.Location = new Point(17, 277);
-            lblNgayVaoLam.Name = "lblNgayVaoLam";
-            lblNgayVaoLam.Size = new Size(104, 20);
-            lblNgayVaoLam.TabIndex = 18;
-            lblNgayVaoLam.Text = "Ngày vào làm:";
             // 
             // cboChucVu
             // 
@@ -502,6 +487,17 @@ namespace QuanLyNhanSu.Forms
             lblNgaySinh.TabIndex = 6;
             lblNgaySinh.Text = "Ngày sinh:";
             // 
+            // cboGioiTinh
+            // 
+            cboGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboGioiTinh.Enabled = false;
+            cboGioiTinh.FormattingEnabled = true;
+            cboGioiTinh.Location = new Point(131, 69);
+            cboGioiTinh.Margin = new Padding(3, 4, 3, 4);
+            cboGioiTinh.Name = "cboGioiTinh";
+            cboGioiTinh.Size = new Size(217, 28);
+            cboGioiTinh.TabIndex = 5;
+            // 
             // lblGioiTinh
             // 
             lblGioiTinh.AutoSize = true;
@@ -597,6 +593,7 @@ namespace QuanLyNhanSu.Forms
             cboLocPhong.Name = "cboLocPhong";
             cboLocPhong.Size = new Size(251, 28);
             cboLocPhong.TabIndex = 1;
+            cboLocPhong.SelectedIndexChanged += cboLocPhong_SelectedIndexChanged;
             // 
             // lblLocPhong
             // 
@@ -617,26 +614,6 @@ namespace QuanLyNhanSu.Forms
             openFileDialogAnh.Filter = "Tập tin ảnh|*.jpg;*.jpeg;*.png;*.bmp;*.gif|Tất cả tập tin|*.*";
             openFileDialogAnh.Title = "Chọn ảnh nhân viên";
             // 
-            // cboGioiTinh
-            // 
-            cboGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboGioiTinh.Enabled = false;
-            cboGioiTinh.FormattingEnabled = true;
-            cboGioiTinh.Location = new Point(131, 69);
-            cboGioiTinh.Margin = new Padding(3, 4, 3, 4);
-            cboGioiTinh.Name = "cboGioiTinh";
-            cboGioiTinh.Size = new Size(217, 28);
-            cboGioiTinh.TabIndex = 5;
-            // 
-            // btnUpdateNhanVien
-            // 
-            btnUpdateNhanVien.Location = new Point(790, 313);
-            btnUpdateNhanVien.Name = "btnUpdateNhanVien";
-            btnUpdateNhanVien.Size = new Size(148, 40);
-            btnUpdateNhanVien.TabIndex = 27;
-            btnUpdateNhanVien.Text = "Cập nhật thông tin";
-            btnUpdateNhanVien.UseVisualStyleBackColor = true;
-            // 
             // frmEmployee
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -649,6 +626,7 @@ namespace QuanLyNhanSu.Forms
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý hồ sơ nhân viên";
             WindowState = FormWindowState.Maximized;
+            Load += frmEmployee_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -693,8 +671,6 @@ namespace QuanLyNhanSu.Forms
         private System.Windows.Forms.ComboBox cboPhongBanInfo;
         private System.Windows.Forms.Label lblChucVu;
         private System.Windows.Forms.ComboBox cboChucVu;
-        private System.Windows.Forms.Label lblNgayVaoLam;
-        private System.Windows.Forms.DateTimePicker dtpNgayVaoLam;
         private System.Windows.Forms.Label lblLuong;
         private System.Windows.Forms.TextBox txtLuong;
         private System.Windows.Forms.PictureBox picAnh;
@@ -704,7 +680,6 @@ namespace QuanLyNhanSu.Forms
         private System.Windows.Forms.NumericUpDown nudPhepNam;
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnHuy;
@@ -719,8 +694,8 @@ namespace QuanLyNhanSu.Forms
         private ColumnHeader colPhong;
         private ColumnHeader colChucVu;
         private ColumnHeader colLuong;
-        private ColumnHeader colTrangThai;
         private ComboBox cboGioiTinh;
         private Button btnUpdateNhanVien;
+        private Button btnSaveImediately;
     }
 }

@@ -29,6 +29,7 @@ PhuCap: 1300000
 MaChucVu: CVSrDevOps
 TenChucVu: Senior DevOps Engineer
 PhuCap: 2000000
+QuyenHan: true
 ---
 MaChucVu: CVJrQA
 TenChucVu: Junior QA Engineer
@@ -41,6 +42,7 @@ PhuCap: 1700000
 MaChucVu: CVPM
 TenChucVu: Project Manager
 PhuCap: 2500000
+QuyenHan: true
 ---
 MaChucVu: CVBA
 TenChucVu: Business Analyst
@@ -49,10 +51,12 @@ PhuCap: 2200000
 MaChucVu: CVKT
 TenChucVu: Kế Toán Viên
 PhuCap: 2400000
+QuyenHan: true
 ---
 MaChucVu: CVNS
 TenChucVu: Nhân Viên Nhân Sự
 PhuCap: 1400000
+QuyenHan: true
 ---
 MaChucVu: CVJrMKT
 TenChucVu: Junior Marketing Specialist
@@ -69,12 +73,15 @@ PhuCap: 1800000
 MaChucVu: CVSrPR
 TenChucVu: Senior Public Relations Specialist
 PhuCap: 2600000
+QuyenHan: true
 ---
 MaChucVu: CVTC
 TenChucVu: Trưởng Phòng Tài Chính
 PhuCap: 3000000
+QuyenHan: true
 ---
 MaChucVu: CVKTT
 TenChucVu: Kế Toán Trưởng
 PhuCap: 3500000
+QuyenHan: true
 ---

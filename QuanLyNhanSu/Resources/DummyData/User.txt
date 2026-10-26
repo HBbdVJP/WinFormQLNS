@@ -19,8 +19,8 @@ TenDangNhap: BaoMinhFE
 MatKhau: fe123
 ---
 MaTaiKhoan: TKDN06
-TenDangNhap: BaoMinhUX
-MatKhau: ux123
+TenDangNhap: BaoMinhHR
+MatKhau: hr123
 ---
 MaTaiKhoan: TKDN07
 TenDangNhap: SaoBienPM
@@ -33,4 +33,8 @@ MatKhau: kt123
 MaTaiKhoan: TKDN09
 TenDangNhap: BacDoPR
 MatKhau: pr123
+---
+MaTaiKhoan: TKDN10
+TenDangNhap: BaoMinhTP
+MatKhau: tp123
 ---

@@ -52,11 +52,13 @@ namespace QuanLyNhanSu.Forms
             mnuTroGiup = new ToolStripMenuItem();
             mnuGioiThieu = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
-            lblNguoiDung = new ToolStripStatusLabel();
-            lblVaiTro = new ToolStripStatusLabel();
+            lblNguoiDungName = new ToolStripStatusLabel();
+            lblVaiTroText = new ToolStripStatusLabel();
             lblKhoangTrong = new ToolStripStatusLabel();
             lblDongHo = new ToolStripStatusLabel();
             timerDongHo = new System.Windows.Forms.Timer(components);
+            lblNguoiDungText = new ToolStripStatusLabel();
+            lblVaiTroName = new ToolStripStatusLabel();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -254,7 +256,7 @@ namespace QuanLyNhanSu.Forms
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
-            statusStrip1.Items.AddRange(new ToolStripItem[] { lblNguoiDung, lblVaiTro, lblKhoangTrong, lblDongHo });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lblNguoiDungText, lblNguoiDungName, lblVaiTroText, lblVaiTroName, lblKhoangTrong, lblDongHo });
             statusStrip1.Location = new Point(0, 907);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new Padding(1, 0, 16, 0);
@@ -262,22 +264,22 @@ namespace QuanLyNhanSu.Forms
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
-            // lblNguoiDung
+            // lblNguoiDungName
             // 
-            lblNguoiDung.Name = "lblNguoiDung";
-            lblNguoiDung.Size = new Size(114, 20);
-            lblNguoiDung.Text = "Người dùng: ---";
+            lblNguoiDungName.Name = "lblNguoiDungName";
+            lblNguoiDungName.Size = new Size(15, 20);
+            lblNguoiDungName.Text = "\"";
             // 
-            // lblVaiTro
+            // lblVaiTroText
             // 
-            lblVaiTro.Name = "lblVaiTro";
-            lblVaiTro.Size = new Size(77, 20);
-            lblVaiTro.Text = "Vai trò: ---";
+            lblVaiTroText.Name = "lblVaiTroText";
+            lblVaiTroText.Size = new Size(55, 20);
+            lblVaiTroText.Text = "Vai trò:";
             // 
             // lblKhoangTrong
             // 
             lblKhoangTrong.Name = "lblKhoangTrong";
-            lblKhoangTrong.Size = new Size(1020, 20);
+            lblKhoangTrong.Size = new Size(995, 20);
             lblKhoangTrong.Spring = true;
             // 
             // lblDongHo
@@ -291,6 +293,18 @@ namespace QuanLyNhanSu.Forms
             timerDongHo.Enabled = true;
             timerDongHo.Interval = 1000;
             timerDongHo.Tick += timerDongHo_Tick;
+            // 
+            // lblNguoiDungText
+            // 
+            lblNguoiDungText.Name = "lblNguoiDungText";
+            lblNguoiDungText.Size = new Size(92, 20);
+            lblNguoiDungText.Text = "Người dùng:";
+            // 
+            // lblVaiTroName
+            // 
+            lblVaiTroName.Name = "lblVaiTroName";
+            lblVaiTroName.Size = new Size(15, 20);
+            lblVaiTroName.Text = "\"";
             // 
             // frmMain
             // 
@@ -306,7 +320,9 @@ namespace QuanLyNhanSu.Forms
             StartPosition = FormStartPosition.CenterScreen;
             Text = "HỆ THỐNG QUẢN LÝ NHÂN SỰ";
             WindowState = FormWindowState.Maximized;
+            FormClosing += frmMain_FormClosing;
             Load += frmMain_Load;
+            Leave += frmMain_Leave;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
@@ -344,11 +360,13 @@ namespace QuanLyNhanSu.Forms
         private System.Windows.Forms.ToolStripMenuItem mnuTroGiup;
         private System.Windows.Forms.ToolStripMenuItem mnuGioiThieu;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblNguoiDung;
-        private System.Windows.Forms.ToolStripStatusLabel lblVaiTro;
+        private System.Windows.Forms.ToolStripStatusLabel lblNguoiDungName;
+        private System.Windows.Forms.ToolStripStatusLabel lblVaiTroText;
         private System.Windows.Forms.ToolStripStatusLabel lblKhoangTrong;
         private System.Windows.Forms.ToolStripStatusLabel lblDongHo;
         private System.Windows.Forms.Timer timerDongHo;
         private ToolStripMenuItem mnuMultiMDIChildView;
+        private ToolStripStatusLabel lblNguoiDungText;
+        private ToolStripStatusLabel lblVaiTroName;
     }
 }
