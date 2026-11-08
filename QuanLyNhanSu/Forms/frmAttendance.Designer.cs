@@ -43,6 +43,7 @@ namespace QuanLyNhanSu.Forms
             mnuDiTre = new ToolStripMenuItem();
             sepTrangThai = new ToolStripSeparator();
             mnuTangCa = new ToolStripMenuItem();
+            mnuGhiChu = new ToolStripMenuItem();
             panelBottom = new Panel();
             btnLuuBangCong = new Button();
             lblTong = new Label();
@@ -193,7 +194,7 @@ namespace QuanLyNhanSu.Forms
             // cmsTrangThai
             // 
             cmsTrangThai.ImageScalingSize = new Size(36, 36);
-            cmsTrangThai.Items.AddRange(new ToolStripItem[] { mnuDiLam, mnuNghiPhep, mnuNghiKhongPhep, mnuDiTre, sepTrangThai, mnuTangCa });
+            cmsTrangThai.Items.AddRange(new ToolStripItem[] { mnuDiLam, mnuNghiPhep, mnuNghiKhongPhep, mnuDiTre, sepTrangThai, mnuTangCa, mnuGhiChu });
             cmsTrangThai.Name = "cmsTrangThai";
             cmsTrangThai.Size = new Size(415, 230);
             // 
@@ -231,6 +232,12 @@ namespace QuanLyNhanSu.Forms
             mnuTangCa.Name = "mnuTangCa";
             mnuTangCa.Size = new Size(414, 44);
             mnuTangCa.Text = "Đánh dấu Tăng ca...";
+            //
+            // mnuGhiChu
+            //
+            mnuGhiChu.Name = "mnuGhiChu";
+            mnuGhiChu.Size = new Size(414, 44);
+            mnuGhiChu.Text = "Nhập/sửa ghi chú...";
             // 
             // panelBottom
             // 
@@ -330,6 +337,7 @@ namespace QuanLyNhanSu.Forms
         private System.Windows.Forms.ToolStripMenuItem mnuDiTre;
         private System.Windows.Forms.ToolStripSeparator sepTrangThai;
         private System.Windows.Forms.ToolStripMenuItem mnuTangCa;
+        private System.Windows.Forms.ToolStripMenuItem mnuGhiChu;
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Button btnChonTatCa;
         private System.Windows.Forms.Button btnBoChon;

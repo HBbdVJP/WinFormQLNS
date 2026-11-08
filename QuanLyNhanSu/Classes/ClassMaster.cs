@@ -125,11 +125,23 @@ namespace QuanLyNhanSu.Classes
         public string MaNhanVien { get; private set; }
         public DateTime NgayCong { get; private set; }
         public string TrangThai { get; private set; }
-        public ChamCong(string maNhanVien, DateTime ngayCong, string trangThai)
+        public string GhiChu { get; private set; }
+        public ChamCong(string maNhanVien, DateTime ngayCong, string trangThai, string ghiChu = "")
         {
             MaNhanVien = maNhanVien;
             NgayCong = ngayCong;
             TrangThai = trangThai;
+            GhiChu = ghiChu;
+        }
+
+        public void CapNhatTrangThai(string trangThai)
+        {
+            TrangThai = trangThai;
+        }
+
+        public void CapNhatGhiChu(string ghiChu)
+        {
+            GhiChu = ghiChu;
         }
     }
     public class ChucVu

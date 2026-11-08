@@ -183,7 +183,7 @@ namespace QuanLyNhanSu.Forms
 
 
             //mặc định khởi tạo các tab form và mở form employee và ẩn các form khác
-            frmAttendance attendanceForm = new frmAttendance();
+            frmAttendance attendanceForm = new frmAttendance(nhanVienList, phongBanList, nvdangnhap);
             attendanceForm.MdiParent = this;
             attendanceForm.Hide();
 
