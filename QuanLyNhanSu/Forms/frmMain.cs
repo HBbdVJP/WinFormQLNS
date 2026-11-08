@@ -199,7 +199,7 @@ namespace QuanLyNhanSu.Forms
             positionForm.MdiParent = this;
             positionForm.Hide();
 
-            frmSalary salaryForm = new frmSalary();
+            frmSalary salaryForm = new frmSalary(nhanVienList, phongBanList, chucVuList, nvdangnhap);
             salaryForm.MdiParent = this;
             salaryForm.Hide();
         }
