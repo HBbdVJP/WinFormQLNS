@@ -15,27 +15,24 @@ namespace QuanLyNhanSu.Forms
         private const string NghiKhongPhep = "Nghỉ không phép";
         private const string DiTre = "Đi trễ";
 
-        private readonly List<NhanVien> danhSachNhanVien;
-        private readonly List<PhongBan> danhSachPhongBan;
-        private readonly SessionLogin sessionLogin;
-        private readonly List<ChamCong> danhSachChamCong = new();
+        public List<NhanVien> DanhSachNhanVien;
+        public List<PhongBan> DanhSachPhongBan;
+        public SessionLogin SessionLogin = new SessionLogin();
+        public List<ChamCong> DanhSachChamCong = new();
         private readonly string chamCongFilePath = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,
             "Resources",
             "DummyData",
             "ChamCong.txt");
-        private bool dangNapDanhSach;
-        private bool dangCapNhatTrangThai;
-
         public frmAttendance(
             List<NhanVien> danhSachNhanVien,
             List<PhongBan> danhSachPhongBan,
             SessionLogin sessionLogin)
         {
             InitializeComponent();
-            this.danhSachNhanVien = danhSachNhanVien;
-            this.danhSachPhongBan = danhSachPhongBan;
-            this.sessionLogin = sessionLogin;
+            this.DanhSachNhanVien = danhSachNhanVien;
+            this.DanhSachPhongBan = danhSachPhongBan;
+            this.SessionLogin = sessionLogin;
 
             dtpNgay.MaxDate = DateTime.Today;
             dtpNgay.Value = DateTime.Today;
@@ -44,6 +41,15 @@ namespace QuanLyNhanSu.Forms
             GanSuKien();
             CapNhatQuyenChinhSua();
             HienThiDanhSach();
+
+            if (dtpNgay.Value.Date >= DateTime.Today)
+            {
+                btnNextDay.Enabled = false;
+            }
+            else
+            {
+                btnNextDay.Enabled = true;
+            }
         }
 
         private void GanSuKien()
@@ -68,7 +74,7 @@ namespace QuanLyNhanSu.Forms
         {
             cboPhong.Items.Clear();
             cboPhong.Items.Add("Tất cả phòng ban");
-            foreach (PhongBan phongBan in danhSachPhongBan)
+            foreach (PhongBan phongBan in DanhSachPhongBan)
             {
                 cboPhong.Items.Add(phongBan.TenPhongBan);
             }
@@ -78,7 +84,7 @@ namespace QuanLyNhanSu.Forms
 
         private void NapBangCongTuFile()
         {
-            danhSachChamCong.Clear();
+            DanhSachChamCong.Clear();
             if (!File.Exists(chamCongFilePath))
             {
                 return;
@@ -97,7 +103,7 @@ namespace QuanLyNhanSu.Forms
 
         private void NhapGhiChuDaChon()
         {
-            if (!sessionLogin.nvDangNhapQuyenHan || lvChamCong.SelectedItems.Count == 0)
+            if (!SessionLogin.nvDangNhapQuyenHan || lvChamCong.SelectedItems.Count == 0)
             {
                 return;
             }
@@ -166,7 +172,8 @@ namespace QuanLyNhanSu.Forms
                 }
 
                 string trangThai = ChuanHoaTrangThai(item.SubItems[4].Text) ?? NghiKhongPhep;
-                ChamCong chamCong = new ChamCong(nv.MaNhanVien, dtpNgay.Value.Date, trangThai, ghiChu);
+                int tangCa = int.TryParse(item.SubItems[5].Text, out int gioTangCa) ? gioTangCa : 0;
+                ChamCong chamCong = new ChamCong(nv.MaNhanVien, dtpNgay.Value.Date, trangThai, tangCa, ghiChu);
                 CapNhatHoacThem(chamCong);
                 item.SubItems[6].Text = ghiChu;
             }
@@ -174,44 +181,50 @@ namespace QuanLyNhanSu.Forms
 
         private void HienThiDanhSach()
         {
-            if (dtpNgay.Value.Date > DateTime.Today)
-            {
-                dtpNgay.Value = DateTime.Today;
-                return;
-            }
-
-            dangNapDanhSach = true;
             try
             {
+                if (dtpNgay.Value.Date > DateTime.Today)
+                {
+                    dtpNgay.Value = DateTime.Today;
+                    return;
+                }
+
                 lvChamCong.Items.Clear();
+
                 string? maPhongBan = LayMaPhongBanDangChon();
                 DateTime ngay = dtpNgay.Value.Date;
-                IEnumerable<NhanVien> nhanVien = danhSachNhanVien.Where(x =>
+
+                IEnumerable<NhanVien> nhanVien = DanhSachNhanVien.Where(x =>
                     maPhongBan == null || x.MaPhongBan == maPhongBan);
 
                 foreach (NhanVien nv in nhanVien.OrderBy(x => x.TenNhanVien))
                 {
-                    ChamCong? chamCong = danhSachChamCong.FirstOrDefault(x =>
+                    ChamCong? chamCong = DanhSachChamCong.FirstOrDefault(x =>
                         x.MaNhanVien == nv.MaNhanVien && x.NgayCong.Date == ngay);
+
                     string trangThai = chamCong?.TrangThai ?? NghiKhongPhep;
+
                     ListViewItem item = new ListViewItem("");
                     item.SubItems.Add(nv.MaNhanVien);
                     item.SubItems.Add(nv.TenNhanVien ?? "");
-                    item.SubItems.Add(danhSachPhongBan.FirstOrDefault(x => x.MaPhongBan == nv.MaPhongBan)?.TenPhongBan ?? "");
+                    item.SubItems.Add(DanhSachPhongBan.FirstOrDefault(
+                        x => x.MaPhongBan == nv.MaPhongBan)?.TenPhongBan ?? "");
                     item.SubItems.Add(trangThai);
-                    item.SubItems.Add("0");
+                    item.SubItems.Add(chamCong?.TangCa.ToString() ?? "0");
                     item.SubItems.Add(chamCong?.GhiChu ?? "");
+
                     item.Tag = nv;
                     item.Checked = trangThai == DiLam || trangThai == DiTre;
+
                     lvChamCong.Items.Add(item);
                 }
 
                 lblTong.Text = $"Số nhân viên: {lvChamCong.Items.Count}";
                 lblCanhBao.Text = string.Empty;
             }
-            finally
+            catch (Exception ex)
             {
-                dangNapDanhSach = false;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -222,18 +235,43 @@ namespace QuanLyNhanSu.Forms
                 return null;
             }
 
-            return danhSachPhongBan.FirstOrDefault(x =>
+            return DanhSachPhongBan.FirstOrDefault(x =>
                 x.TenPhongBan == cboPhong.SelectedItem.ToString())?.MaPhongBan;
         }
 
         private void lvChamCong_ItemChecked(object? sender, ItemCheckedEventArgs e)
         {
-            if (dangNapDanhSach || dangCapNhatTrangThai || !sessionLogin.nvDangNhapQuyenHan)
+            try
             {
-                return;
-            }
+                if (!SessionLogin.nvDangNhapQuyenHan)
+                {
+                    return;
+                }
 
-            DatTrangThai(e.Item, e.Item.Checked ? DiLam : NghiKhongPhep);
+                string trangThaiHienTai = e.Item.SubItems[4].Text;
+
+                // Giữ nguyên trạng thái nếu checkbox phù hợp với trạng thái hiện tại
+                if (e.Item.Checked &&
+                    (trangThaiHienTai == DiLam || trangThaiHienTai == DiTre))
+                {
+                    return;
+                }
+
+                if (!e.Item.Checked &&
+                    (trangThaiHienTai == NghiPhep || trangThaiHienTai == NghiKhongPhep))
+                {
+                    return;
+                }
+
+                DatTrangThai(
+                    e.Item,
+                    e.Item.Checked ? DiLam : NghiKhongPhep
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void lvChamCong_MouseDown(object? sender, MouseEventArgs e)
@@ -253,7 +291,7 @@ namespace QuanLyNhanSu.Forms
 
         private void DatTrangThaiDaChon(string trangThai)
         {
-            if (!sessionLogin.nvDangNhapQuyenHan)
+            if (!SessionLogin.nvDangNhapQuyenHan)
             {
                 return;
             }
@@ -266,43 +304,41 @@ namespace QuanLyNhanSu.Forms
 
         private void DatTrangThai(ListViewItem item, string trangThai)
         {
-            dangCapNhatTrangThai = true;
             try
             {
                 item.SubItems[4].Text = trangThai;
                 item.Checked = trangThai == DiLam || trangThai == DiTre;
             }
-            finally
+            catch (Exception ex)
             {
-                dangCapNhatTrangThai = false;
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void DatTrangThaiTatCa(bool diLam)
         {
-            if (!sessionLogin.nvDangNhapQuyenHan)
-            {
-                return;
-            }
-
-            dangNapDanhSach = true;
             try
             {
+                if (!SessionLogin.nvDangNhapQuyenHan)
+                {
+                    return;
+                }
+
                 foreach (ListViewItem item in lvChamCong.Items)
                 {
                     item.Checked = diLam;
                     item.SubItems[4].Text = diLam ? DiLam : NghiKhongPhep;
                 }
             }
-            finally
+            catch (Exception ex)
             {
-                dangNapDanhSach = false;
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void CapNhatQuyenChinhSua()
         {
-            bool coQuyen = sessionLogin.nvDangNhapQuyenHan;
+            bool coQuyen = SessionLogin.nvDangNhapQuyenHan;
             btnLuuBangCong.Enabled = coQuyen;
             btnNhapCSV.Enabled = coQuyen;
             btnChonTatCa.Enabled = coQuyen;
@@ -315,7 +351,7 @@ namespace QuanLyNhanSu.Forms
 
         private void btnNhapCSV_Click(object? sender, EventArgs e)
         {
-            if (!sessionLogin.nvDangNhapQuyenHan || openFileDialogCSV.ShowDialog() != DialogResult.OK)
+            if (!SessionLogin.nvDangNhapQuyenHan || openFileDialogCSV.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
@@ -379,7 +415,7 @@ namespace QuanLyNhanSu.Forms
                 return false;
             }
 
-            if (!danhSachNhanVien.Any(x => x.MaNhanVien.Equals(maNhanVien, StringComparison.OrdinalIgnoreCase)))
+            if (!DanhSachNhanVien.Any(x => x.MaNhanVien.Equals(maNhanVien, StringComparison.OrdinalIgnoreCase)))
             {
                 lyDo = $"Không tồn tại mã nhân viên {maNhanVien}.";
                 return false;
@@ -407,7 +443,33 @@ namespace QuanLyNhanSu.Forms
                 return false;
             }
 
-            chamCong = new ChamCong(maNhanVien, ngay.Date, trangThai, ghiChu);
+            // Định dạng mới: MaNV;Ngay;TrangThai;TangCa;GhiChu.
+            // Định dạng cũ: MaNV;Ngay;TrangThai;GhiChu.
+            int tangCa = 0;
+            ghiChu = string.Empty;
+
+            if (cot.Length > 3)
+            {
+                if (int.TryParse(cot[3].Trim(), out int soGio))
+                {
+                    tangCa = soGio;
+                    ghiChu = cot.Length > 4
+                        ? string.Join(",", cot.Skip(4)).Trim()
+                        : string.Empty;
+                }
+                else
+                {
+                    ghiChu = string.Join(",", cot.Skip(3)).Trim();
+                }
+            }
+
+            if (tangCa < 0 || tangCa > 24)
+            {
+                lyDo = "Số giờ tăng ca phải từ 0 đến 24.";
+                return false;
+            }
+
+            chamCong = new ChamCong(maNhanVien, ngay.Date, trangThai, tangCa, ghiChu);
             return true;
         }
 
@@ -425,57 +487,210 @@ namespace QuanLyNhanSu.Forms
 
         private void CapNhatHoacThem(ChamCong chamCong)
         {
-            ChamCong? banGhi = danhSachChamCong.FirstOrDefault(x =>
+            ChamCong? banGhi = DanhSachChamCong.FirstOrDefault(x =>
                 x.MaNhanVien.Equals(chamCong.MaNhanVien, StringComparison.OrdinalIgnoreCase) &&
                 x.NgayCong.Date == chamCong.NgayCong.Date);
             if (banGhi == null)
             {
-                danhSachChamCong.Add(chamCong);
+                DanhSachChamCong.Add(chamCong);
             }
             else
             {
                 banGhi.CapNhatTrangThai(chamCong.TrangThai);
+                banGhi.CapNhatTangCa(chamCong.TangCa);
                 banGhi.CapNhatGhiChu(chamCong.GhiChu);
             }
         }
 
         private void btnLuuBangCong_Click(object? sender, EventArgs e)
         {
-            if (!sessionLogin.nvDangNhapQuyenHan)
+            try
             {
-                return;
-            }
-
-            if (dtpNgay.Value.Date > DateTime.Today)
-            {
-                MessageBox.Show("Không được lưu bảng công cho ngày tương lai.", "Dữ liệu không hợp lệ",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            DateTime ngay = dtpNgay.Value.Date;
-            foreach (ListViewItem item in lvChamCong.Items)
-            {
-                if (item.Tag is not NhanVien nv)
+                if (!SessionLogin.nvDangNhapQuyenHan)
                 {
-                    continue;
+                    return;
                 }
 
-                string trangThai = ChuanHoaTrangThai(item.SubItems[4].Text) ?? NghiKhongPhep;
-                string ghiChu = item.SubItems[6].Text.Trim();
-                CapNhatHoacThem(new ChamCong(nv.MaNhanVien, ngay, trangThai, ghiChu));
-            }
+                if (dtpNgay.Value.Date > DateTime.Today)
+                {
+                    MessageBox.Show("Không được lưu bảng công cho ngày tương lai.", "Dữ liệu không hợp lệ",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            Directory.CreateDirectory(Path.GetDirectoryName(chamCongFilePath)!);
-            List<string> dong = new() { "MaNV;Ngay;TrangThai;GhiChu" };
-            dong.AddRange(danhSachChamCong
-                .OrderBy(x => x.NgayCong)
-                .ThenBy(x => x.MaNhanVien)
-                .Select(x => $"{x.MaNhanVien};{x.NgayCong:dd/MM/yyyy};{x.TrangThai};{x.GhiChu}"));
-            File.WriteAllLines(chamCongFilePath, dong);
-            lblCanhBao.Text = "Đã lưu bảng công.";
-            MessageBox.Show("Đã lưu bảng công thành công.", "Thông báo", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+                DateTime ngay = dtpNgay.Value.Date;
+
+                foreach (ListViewItem item in lvChamCong.Items)
+                {
+                    if (item.Tag is not NhanVien nv)
+                    {
+                        continue;
+                    }
+
+                    string trangThai = ChuanHoaTrangThai(item.SubItems[4].Text) ?? NghiKhongPhep;
+                    int tangCa = int.TryParse(item.SubItems[5].Text, out int gioTangCa)
+                        ? gioTangCa
+                        : 0;
+                    string ghiChu = item.SubItems[6].Text.Trim();
+
+                    CapNhatHoacThem(new ChamCong(
+                        nv.MaNhanVien, ngay, trangThai, tangCa, ghiChu));
+                }
+
+                Directory.CreateDirectory(Path.GetDirectoryName(chamCongFilePath)!);
+
+                List<string> dong = new()
+                {
+                    "MaNV;Ngay;TrangThai;TangCa;GhiChu"
+                };
+
+                dong.AddRange(DanhSachChamCong
+                    .OrderBy(x => x.NgayCong)
+                    .ThenBy(x => x.MaNhanVien)
+                    .Select(x =>
+                        $"{x.MaNhanVien};{x.NgayCong:dd/MM/yyyy};{x.TrangThai};{x.TangCa};{x.GhiChu}"));
+
+                File.WriteAllLines(chamCongFilePath, dong);
+
+                lblCanhBao.Text = "Đã lưu bảng công.";
+                MessageBox.Show("Đã lưu bảng công thành công.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnNextDay_Click(object sender, EventArgs e)
+        {
+            if (!(dtpNgay.Value.Date >= DateTime.Today))
+            {
+                dtpNgay.Value = dtpNgay.Value.AddDays(1);
+            }
+        }
+
+        private void btnPrevDay_Click(object sender, EventArgs e)
+        {
+            dtpNgay.Value = dtpNgay.Value.AddDays(-1);
+        }
+
+        private void dtpNgay_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpNgay.Value.Date >= DateTime.Today)
+            {
+                btnNextDay.Enabled = false;
+            }
+            else
+            {
+                btnNextDay.Enabled = true;
+            }
+        }
+
+        private void mnuTangCa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!SessionLogin.nvDangNhapQuyenHan)
+                {
+                    return;
+                }
+
+                if (lvChamCong.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn nhân viên cần nhập giờ tăng ca.");
+                    return;
+                }
+
+                using Form dialog = new Form
+                {
+                    Text = "Nhập giờ tăng ca",
+                    Width = 300,
+                    Height = 180,
+                    StartPosition = FormStartPosition.CenterParent,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MinimizeBox = false,
+                    MaximizeBox = false,
+                    ShowInTaskbar = false
+                };
+
+                Label lblSoGio = new Label
+                {
+                    Text = "Số giờ tăng ca: ",
+                    Left = 20,
+                    Top = 25,
+                    AutoSize = true
+                };
+
+                NumericUpDown numSoGio = new NumericUpDown
+                {
+                    Left = 130,
+                    Top = 20,
+                    Width = 120,
+                    Minimum = 0,
+                    Maximum = 24,
+                    DecimalPlaces = 0,
+                    Increment = 1,
+                    Value = 1
+                };
+
+                Button btnLuu = new Button
+                {
+                    Text = "Lưu",
+                    DialogResult = DialogResult.OK,
+                    Left = 80,
+                    Top = 80,
+                    Width = 80
+                };
+
+                Button btnHuy = new Button
+                {
+                    Text = "Hủy",
+                    DialogResult = DialogResult.Cancel,
+                    Left = 170,
+                    Top = 80,
+                    Width = 80
+                };
+
+                dialog.Controls.AddRange(new Control[]
+                { lblSoGio, numSoGio, btnLuu, btnHuy });
+
+                dialog.AcceptButton = btnLuu;
+                dialog.CancelButton = btnHuy;
+
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                {
+                    return;
+                }
+
+                int soGioTangCa = (int)numSoGio.Value;
+                foreach (ListViewItem item in lvChamCong.SelectedItems)
+                {
+                    if (item.Tag is not NhanVien nv)
+                    {
+                        continue;
+                    }
+
+                    item.SubItems[5].Text = soGioTangCa.ToString();
+
+                    string trangThai = ChuanHoaTrangThai(item.SubItems[4].Text)
+                        ?? NghiKhongPhep;
+                    string ghiChu = item.SubItems[6].Text.Trim();
+
+                    CapNhatHoacThem(new ChamCong(
+                        nv.MaNhanVien,
+                        dtpNgay.Value.Date,
+                        trangThai,
+                        soGioTangCa,
+                        ghiChu));
+                }
+
+                lblCanhBao.Text = "Đã cập nhật giờ tăng ca. Nhấn Lưu bảng công để ghi vào file.";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

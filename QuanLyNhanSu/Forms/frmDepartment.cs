@@ -449,91 +449,94 @@ namespace QuanLyNhanSu.Forms
 
                 try
                 {
-                    string[] lines = File.ReadAllLines(dialog.FileName);
-
-                    string? maPhongBan = null;
-                    string? tenPhongBan = null;
-
-                    int soLuongThem = 0;
-                    int soLuongBoQua = 0;
-
-                    // Kiểm tra mã phòng ban đã tồn tại
-                    HashSet<string> maPhongBanDaCo = new HashSet<string>(
-                        DSPhongBan.Select(pb => pb.MaPhongBan),
-                        StringComparer.OrdinalIgnoreCase);
-
-                    // Hàm xử lý từng bản ghi
-                    void XuLyBanGhi()
+                    using (StreamReader sr = new StreamReader(dialog.FileName))
                     {
-                        if (string.IsNullOrWhiteSpace(maPhongBan) ||
-                            string.IsNullOrWhiteSpace(tenPhongBan))
-                        {
-                            soLuongBoQua++;
-                        }
-                        else if (maPhongBanDaCo.Contains(maPhongBan))
-                        {
-                            // Bỏ qua mã phòng ban bị trùng
-                            soLuongBoQua++;
-                        }
-                        else
-                        {
-                            DSPhongBan.Add(new PhongBan(
-                                maPhongBan,
-                                tenPhongBan));
+                        string? line;
 
-                            maPhongBanDaCo.Add(maPhongBan);
-                            soLuongThem++;
+                        string? maPhongBan = null;
+                        string? tenPhongBan = null;
+
+                        int soLuongThem = 0;
+                        int soLuongBoQua = 0;
+
+                        // Kiểm tra mã phòng ban đã tồn tại
+                        HashSet<string> maPhongBanDaCo = new HashSet<string>(
+                            DSPhongBan.Select(pb => pb.MaPhongBan),
+                            StringComparer.OrdinalIgnoreCase);
+
+                        // Hàm xử lý từng bản ghi
+                        void XuLyBanGhi()
+                        {
+                            if (string.IsNullOrWhiteSpace(maPhongBan) ||
+                                string.IsNullOrWhiteSpace(tenPhongBan))
+                            {
+                                soLuongBoQua++;
+                            }
+                            else if (maPhongBanDaCo.Contains(maPhongBan))
+                            {
+                                // Bỏ qua mã phòng ban bị trùng
+                                soLuongBoQua++;
+                            }
+                            else
+                            {
+                                DSPhongBan.Add(new PhongBan(
+                                    maPhongBan,
+                                    tenPhongBan));
+
+                                maPhongBanDaCo.Add(maPhongBan);
+                                soLuongThem++;
+                            }
+
+                            maPhongBan = null;
+                            tenPhongBan = null;
                         }
 
-                        maPhongBan = null;
-                        tenPhongBan = null;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            string dong = line.Trim();
+
+                            // Gặp dấu phân cách thì xử lý bản ghi hiện tại
+                            if (dong == "---")
+                            {
+                                if (maPhongBan != null || tenPhongBan != null)
+                                    XuLyBanGhi();
+
+                                continue;
+                            }
+
+                            if (string.IsNullOrWhiteSpace(dong))
+                                continue;
+
+                            // Tách tại dấu ':' đầu tiên
+                            string[] parts = dong.Split(new char[] { ':' }, 2);
+
+                            if (parts.Length != 2)
+                                continue;
+
+                            string key = parts[0].Trim();
+                            string value = parts[1].Trim();
+
+                            if (key.Equals("MaPhongBan", StringComparison.OrdinalIgnoreCase))
+                                maPhongBan = value;
+                            else if (key.Equals("TenPhongBan", StringComparison.OrdinalIgnoreCase))
+                                tenPhongBan = value;
+                        }
+
+                        // Xử lý bản ghi cuối nếu file không có dấu --- ở cuối
+                        if (maPhongBan != null || tenPhongBan != null)
+                            XuLyBanGhi();
+
+                        HienThiDanhSachPhongBan();
+                        LamTrongThongTin();
+
+                        MessageBox.Show(
+                            $"Nhập file hoàn tất!\n" +
+                            $"Số phòng ban được thêm: {soLuongThem}\n" +
+                            $"Số bản ghi bị bỏ qua: {soLuongBoQua}",
+                            "Kết quả nhập file",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
-
-                    foreach (string line in lines)
-                    {
-                        string dong = line.Trim();
-
-                        // Gặp dấu phân cách thì xử lý bản ghi hiện tại
-                        if (dong == "---")
-                        {
-                            if (maPhongBan != null || tenPhongBan != null)
-                                XuLyBanGhi();
-
-                            continue;
-                        }
-
-                        if (string.IsNullOrWhiteSpace(dong))
-                            continue;
-
-                        // Tách tại dấu ':' đầu tiên
-                        string[] parts = dong.Split(new char[] { ':' }, 2);
-
-                        if (parts.Length != 2)
-                            continue;
-
-                        string key = parts[0].Trim();
-                        string value = parts[1].Trim();
-
-                        if (key.Equals("MaPhongBan", StringComparison.OrdinalIgnoreCase))
-                            maPhongBan = value;
-                        else if (key.Equals("TenPhongBan", StringComparison.OrdinalIgnoreCase))
-                            tenPhongBan = value;
-                    }
-
-                    // Xử lý bản ghi cuối nếu file không có dấu --- ở cuối
-                    if (maPhongBan != null || tenPhongBan != null)
-                        XuLyBanGhi();
-
-                    HienThiDanhSachPhongBan();
-                    LamTrongThongTin();
-
-                    MessageBox.Show(
-                        $"Nhập file hoàn tất!\n" +
-                        $"Số phòng ban được thêm: {soLuongThem}\n" +
-                        $"Số bản ghi bị bỏ qua: {soLuongBoQua}",
-                        "Kết quả nhập file",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {

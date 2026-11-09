@@ -493,148 +493,151 @@ namespace QuanLyNhanSu.Forms
 
                 try
                 {
-                    string[] lines = File.ReadAllLines(dialog.FileName);
-
-                    string? maChucVu = null;
-                    string? tenChucVu = null;
-                    string? chuoiPhuCap = null;
-                    string? chuoiQuyenCRUD = null;
-
-                    int soLuongThem = 0;
-                    int soLuongBoQua = 0;
-
-                    HashSet<string> maDaCo = new HashSet<string>(
-                        DSChucVu.Select(cv => cv.MaChucVu),
-                        StringComparer.OrdinalIgnoreCase);
-
-                    void XuLyBanGhi()
+                    using (StreamReader sr = new StreamReader(dialog.FileName))
                     {
-                        if (string.IsNullOrWhiteSpace(maChucVu)
-                            || string.IsNullOrWhiteSpace(tenChucVu)
-                            || string.IsNullOrWhiteSpace(chuoiPhuCap)
-                            || !decimal.TryParse(
-                                chuoiPhuCap,
-                                NumberStyles.Number,
-                                CultureInfo.InvariantCulture,
-                                out decimal phuCap)
-                            || phuCap < 0)
-                        {
-                            soLuongBoQua++;
-                        }
-                        else if (maDaCo.Contains(maChucVu))
-                        {
-                            soLuongBoQua++;
-                        }
-                        else
-                        {
-                            bool quyenCRUD = false;
+                        string? line;
 
-                            if (!string.IsNullOrWhiteSpace(chuoiQuyenCRUD))
+                        string? maChucVu = null;
+                        string? tenChucVu = null;
+                        string? chuoiPhuCap = null;
+                        string? chuoiQuyenCRUD = null;
+
+                        int soLuongThem = 0;
+                        int soLuongBoQua = 0;
+
+                        HashSet<string> maDaCo = new HashSet<string>(
+                            DSChucVu.Select(cv => cv.MaChucVu),
+                            StringComparer.OrdinalIgnoreCase);
+
+                        void XuLyBanGhi()
+                        {
+                            if (string.IsNullOrWhiteSpace(maChucVu)
+                                || string.IsNullOrWhiteSpace(tenChucVu)
+                                || string.IsNullOrWhiteSpace(chuoiPhuCap)
+                                || !decimal.TryParse(
+                                    chuoiPhuCap,
+                                    NumberStyles.Number,
+                                    CultureInfo.InvariantCulture,
+                                    out decimal phuCap)
+                                || phuCap < 0)
                             {
-                                if (!bool.TryParse(
-                                    chuoiQuyenCRUD,
-                                    out quyenCRUD))
+                                soLuongBoQua++;
+                            }
+                            else if (maDaCo.Contains(maChucVu))
+                            {
+                                soLuongBoQua++;
+                            }
+                            else
+                            {
+                                bool quyenCRUD = false;
+
+                                if (!string.IsNullOrWhiteSpace(chuoiQuyenCRUD))
                                 {
-                                    // Bỏ qua bản ghi có quyền CRUD sai định dạng
-                                    soLuongBoQua++;
+                                    if (!bool.TryParse(
+                                        chuoiQuyenCRUD,
+                                        out quyenCRUD))
+                                    {
+                                        // Bỏ qua bản ghi có quyền CRUD sai định dạng
+                                        soLuongBoQua++;
 
-                                    maChucVu = null;
-                                    tenChucVu = null;
-                                    chuoiPhuCap = null;
-                                    chuoiQuyenCRUD = null;
-                                    return;
+                                        maChucVu = null;
+                                        tenChucVu = null;
+                                        chuoiPhuCap = null;
+                                        chuoiQuyenCRUD = null;
+                                        return;
+                                    }
                                 }
+
+                                DSChucVu.Add(new ChucVu(
+                                    maChucVu,
+                                    tenChucVu,
+                                    phuCap,
+                                    quyenCRUD));
+
+                                maDaCo.Add(maChucVu);
+                                soLuongThem++;
                             }
 
-                            DSChucVu.Add(new ChucVu(
-                                maChucVu,
-                                tenChucVu,
-                                phuCap,
-                                quyenCRUD));
-
-                            maDaCo.Add(maChucVu);
-                            soLuongThem++;
+                            maChucVu = null;
+                            tenChucVu = null;
+                            chuoiPhuCap = null;
+                            chuoiQuyenCRUD = null;
                         }
 
-                        maChucVu = null;
-                        tenChucVu = null;
-                        chuoiPhuCap = null;
-                        chuoiQuyenCRUD = null;
-                    }
-
-                    foreach (string line in lines)
-                    {
-                        string dong = line.Trim();
-
-                        if (dong == "---")
+                        while ((line = sr.ReadLine()) != null)
                         {
-                            if (maChucVu != null
-                                || tenChucVu != null
-                                || chuoiPhuCap != null
-                                || chuoiQuyenCRUD != null)
+                            string dong = line.Trim();
+
+                            if (dong == "---")
                             {
-                                XuLyBanGhi();
+                                if (maChucVu != null
+                                    || tenChucVu != null
+                                    || chuoiPhuCap != null
+                                    || chuoiQuyenCRUD != null)
+                                {
+                                    XuLyBanGhi();
+                                }
+
+                                continue;
                             }
 
-                            continue;
+                            if (string.IsNullOrWhiteSpace(dong))
+                                continue;
+
+                            string[] parts = dong.Split(new char[] { ':' }, 2);
+
+                            if (parts.Length != 2)
+                                continue;
+
+                            string key = parts[0].Trim();
+                            string value = parts[1].Trim();
+
+                            if (key.Equals(
+                                "MaChucVu",
+                                StringComparison.OrdinalIgnoreCase))
+                            {
+                                maChucVu = value;
+                            }
+                            else if (key.Equals(
+                                "TenChucVu",
+                                StringComparison.OrdinalIgnoreCase))
+                            {
+                                tenChucVu = value;
+                            }
+                            else if (key.Equals(
+                                "PhuCap",
+                                StringComparison.OrdinalIgnoreCase))
+                            {
+                                chuoiPhuCap = value;
+                            }
+                            else if (key.Equals(
+                                "QuyenCRUD",
+                                StringComparison.OrdinalIgnoreCase))
+                            {
+                                chuoiQuyenCRUD = value;
+                            }
                         }
 
-                        if (string.IsNullOrWhiteSpace(dong))
-                            continue;
-
-                        string[] parts = dong.Split(new char[] { ':' }, 2);
-
-                        if (parts.Length != 2)
-                            continue;
-
-                        string key = parts[0].Trim();
-                        string value = parts[1].Trim();
-
-                        if (key.Equals(
-                            "MaChucVu",
-                            StringComparison.OrdinalIgnoreCase))
+                        // Xử lý bản ghi cuối nếu file không có --- ở cuối
+                        if (maChucVu != null
+                            || tenChucVu != null
+                            || chuoiPhuCap != null
+                            || chuoiQuyenCRUD != null)
                         {
-                            maChucVu = value;
+                            XuLyBanGhi();
                         }
-                        else if (key.Equals(
-                            "TenChucVu",
-                            StringComparison.OrdinalIgnoreCase))
-                        {
-                            tenChucVu = value;
-                        }
-                        else if (key.Equals(
-                            "PhuCap",
-                            StringComparison.OrdinalIgnoreCase))
-                        {
-                            chuoiPhuCap = value;
-                        }
-                        else if (key.Equals(
-                            "QuyenCRUD",
-                            StringComparison.OrdinalIgnoreCase))
-                        {
-                            chuoiQuyenCRUD = value;
-                        }
+
+                        HienThiDanhSachChucVu();
+                        LamTrongThongTin();
+
+                        MessageBox.Show(
+                            $"Nhập file hoàn tất!\n" +
+                            $"Số chức vụ được thêm: {soLuongThem}\n" +
+                            $"Số bản ghi bị bỏ qua: {soLuongBoQua}",
+                            "Kết quả nhập file",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
-
-                    // Xử lý bản ghi cuối nếu file không có --- ở cuối
-                    if (maChucVu != null
-                        || tenChucVu != null
-                        || chuoiPhuCap != null
-                        || chuoiQuyenCRUD != null)
-                    {
-                        XuLyBanGhi();
-                    }
-
-                    HienThiDanhSachChucVu();
-                    LamTrongThongTin();
-
-                    MessageBox.Show(
-                        $"Nhập file hoàn tất!\n" +
-                        $"Số chức vụ được thêm: {soLuongThem}\n" +
-                        $"Số bản ghi bị bỏ qua: {soLuongBoQua}",
-                        "Kết quả nhập file",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {

@@ -125,12 +125,14 @@ namespace QuanLyNhanSu.Classes
         public string MaNhanVien { get; private set; }
         public DateTime NgayCong { get; private set; }
         public string TrangThai { get; private set; }
+        public int TangCa { get; private set; }
         public string GhiChu { get; private set; }
-        public ChamCong(string maNhanVien, DateTime ngayCong, string trangThai, string ghiChu = "")
+        public ChamCong(string maNhanVien, DateTime ngayCong, string trangThai, int tangCa, string ghiChu = "")
         {
             MaNhanVien = maNhanVien;
             NgayCong = ngayCong;
             TrangThai = trangThai;
+            TangCa = tangCa;
             GhiChu = ghiChu;
         }
 
@@ -142,6 +144,10 @@ namespace QuanLyNhanSu.Classes
         public void CapNhatGhiChu(string ghiChu)
         {
             GhiChu = ghiChu;
+        }
+        public void CapNhatTangCa(int tangCa)
+        {
+            TangCa = tangCa;
         }
     }
     public class ChucVu
