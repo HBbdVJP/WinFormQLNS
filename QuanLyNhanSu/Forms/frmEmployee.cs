@@ -574,8 +574,11 @@ namespace QuanLyNhanSu.Forms
 
                         // Lưu đường dẫn ảnh, không ghi trực tiếp dữ liệu ảnh vào file TXT.
                         // Cần điều chỉnh theo cách lớp NhanVien quản lý ảnh hiện tại.
-                        sw.WriteLine($"AnhNhanVien: Resources/Image/{nv.DuongDanAnh}");
+                        sw.WriteLine($"AnhNhanVien: {nv.DuongDanAnh}");
 
+                        sw.WriteLine($"DienThoai: {nv.DienThoai}");
+                        sw.WriteLine($"Email: {nv.Email}");
+                        sw.WriteLine($"DiaChi: {nv.DiaChi}");
                         sw.WriteLine("---");
                     }
                 }
@@ -690,103 +693,113 @@ namespace QuanLyNhanSu.Forms
                 int soNhanVienDaNap = 0;
                 int soBanGhiBiBoQua = 0;
 
-                Dictionary<string, string> record = new Dictionary<string, string>();
-                bool recordHopLe = true;
+                // biến tạm cho 1 entry
+                string maNhanVien = "";
+                string tenNhanVien = "";
+                string gioiTinh = "";
+                DateTime ngaySinh = DateTime.MinValue;
+                string maChucVu = "";
+                string maPhongBan = "";
+                string maTaiKhoanNV = "";
+                int soNgayNghiPhep = 0;
+                decimal luongCoBan = 0;
+                string duongDanAnh = "";
+                string dienThoai = "";
+                string email = "";
+                string diaChi = "";
 
-                // Đọc và xử lý một bản ghi nhân viên.
+                int requiredIndicator = 0;  // đếm 10 trường bắt buộc (constructor simple)
+                int contactIndicator = 0;   // đếm 3 trường liên hệ (constructor full)
+                bool recordHopLe = true;    // false nếu parse số/ngày lỗi
+
+                const int SO_TRUONG_BAT_BUOC = 10;
+                const int SO_TRUONG_LIEN_HE = 3;
+
+                string LayGiaTri(string line, string prefix) => line.Substring(prefix.Length).Trim();
+
+                void ResetBanGhi()
+                {
+                    maNhanVien = "";
+                    tenNhanVien = "";
+                    gioiTinh = "";
+                    ngaySinh = DateTime.MinValue;
+                    maChucVu = "";
+                    maPhongBan = "";
+                    maTaiKhoanNV = "";
+                    soNgayNghiPhep = 0;
+                    luongCoBan = 0;
+                    duongDanAnh = "";
+                    dienThoai = "";
+                    email = "";
+                    diaChi = "";
+                    requiredIndicator = 0;
+                    contactIndicator = 0;
+                    recordHopLe = true;
+                }
+
                 void XuLyBanGhi()
                 {
                     try
                     {
-                        string[] truongBatBuoc =
-                        {
-                    "MaNhanVien",
-                    "TenNhanVien",
-                    "GioiTinh",
-                    "NgaySinh",
-                    "MaChucVu",
-                    "MaPhongBan",
-                    "MaTaiKhoan",
-                    "SoNgayNghiPhep",
-                    "LuongCoBan",
-                    "AnhNhanVien"
-                };
+                        // entry rỗng (vd: hai dòng --- liền nhau) -> bỏ qua, không tính là lỗi
+                        if (requiredIndicator == 0 && contactIndicator == 0 && recordHopLe)
+                            return;
 
-                        // Bản ghi có dòng sai định dạng hoặc thiếu trường.
-                        if (!recordHopLe ||
-                            truongBatBuoc.Any(k =>
-                                !record.ContainsKey(k) ||
-                                string.IsNullOrWhiteSpace(record[k])))
+                        // sai định dạng, thiếu hoặc dư trường bắt buộc, hoặc có trường rỗng
+                        if (!recordHopLe
+                            || requiredIndicator != SO_TRUONG_BAT_BUOC
+                            || string.IsNullOrWhiteSpace(maNhanVien)
+                            || string.IsNullOrWhiteSpace(tenNhanVien)
+                            || string.IsNullOrWhiteSpace(gioiTinh)
+                            || string.IsNullOrWhiteSpace(maChucVu)
+                            || string.IsNullOrWhiteSpace(maPhongBan)
+                            || string.IsNullOrWhiteSpace(maTaiKhoanNV)
+                            || string.IsNullOrWhiteSpace(duongDanAnh))
                         {
                             soBanGhiBiBoQua++;
                             return;
                         }
 
-                        // Kiểm tra dữ liệu số và ngày tháng.
-                        if (!DateTime.TryParse(
-                                record["NgaySinh"], out DateTime ngaySinh) ||
-                            !int.TryParse(
-                                record["SoNgayNghiPhep"], out int soNgayNghiPhep) ||
-                            !decimal.TryParse(
-                                record["LuongCoBan"],
-                                System.Globalization.NumberStyles.Number,
-                                System.Globalization.CultureInfo.CurrentCulture,
-                                out decimal luongCoBan))
+                        // trùng mã nhân viên
+                        if (DanhSachNhanVien.Any(nv => nv.MaNhanVien == maNhanVien))
                         {
                             soBanGhiBiBoQua++;
                             return;
                         }
 
-                        // Kiểm tra đường dẫn ảnh.
-                        string duongDanAnh = record["AnhNhanVien"];
-
-                        string fullPathAnh = Path.Combine(
-                            AppDomain.CurrentDomain.BaseDirectory,
-                            duongDanAnh
-                        );
-
-                        if (!File.Exists(fullPathAnh))
+                        // file ảnh không tồn tại
+                        if (!File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongDanAnh)))
                         {
                             soBanGhiBiBoQua++;
                             return;
                         }
 
-                        // Đọc thêm thông tin liên hệ nếu file có các trường này.
-                        string dienThoai = record.TryGetValue(
-                            "DienThoai", out string? dt) ? dt : "";
+                        NhanVien nv;
+                        if (contactIndicator == SO_TRUONG_LIEN_HE)
+                        {
+                            // đủ 13 trường -> constructor full
+                            nv = new NhanVien(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, maChucVu,
+                                maPhongBan, maTaiKhoanNV, soNgayNghiPhep, luongCoBan, duongDanAnh,
+                                dienThoai, email, diaChi);
+                        }
+                        else
+                        {
+                            // thiếu trường liên hệ -> fallback constructor simple
+                            nv = new NhanVien(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, maChucVu,
+                                maPhongBan, maTaiKhoanNV, soNgayNghiPhep, luongCoBan, duongDanAnh);
+                        }
 
-                        string email = record.TryGetValue(
-                            "Email", out string? em) ? em : "";
-
-                        string diaChi = record.TryGetValue(
-                            "DiaChi", out string? dc) ? dc : "";
-
-                        // Tạo đối tượng. Nếu ảnh lỗi hoặc constructor phát sinh
-                        // exception, bản ghi này sẽ bị bỏ qua.
-                        NhanVien nv = new NhanVien(
-                            record["MaNhanVien"],
-                            record["TenNhanVien"],
-                            record["GioiTinh"],
-                            ngaySinh,
-                            record["MaChucVu"],
-                            record["MaPhongBan"],
-                            record["MaTaiKhoan"],
-                            soNgayNghiPhep,
-                            luongCoBan,
-                            duongDanAnh,
-                            dienThoai,
-                            email,
-                            diaChi
-                        );
-
-                        // Chỉ thêm khi bản ghi hợp lệ.
                         DanhSachNhanVien.Add(nv);
                         soNhanVienDaNap++;
                     }
                     catch
                     {
-                        // Bỏ qua bản ghi gây lỗi, không làm dừng toàn bộ quá trình.
+                        // constructor lỗi (vd: Image.FromFile) -> bỏ qua entry
                         soBanGhiBiBoQua++;
+                    }
+                    finally
+                    {
+                        ResetBanGhi(); // luôn reset dù add hay skip
                     }
                 }
 
@@ -795,60 +808,87 @@ namespace QuanLyNhanSu.Forms
                     using (StreamReader sr = new StreamReader(ofd.FileName))
                     {
                         string? line;
-
                         while ((line = sr.ReadLine()) != null)
                         {
-                            // Kết thúc một bản ghi.
                             if (line.Trim() == "---")
                             {
                                 XuLyBanGhi();
-
-                                record.Clear();
-                                recordHopLe = true;
-                                continue;
                             }
-
-                            // Bỏ qua dòng trống.
-                            if (string.IsNullOrWhiteSpace(line))
-                                continue;
-
-                            // Mỗi dòng phải có dạng TenTruong: GiaTri.
-                            int viTriPhanCach = line.IndexOf(':');
-
-                            if (viTriPhanCach <= 0 ||
-                                viTriPhanCach == line.Length - 1)
+                            else if (line.StartsWith("MaNhanVien: "))
                             {
-                                recordHopLe = false;
-                                continue;
+                                requiredIndicator++;
+                                maNhanVien = LayGiaTri(line, "MaNhanVien: ");
                             }
-
-                            string tenTruong = line
-                                .Substring(0, viTriPhanCach)
-                                .Trim();
-
-                            string giaTri = line
-                                .Substring(viTriPhanCach + 1)
-                                .Trim();
-
-                            // Từ chối trường bị lặp.
-                            if (record.ContainsKey(tenTruong))
+                            else if (line.StartsWith("TenNhanVien: "))
                             {
-                                recordHopLe = false;
-                                continue;
+                                requiredIndicator++;
+                                tenNhanVien = LayGiaTri(line, "TenNhanVien: ");
                             }
-
-                            record.Add(tenTruong, giaTri);
+                            else if (line.StartsWith("GioiTinh: "))
+                            {
+                                requiredIndicator++;
+                                gioiTinh = LayGiaTri(line, "GioiTinh: ");
+                            }
+                            else if (line.StartsWith("NgaySinh: "))
+                            {
+                                requiredIndicator++;
+                                if (!DateTime.TryParse(LayGiaTri(line, "NgaySinh: "), out ngaySinh))
+                                    recordHopLe = false;
+                            }
+                            else if (line.StartsWith("MaChucVu: "))
+                            {
+                                requiredIndicator++;
+                                maChucVu = LayGiaTri(line, "MaChucVu: ");
+                            }
+                            else if (line.StartsWith("MaPhongBan: "))
+                            {
+                                requiredIndicator++;
+                                maPhongBan = LayGiaTri(line, "MaPhongBan: ");
+                            }
+                            else if (line.StartsWith("MaTaiKhoan: "))
+                            {
+                                requiredIndicator++;
+                                maTaiKhoanNV = LayGiaTri(line, "MaTaiKhoan: ");
+                            }
+                            else if (line.StartsWith("SoNgayNghiPhep: "))
+                            {
+                                requiredIndicator++;
+                                if (!int.TryParse(LayGiaTri(line, "SoNgayNghiPhep: "), out soNgayNghiPhep))
+                                    recordHopLe = false;
+                            }
+                            else if (line.StartsWith("LuongCoBan: "))
+                            {
+                                requiredIndicator++;
+                                if (!decimal.TryParse(LayGiaTri(line, "LuongCoBan: "), out luongCoBan))
+                                    recordHopLe = false;
+                            }
+                            else if (line.StartsWith("AnhNhanVien: "))
+                            {
+                                requiredIndicator++;
+                                duongDanAnh = LayGiaTri(line, "AnhNhanVien: ");
+                            }
+                            else if (line.StartsWith("DienThoai: "))
+                            {
+                                contactIndicator++;
+                                dienThoai = LayGiaTri(line, "DienThoai: ");
+                            }
+                            else if (line.StartsWith("Email: "))
+                            {
+                                contactIndicator++;
+                                email = LayGiaTri(line, "Email: ");
+                            }
+                            else if (line.StartsWith("DiaChi: "))
+                            {
+                                contactIndicator++;
+                                diaChi = LayGiaTri(line, "DiaChi: ");
+                            }
                         }
 
-                        // Xử lý bản ghi cuối nếu file không có --- ở cuối.
-                        if (record.Count > 0 || !recordHopLe)
-                        {
+                        // entry cuối không có --- ở cuối file
+                        if (requiredIndicator > 0 || contactIndicator > 0 || !recordHopLe)
                             XuLyBanGhi();
-                        }
                     }
 
-                    // Cập nhật giao diện nếu cậu đang dùng DataGridView.
-                    // Thay dgvNhanVien bằng tên DataGridView thực tế của cậu.
                     // dgvNhanVien.DataSource = null;
                     // dgvNhanVien.DataSource = DanhSachNhanVien;
 
@@ -858,8 +898,7 @@ namespace QuanLyNhanSu.Forms
                         $"Số bản ghi bị bỏ qua: {soBanGhiBiBoQua}",
                         "Kết quả nạp dữ liệu",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
+                        MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -867,8 +906,7 @@ namespace QuanLyNhanSu.Forms
                         $"Không thể đọc file dữ liệu.\nChi tiết: {ex.Message}",
                         "Lỗi đọc file",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                    );
+                        MessageBoxIcon.Error);
                 }
             }
         }

@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using QuanLyNhanSu.Classes;
+using System.Configuration;
 
 namespace QuanLyNhanSu.Forms
 {
@@ -15,8 +16,9 @@ namespace QuanLyNhanSu.Forms
 
         string rememberLoginFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "RememberLogin", "GhiNhoDangNhapTemp.txt");
         string userDataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "DummyData", "User.txt");
-
-
+        int failedLoginAttemptCount = 0;
+        int maxFailedLoginAttempts = int.Parse(ConfigurationManager.AppSettings["DangNhapToiDa"]!);
+        int lockoutTime = int.Parse(ConfigurationManager.AppSettings["ThoiGianKhoaPhut"]!);
         private void pnlRight_Paint(object sender, PaintEventArgs e)
         {
 
@@ -87,20 +89,37 @@ namespace QuanLyNhanSu.Forms
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
-            User tryingLogin = new User("NaN", txtUsername.Text, txtPassword.Text);
-            foreach (User user in availableUsers)
+            if (failedLoginAttemptCount >= maxFailedLoginAttempts)
             {
-                if (user.TenDangNhap == tryingLogin.TenDangNhap && user.MatKhau == tryingLogin.MatKhau)
-                {
-                    // Open main form
-                    frmMain mainForm = new frmMain(user.MaTaiKhoan);
-                    mainForm.Show();
-                    this.Hide();
-                    return;
-                }
+                lblThongBaoLoi.ForeColor = System.Drawing.Color.Red;
+                lblThongBaoLoi.Text = $"Bạn đã nhập sai quá {maxFailedLoginAttempts} lần, vui lòng thử lại sau!";
+                return;
             }
-            lblThongBaoLoi.ForeColor = System.Drawing.Color.Red;
-            lblThongBaoLoi.Text = "Tên đăng nhập hoặc mật khẩu không đúng";
+            else
+            {
+                User tryingLogin = new User("NaN", txtUsername.Text, txtPassword.Text);
+                bool logged = false;
+                foreach (User user in availableUsers)
+                {
+                    if (user.TenDangNhap == tryingLogin.TenDangNhap && user.MatKhau == tryingLogin.MatKhau)
+                    {
+                        //reset failed attempt
+                        failedLoginAttemptCount = 0;
+                        logged = true;
+                        // Open main form
+                        frmMain mainForm = new frmMain(user.MaTaiKhoan);
+                        mainForm.Show();
+                        this.Hide();
+                        return;
+                    }
+                }
+                if(!logged)
+                {
+                    failedLoginAttemptCount++;
+                }
+                lblThongBaoLoi.ForeColor = System.Drawing.Color.Red;
+                lblThongBaoLoi.Text = $"Tên đăng nhập hoặc mật khẩu không đúng | Còn {maxFailedLoginAttempts - failedLoginAttemptCount} lần thử";
+            }
         }
 
         private void chkHienMatKhau_CheckedChanged(object sender, EventArgs e)

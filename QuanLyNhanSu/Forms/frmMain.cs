@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using QuanLyNhanSu.Classes;
+using System.Linq;
 
 namespace QuanLyNhanSu.Forms
 {
@@ -43,9 +44,11 @@ namespace QuanLyNhanSu.Forms
                     }
                     else if (line == "---")
                     {
-                        phongBanList.Add(new PhongBan(maPhongBan, tenPhongBan));
-                        maPhongBan = "";
-                        tenPhongBan = "";
+                        if (!phongBanList.Any(pb => pb.MaPhongBan == maPhongBan))
+                        {
+                            phongBanList.Add(new PhongBan(maPhongBan, tenPhongBan));
+                        }
+                        maPhongBan = ""; tenPhongBan = "";
                     }
                 }
             }
@@ -81,23 +84,18 @@ namespace QuanLyNhanSu.Forms
                     }
                     else if (line == "---")
                     {
-                        if (constructorIndicator == 4)
+                        if (!chucVuList.Any(cv => cv.MaChucVu == maChucVu))
                         {
-                            chucVuList.Add(new ChucVu(maChucVu, tenChucVu, phuCap, quyenHan));
-                            maChucVu = "";
-                            tenChucVu = "";
-                            phuCap = 0;
-                            quyenHan = false;
-                            constructorIndicator = 0;
+                            if (constructorIndicator == 4)
+                            {
+                                chucVuList.Add(new ChucVu(maChucVu, tenChucVu, phuCap, quyenHan));
+                            }
+                            else
+                            {
+                                chucVuList.Add(new ChucVu(maChucVu, tenChucVu, phuCap));
+                            }
                         }
-                        else
-                        {
-                            chucVuList.Add(new ChucVu(maChucVu, tenChucVu, phuCap));
-                            maChucVu = "";
-                            tenChucVu = "";
-                            phuCap = 0;
-                            constructorIndicator = 0;
-                        }
+                        maChucVu = ""; tenChucVu = ""; phuCap = 0; quyenHan = false; constructorIndicator = 0;
                     }
                 }
             }
@@ -159,7 +157,10 @@ namespace QuanLyNhanSu.Forms
                     }
                     else if (line == "---")
                     {
-                        nhanVienList.Add(new NhanVien(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, maChucVu, maPhongBan, maTaiKhoan, soNgayNghiPhep, luongCoBan, pathAnhNhanVien));
+                        if (!nhanVienList.Any(nv => nv.MaNhanVien == maNhanVien))
+                        {
+                            nhanVienList.Add(new NhanVien(maNhanVien, tenNhanVien, gioiTinh, ngaySinh, maChucVu, maPhongBan, maTaiKhoan, soNgayNghiPhep, luongCoBan, pathAnhNhanVien));
+                        }
                         maNhanVien = "";
                         tenNhanVien = "";
                         gioiTinh = "";
@@ -214,7 +215,6 @@ namespace QuanLyNhanSu.Forms
             this.Hide();
             frmLogin loginForm = new frmLogin();
             loginForm.Show();
-            this.Close();
         }
         private void mnuThoat_Click(object sender, EventArgs e)
         {
