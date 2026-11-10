@@ -47,6 +47,7 @@ namespace QuanLyNhanSu.Forms
             mnuTangCa = new ToolStripMenuItem();
             mnuGhiChu = new ToolStripMenuItem();
             panelBottom = new Panel();
+            btnSaveToFile = new Button();
             btnLuuBangCong = new Button();
             lblTong = new Label();
             btnBoChon = new Button();
@@ -220,7 +221,7 @@ namespace QuanLyNhanSu.Forms
             cmsTrangThai.ImageScalingSize = new Size(36, 36);
             cmsTrangThai.Items.AddRange(new ToolStripItem[] { mnuDiLam, mnuNghiPhep, mnuNghiKhongPhep, mnuDiTre, sepTrangThai, mnuTangCa, mnuGhiChu });
             cmsTrangThai.Name = "cmsTrangThai";
-            cmsTrangThai.Size = new Size(257, 182);
+            cmsTrangThai.Size = new Size(257, 154);
             // 
             // mnuDiLam
             // 
@@ -266,6 +267,7 @@ namespace QuanLyNhanSu.Forms
             // 
             // panelBottom
             // 
+            panelBottom.Controls.Add(btnSaveToFile);
             panelBottom.Controls.Add(btnLuuBangCong);
             panelBottom.Controls.Add(lblTong);
             panelBottom.Controls.Add(btnBoChon);
@@ -277,15 +279,26 @@ namespace QuanLyNhanSu.Forms
             panelBottom.Size = new Size(1026, 75);
             panelBottom.TabIndex = 2;
             // 
+            // btnSaveToFile
+            // 
+            btnSaveToFile.Location = new Point(825, 15);
+            btnSaveToFile.Name = "btnSaveToFile";
+            btnSaveToFile.Size = new Size(189, 45);
+            btnSaveToFile.TabIndex = 4;
+            btnSaveToFile.Text = "Lưu thành File";
+            btnSaveToFile.UseVisualStyleBackColor = true;
+            btnSaveToFile.Click += btnSaveToFile_Click;
+            // 
             // btnLuuBangCong
             // 
-            btnLuuBangCong.Location = new Point(800, 15);
+            btnLuuBangCong.Location = new Point(683, 15);
             btnLuuBangCong.Margin = new Padding(3, 4, 3, 4);
             btnLuuBangCong.Name = "btnLuuBangCong";
-            btnLuuBangCong.Size = new Size(217, 45);
+            btnLuuBangCong.Size = new Size(136, 45);
             btnLuuBangCong.TabIndex = 3;
             btnLuuBangCong.Text = "Lưu bảng công";
             btnLuuBangCong.UseVisualStyleBackColor = true;
+            btnLuuBangCong.Click += btnLuuBangCong_Click_1;
             // 
             // lblTong
             // 
@@ -377,5 +390,6 @@ namespace QuanLyNhanSu.Forms
         private ColumnHeader colGhiChu;
         private Button btnNextDay;
         private Button btnPrevDay;
+        private Button btnSaveToFile;
     }
 }

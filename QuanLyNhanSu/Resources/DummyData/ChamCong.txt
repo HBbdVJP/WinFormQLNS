@@ -1,1 +1,39 @@
-MaNV;Ngay;TrangThai;GhiChu
+MaNV;Ngay;TrangThai;TangCa;GhiChu
+MNV01;02/11/2026;Đi làm;1;Hoàn thành triển khai
+MNV02;02/11/2026;Đi làm;0;
+MNV03;02/11/2026;Đi làm;2;Họp dự án
+MNV04;02/11/2026;Đi làm;0;
+MNV05;02/11/2026;Đi làm;1;Hoàn thiện giao diện
+MNV06;02/11/2026;Đi làm;0;
+MNV01;03/11/2026;Đi làm;0;
+MNV02;03/11/2026;Đi làm;2;Tối ưu cơ sở dữ liệu
+MNV03;03/11/2026;Đi làm;0;
+MNV04;03/11/2026;Nghỉ phép;0;Nghỉ phép cá nhân
+MNV05;03/11/2026;Đi làm;0;
+MNV06;03/11/2026;Đi làm;1;Họp phòng ban
+MNV01;04/11/2026;Đi trễ;0;Trễ 15 phút
+MNV02;04/11/2026;Đi làm;0;
+MNV03;04/11/2026;Đi làm;1;Review tiến độ
+MNV04;04/11/2026;Đi làm;0;
+MNV05;04/11/2026;Đi làm;2;Sửa lỗi UI
+MNV06;04/11/2026;Đi làm;0;
+MNV01;05/11/2026;Đi làm;2;Hỗ trợ hệ thống
+MNV02;05/11/2026;Nghỉ phép;0;Nghỉ phép đã duyệt
+MNV03;05/11/2026;Đi làm;0;
+MNV04;05/11/2026;Đi làm;1;Tuyển dụng
+MNV05;05/11/2026;Đi làm;0;
+MNV06;05/11/2026;Đi làm;2;Báo cáo công việc
+MNV01;06/11/2026;Đi làm;0;
+MNV02;06/11/2026;Đi làm;0;
+MNV03;06/11/2026;Đi trễ;0;Trễ 10 phút
+MNV04;06/11/2026;Đi làm;0;
+MNV05;06/11/2026;Nghỉ không phép;0;Không có thông báo
+MNV06;06/11/2026;Đi làm;0;
+MNV01;09/11/2026;Đi làm;1;Kiểm tra DevOps
+MNV02;09/11/2026;Đi làm;1;Hỗ trợ database
+MNV03;09/11/2026;Đi làm;2;Lập kế hoạch
+MNV04;09/11/2026;Đi làm;0;Xử lý hồ sơ nhân sự
+MNV05;09/11/2026;Đi làm;1;Bàn giao thiết kế
+MNV06;09/11/2026;Đi làm;0;Kiểm tra tiến độ
+MNV01;10/11/2026;Đi làm;1;Theo dõi vận hành
+MNV02;10/11/2026;Đi làm;0;

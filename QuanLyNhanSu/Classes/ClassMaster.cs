@@ -149,6 +149,13 @@ namespace QuanLyNhanSu.Classes
         {
             TangCa = tangCa;
         }
+        public void GhiDeChamCong(ChamCong chamcong, DateTime ngayCong, string trangThai, int tangCa, string ghiChu = "")
+        {
+            chamcong.NgayCong = ngayCong;
+            chamcong.TrangThai = trangThai;
+            chamcong.TangCa = tangCa;
+            chamcong.GhiChu = ghiChu;
+        }
     }
     public class ChucVu
     {

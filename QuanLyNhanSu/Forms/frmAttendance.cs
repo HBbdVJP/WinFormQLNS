@@ -90,14 +90,19 @@ namespace QuanLyNhanSu.Forms
                 return;
             }
 
-            foreach (string line in File.ReadLines(chamCongFilePath))
+            using (StreamReader reader = new StreamReader(chamCongFilePath))
             {
-                if (!TryParseCsvLine(line, out ChamCong? chamCong, out _))
-                {
-                    continue;
-                }
+                string? line;
 
-                CapNhatHoacThem(chamCong);
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (!TryParseCsvLine(line, out ChamCong? chamCong, out _))
+                    {
+                        continue;
+                    }
+
+                    CapNhatHoacThem(chamCong);
+                }
             }
         }
 
@@ -359,22 +364,28 @@ namespace QuanLyNhanSu.Forms
             List<string> loi = new();
             int soDongHopLe = 0;
             int soDong = 0;
-            foreach (string line in File.ReadLines(openFileDialogCSV.FileName))
+            using (StreamReader reader = new StreamReader(openFileDialogCSV.FileName))
             {
-                soDong++;
-                if (string.IsNullOrWhiteSpace(line) || line.StartsWith("MaNV", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
+                string? line;
 
-                if (!TryParseCsvLine(line, out ChamCong? chamCong, out string lyDo))
+                while ((line = reader.ReadLine()) != null)
                 {
-                    loi.Add($"Dòng {soDong}: {lyDo}");
-                    continue;
-                }
+                    soDong++;
+                    if (string.IsNullOrWhiteSpace(line) ||
+                        line.StartsWith("MaNV", StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
 
-                CapNhatHoacThem(chamCong);
-                soDongHopLe++;
+                    if (!TryParseCsvLine(line, out ChamCong? chamCong, out string lyDo))
+                    {
+                        loi.Add($"Dòng {soDong}: {lyDo}");
+                        continue;
+                    }
+
+                    CapNhatHoacThem(chamCong);
+                    soDongHopLe++;
+                }
             }
 
             HienThiDanhSach();
@@ -550,7 +561,13 @@ namespace QuanLyNhanSu.Forms
                     .Select(x =>
                         $"{x.MaNhanVien};{x.NgayCong:dd/MM/yyyy};{x.TrangThai};{x.TangCa};{x.GhiChu}"));
 
-                File.WriteAllLines(chamCongFilePath, dong);
+                using (StreamWriter writer = new StreamWriter(chamCongFilePath, false))
+                {
+                    foreach (string line in dong)
+                    {
+                        writer.WriteLine(line);
+                    }
+                }
 
                 lblCanhBao.Text = "Đã lưu bảng công.";
                 MessageBox.Show("Đã lưu bảng công thành công.", "Thông báo",
@@ -686,6 +703,38 @@ namespace QuanLyNhanSu.Forms
                 }
 
                 lblCanhBao.Text = "Đã cập nhật giờ tăng ca. Nhấn Lưu bảng công để ghi vào file.";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnLuuBangCong_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSaveToFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv|All Files (*.*)|*.*";
+                    saveFileDialog.Title = "Lưu dữ liệu";
+                    saveFileDialog.FileName = "DuLieu.txt";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName, false))
+                        {
+                            // Ghi dữ liệu vào file tại đây
+                        }
+
+                        MessageBox.Show("Lưu file thành công!");
+                    }
+                }
             }
             catch (Exception ex)
             {
