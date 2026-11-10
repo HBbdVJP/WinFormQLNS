@@ -8,6 +8,7 @@ namespace QuanLyNhanSu.Forms
 {
     public partial class frmLogin : Form
     {
+        public bool rememberLogin = false;
         public frmLogin()
         {
             InitializeComponent();
@@ -103,6 +104,15 @@ namespace QuanLyNhanSu.Forms
                 {
                     if (user.TenDangNhap == tryingLogin.TenDangNhap && user.MatKhau == tryingLogin.MatKhau)
                     {
+                        if (rememberLogin)
+                        {
+                            // Save the username and password to a temporary file
+                            using (StreamWriter sw = new StreamWriter(rememberLoginFilePath, false))
+                            {
+                                sw.WriteLine($"TenDangNhap: {txtUsername.Text}");
+                                sw.WriteLine($"MatKhau: {txtPassword.Text}");
+                            }
+                        }
                         //reset failed attempt
                         failedLoginAttemptCount = 0;
                         logged = true;
@@ -131,12 +141,11 @@ namespace QuanLyNhanSu.Forms
         {
             if (chkGhiNho.Checked)
             {
-                // Save the username and password to a temporary file
-                using (StreamWriter sw = new StreamWriter(rememberLoginFilePath))
-                {
-                    sw.WriteLine($"TenDangNhap: {txtUsername.Text}");
-                    sw.WriteLine($"MatKhau: {txtPassword.Text}");
-                }
+                rememberLogin = true;
+            }
+            else
+            {
+                rememberLogin = false;
             }
         }
 

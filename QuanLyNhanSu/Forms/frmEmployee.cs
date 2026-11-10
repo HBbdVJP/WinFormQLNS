@@ -13,23 +13,26 @@ namespace QuanLyNhanSu.Forms
 {
     public partial class frmEmployee : Form
     {
-        public frmEmployee(List<NhanVien> danhsachNV, List<ChucVu> danhsachCV, List<PhongBan> danhsachPB, SessionLogin sessionlogin)
+        public frmEmployee(List<NhanVien> danhsachNV, List<ChucVu> danhsachCV, List<PhongBan> danhsachPB, List<ChamCong> danhsachCC, SessionLogin sessionlogin)
         {
             InitializeComponent();
             DanhSachNhanVien = danhsachNV;
             DanhSachChucVu = danhsachCV;
             DanhSachPhongBan = danhsachPB;
+            DanhSachChamCong = danhsachCC;
             NVDangNhap = sessionlogin;
         }
         private readonly string nhanVienFilePath = Path.Combine(
         AppDomain.CurrentDomain.BaseDirectory,
-        "Resources","DummyData","NhanVien.txt"
+        "Resources", "DummyData", "NhanVien.txt"
         );
 
         public List<NhanVien> DanhSachNhanVien { get; private set; } = new List<NhanVien>();
         public List<ChucVu> DanhSachChucVu { get; private set; } = new List<ChucVu>();
         public List<PhongBan> DanhSachPhongBan { get; private set; } = new List<PhongBan>();
+        public List<ChamCong> DanhSachChamCong { get; private set; } = new List<ChamCong>();
         public SessionLogin NVDangNhap { get; private set; } = new SessionLogin();
+
 
         private void frmEmployee_Load(object sender, EventArgs e)
         {
@@ -93,6 +96,7 @@ namespace QuanLyNhanSu.Forms
             btnLuu.Enabled = false;
             btnLamMoi.Enabled = true;
             btnTimKiem.Enabled = true;
+            btnLamMoi_Click(btnLamMoi, EventArgs.Empty);
         }
 
         private void tvToChuc_AfterSelection(object sender, TreeViewEventArgs e)
@@ -114,6 +118,11 @@ namespace QuanLyNhanSu.Forms
             dtpNgaySinh.Value = nv.NgaySinh ?? DateTime.Today;
             txtLuong.Text = nv.LuongCoBan?.ToString("N0") ?? "0";
             nudPhepNam.Value = nv.SoNgayNghiPhep ?? 1;
+            nudPhepNam_ValueChanged(nudPhepNam, EventArgs.Empty);
+
+            txtDiaChi.Text = nv.DiaChi ?? "";
+            txtDienThoai.Text = nv.DienThoai ?? "";
+            txtEmail.Text = nv.Email ?? "";
 
             PhongBan? pb = DanhSachPhongBan.FirstOrDefault(x => x.MaPhongBan == nv.MaPhongBan);
             cboPhongBanInfo.Text = pb?.TenPhongBan ?? "";
@@ -181,10 +190,12 @@ namespace QuanLyNhanSu.Forms
             cboChucVu.Enabled = true;
             txtLuong.ReadOnly = false;
             btnLuu.Enabled = true;
+            nudPhepNam.Enabled = true;
+            btnHuy.Enabled = true;
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
-        {
+        {   
             if (string.IsNullOrWhiteSpace(txtHoTen.Text) || txtHoTen.Text.Any(c => !char.IsLetter(c) && c != ' '))
             {
                 MessageBox.Show("Hãy khai báo Họ tên hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -268,6 +279,7 @@ namespace QuanLyNhanSu.Forms
                     if (nv.MaNhanVien == txtMaNV.Text)
                     {
                         nv.UpdateNhanVien(name, gender, ngaysinh, machucvu, maphongban, luong, phonenum, email, txtDiaChi.Text);
+                        nv.UpdatePaidLeave((int)nudPhepNam.Value);
                     }
                 }
             }
@@ -304,6 +316,7 @@ namespace QuanLyNhanSu.Forms
             cboPhongBanInfo.Enabled = false;
             cboChucVu.Enabled = false;
             txtLuong.ReadOnly = true;
+            nudPhepNam.Enabled = false;
         }
 
         private void cboLocPhong_SelectedIndexChanged(object sender, EventArgs e)
@@ -352,19 +365,7 @@ namespace QuanLyNhanSu.Forms
                 return;
 
             // Đổ dữ liệu vào các controller
-            txtMaNV.Text = nv.MaNhanVien;
-            txtHoTen.Text = nv.TenNhanVien ?? "";
-            cboGioiTinh.Text = nv.GioiTinh ?? "";
-            dtpNgaySinh.Value = nv.NgaySinh ?? DateTime.Today;
-            txtDienThoai.Text = nv.DienThoai ?? "";
-            txtEmail.Text = nv.Email ?? "";
-            txtDiaChi.Text = nv.DiaChi ?? "";
-            cboPhongBanInfo.SelectedValue = nv.MaPhongBan ?? "";
-            cboChucVu.SelectedValue = nv.MaChucVu ?? "";
-            txtLuong.Text = nv.LuongCoBan?.ToString("0.##") ?? "";
-
-            // Hiển thị ảnh nhân viên
-            picAnh.Image = nv.AnhNhanVien ?? null;
+            HienTTLenTxtBox(nv);
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
@@ -981,6 +982,27 @@ namespace QuanLyNhanSu.Forms
                 e.Cancel = true;   // huỷ việc đóng
                 this.Hide();       // chỉ ẩn đi
             }
+        }
+
+        private void nudPhepNam_ValueChanged(object sender, EventArgs e)
+        {
+            int soNgayDaNghi = 0;
+
+            if (!string.IsNullOrWhiteSpace(txtMaNV.Text))
+            {
+                soNgayDaNghi = DanhSachChamCong
+                    .Where(cc =>
+                        cc.MaNhanVien == txtMaNV.Text &&
+                        cc.TrangThai == "Nghỉ phép" &&
+                        cc.NgayCong.Year == DateTime.Today.Year)
+                    .Select(cc => cc.NgayCong.Date)
+                    .Distinct()
+                    .Count();
+            }
+
+            decimal phepConLai = nudPhepNam.Value - soNgayDaNghi;
+
+            txtRemainingPaidLeave.Text = phepConLai < 0 ? "0" : phepConLai.ToString("0");
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -56,7 +57,6 @@ namespace QuanLyNhanSu.Forms
         {
             btnTaiDanhSach.Click += (_, _) => HienThiDanhSach();
             btnNhapCSV.Click += btnNhapCSV_Click;
-            btnLuuBangCong.Click += btnLuuBangCong_Click;
             btnChonTatCa.Click += (_, _) => DatTrangThaiTatCa(true);
             btnBoChon.Click += (_, _) => DatTrangThaiTatCa(false);
             dtpNgay.ValueChanged += (_, _) => HienThiDanhSach();
@@ -474,9 +474,10 @@ namespace QuanLyNhanSu.Forms
                 }
             }
 
-            if (tangCa < 0 || tangCa > 24)
+            int tangCaToiDaPerDay = DocTangCaToiDaPerDay();
+            if (tangCa < 0 || tangCa > tangCaToiDaPerDay)
             {
-                lyDo = "Số giờ tăng ca phải từ 0 đến 24.";
+                lyDo = $"Số giờ tăng ca phải từ 0 đến {tangCaToiDaPerDay} giờ/ngày.";
                 return false;
             }
 
@@ -494,6 +495,17 @@ namespace QuanLyNhanSu.Forms
                 "đi trễ" or "di tre" => DiTre,
                 _ => null
             };
+        }
+
+        private int DocTangCaToiDaPerDay()
+        {
+            return int.TryParse(
+                ConfigurationManager.AppSettings["TangCaToiDaPerDay"],
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out int value) && value >= 0
+                ? value
+                : 12;
         }
 
         private void CapNhatHoacThem(ChamCong chamCong)
@@ -645,10 +657,10 @@ namespace QuanLyNhanSu.Forms
                     Top = 20,
                     Width = 120,
                     Minimum = 0,
-                    Maximum = 24,
+                    Maximum = DocTangCaToiDaPerDay(),
                     DecimalPlaces = 0,
                     Increment = 1,
-                    Value = 1
+                    Value = DocTangCaToiDaPerDay() > 0 ? 1 : 0
                 };
 
                 Button btnLuu = new Button
@@ -681,6 +693,17 @@ namespace QuanLyNhanSu.Forms
                 }
 
                 int soGioTangCa = (int)numSoGio.Value;
+                int tangCaToiDaPerDay = DocTangCaToiDaPerDay();
+                if (soGioTangCa < 0 || soGioTangCa > tangCaToiDaPerDay)
+                {
+                    MessageBox.Show(
+                        $"Số giờ tăng ca phải từ 0 đến {tangCaToiDaPerDay} giờ/ngày.",
+                        "Dữ liệu không hợp lệ",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
                 foreach (ListViewItem item in lvChamCong.SelectedItems)
                 {
                     if (item.Tag is not NhanVien nv)
@@ -708,11 +731,6 @@ namespace QuanLyNhanSu.Forms
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void btnLuuBangCong_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void btnSaveToFile_Click(object sender, EventArgs e)

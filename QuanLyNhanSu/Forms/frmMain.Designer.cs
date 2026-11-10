@@ -41,6 +41,7 @@ namespace QuanLyNhanSu.Forms
             mnuHoSo = new ToolStripMenuItem();
             mnuPhongBan = new ToolStripMenuItem();
             mnuChucVu = new ToolStripMenuItem();
+            mnuSinhNhat = new ToolStripMenuItem();
             mnuNghiepVu = new ToolStripMenuItem();
             mnuChamCong = new ToolStripMenuItem();
             mnuTinhLuong = new ToolStripMenuItem();
@@ -52,13 +53,13 @@ namespace QuanLyNhanSu.Forms
             mnuTroGiup = new ToolStripMenuItem();
             mnuGioiThieu = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
+            lblNguoiDungText = new ToolStripStatusLabel();
             lblNguoiDungName = new ToolStripStatusLabel();
             lblVaiTroText = new ToolStripStatusLabel();
+            lblVaiTroName = new ToolStripStatusLabel();
             lblKhoangTrong = new ToolStripStatusLabel();
             lblDongHo = new ToolStripStatusLabel();
             timerDongHo = new System.Windows.Forms.Timer(components);
-            lblNguoiDungText = new ToolStripStatusLabel();
-            lblVaiTroName = new ToolStripStatusLabel();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -152,7 +153,7 @@ namespace QuanLyNhanSu.Forms
             // 
             // mnuQuanLy
             // 
-            mnuQuanLy.DropDownItems.AddRange(new ToolStripItem[] { mnuHoSo, mnuPhongBan, mnuChucVu });
+            mnuQuanLy.DropDownItems.AddRange(new ToolStripItem[] { mnuHoSo, mnuPhongBan, mnuChucVu, mnuSinhNhat });
             mnuQuanLy.Name = "mnuQuanLy";
             mnuQuanLy.Size = new Size(73, 24);
             mnuQuanLy.Text = "Quản lý";
@@ -161,7 +162,7 @@ namespace QuanLyNhanSu.Forms
             // 
             mnuHoSo.Name = "mnuHoSo";
             mnuHoSo.ShortcutKeys = Keys.Control | Keys.Alt | Keys.H;
-            mnuHoSo.Size = new Size(280, 26);
+            mnuHoSo.Size = new Size(300, 26);
             mnuHoSo.Text = "Hồ sơ nhân viên";
             mnuHoSo.Click += mnuHoSoNhanVien_Click;
             // 
@@ -169,7 +170,7 @@ namespace QuanLyNhanSu.Forms
             // 
             mnuPhongBan.Name = "mnuPhongBan";
             mnuPhongBan.ShortcutKeys = Keys.Control | Keys.Alt | Keys.P;
-            mnuPhongBan.Size = new Size(280, 26);
+            mnuPhongBan.Size = new Size(300, 26);
             mnuPhongBan.Text = "Phòng ban";
             mnuPhongBan.Click += mnuPhongBan_Click;
             // 
@@ -177,9 +178,17 @@ namespace QuanLyNhanSu.Forms
             // 
             mnuChucVu.Name = "mnuChucVu";
             mnuChucVu.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
-            mnuChucVu.Size = new Size(280, 26);
+            mnuChucVu.Size = new Size(300, 26);
             mnuChucVu.Text = "Chức vụ";
             mnuChucVu.Click += mnuChucVu_Click;
+            // 
+            // mnuSinhNhat
+            // 
+            mnuSinhNhat.Name = "mnuSinhNhat";
+            mnuSinhNhat.ShortcutKeys = Keys.Control | Keys.Alt | Keys.B;
+            mnuSinhNhat.Size = new Size(300, 26);
+            mnuSinhNhat.Text = "Sinh nhật nhân viên";
+            mnuSinhNhat.Click += mnuSinhNhat_Click;
             // 
             // mnuNghiepVu
             // 
@@ -264,6 +273,12 @@ namespace QuanLyNhanSu.Forms
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
+            // lblNguoiDungText
+            // 
+            lblNguoiDungText.Name = "lblNguoiDungText";
+            lblNguoiDungText.Size = new Size(92, 20);
+            lblNguoiDungText.Text = "Người dùng:";
+            // 
             // lblNguoiDungName
             // 
             lblNguoiDungName.Name = "lblNguoiDungName";
@@ -276,10 +291,16 @@ namespace QuanLyNhanSu.Forms
             lblVaiTroText.Size = new Size(55, 20);
             lblVaiTroText.Text = "Vai trò:";
             // 
+            // lblVaiTroName
+            // 
+            lblVaiTroName.Name = "lblVaiTroName";
+            lblVaiTroName.Size = new Size(15, 20);
+            lblVaiTroName.Text = "\"";
+            // 
             // lblKhoangTrong
             // 
             lblKhoangTrong.Name = "lblKhoangTrong";
-            lblKhoangTrong.Size = new Size(995, 20);
+            lblKhoangTrong.Size = new Size(1034, 20);
             lblKhoangTrong.Spring = true;
             // 
             // lblDongHo
@@ -293,18 +314,6 @@ namespace QuanLyNhanSu.Forms
             timerDongHo.Enabled = true;
             timerDongHo.Interval = 1000;
             timerDongHo.Tick += timerDongHo_Tick;
-            // 
-            // lblNguoiDungText
-            // 
-            lblNguoiDungText.Name = "lblNguoiDungText";
-            lblNguoiDungText.Size = new Size(92, 20);
-            lblNguoiDungText.Text = "Người dùng:";
-            // 
-            // lblVaiTroName
-            // 
-            lblVaiTroName.Name = "lblVaiTroName";
-            lblVaiTroName.Size = new Size(15, 20);
-            lblVaiTroName.Text = "\"";
             // 
             // frmMain
             // 
@@ -368,5 +377,6 @@ namespace QuanLyNhanSu.Forms
         private ToolStripMenuItem mnuMultiMDIChildView;
         private ToolStripStatusLabel lblNguoiDungText;
         private ToolStripStatusLabel lblVaiTroName;
+        private ToolStripMenuItem mnuSinhNhat;
     }
 }

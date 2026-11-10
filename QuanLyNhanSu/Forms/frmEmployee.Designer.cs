@@ -74,6 +74,8 @@ namespace QuanLyNhanSu.Forms
             lblLocPhong = new Label();
             errorProvider1 = new ErrorProvider(components);
             openFileDialogAnh = new OpenFileDialog();
+            lblRemainingPaidLeave = new Label();
+            txtRemainingPaidLeave = new TextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -287,6 +289,8 @@ namespace QuanLyNhanSu.Forms
             // 
             // panelInfo
             // 
+            panelInfo.Controls.Add(txtRemainingPaidLeave);
+            panelInfo.Controls.Add(lblRemainingPaidLeave);
             panelInfo.Controls.Add(btnUpdateNhanVien);
             panelInfo.Controls.Add(nudPhepNam);
             panelInfo.Controls.Add(lblPhepNam);
@@ -333,13 +337,15 @@ namespace QuanLyNhanSu.Forms
             // 
             // nudPhepNam
             // 
+            nudPhepNam.Enabled = false;
             nudPhepNam.Location = new Point(156, 273);
             nudPhepNam.Margin = new Padding(3, 4, 3, 4);
             nudPhepNam.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             nudPhepNam.Name = "nudPhepNam";
             nudPhepNam.ReadOnly = true;
-            nudPhepNam.Size = new Size(201, 27);
+            nudPhepNam.Size = new Size(192, 27);
             nudPhepNam.TabIndex = 26;
+            nudPhepNam.ValueChanged += nudPhepNam_ValueChanged;
             // 
             // lblPhepNam
             // 
@@ -647,6 +653,23 @@ namespace QuanLyNhanSu.Forms
             openFileDialogAnh.Filter = "Tập tin ảnh|*.jpg;*.jpeg;*.png;*.bmp;*.gif|Tất cả tập tin|*.*";
             openFileDialogAnh.Title = "Chọn ảnh nhân viên";
             // 
+            // lblRemainingPaidLeave
+            // 
+            lblRemainingPaidLeave.AutoSize = true;
+            lblRemainingPaidLeave.Location = new Point(17, 313);
+            lblRemainingPaidLeave.Name = "lblRemainingPaidLeave";
+            lblRemainingPaidLeave.Size = new Size(184, 20);
+            lblRemainingPaidLeave.TabIndex = 28;
+            lblRemainingPaidLeave.Text = "Số ngày nghỉ phép còn lại:";
+            // 
+            // txtRemainingPaidLeave
+            // 
+            txtRemainingPaidLeave.Location = new Point(207, 310);
+            txtRemainingPaidLeave.Name = "txtRemainingPaidLeave";
+            txtRemainingPaidLeave.ReadOnly = true;
+            txtRemainingPaidLeave.Size = new Size(141, 27);
+            txtRemainingPaidLeave.TabIndex = 29;
+            // 
             // frmEmployee
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -733,5 +756,7 @@ namespace QuanLyNhanSu.Forms
         private Button btnSaveImediately;
         private Button btnLoadFromFile;
         private Button btnExport;
+        private TextBox txtRemainingPaidLeave;
+        private Label lblRemainingPaidLeave;
     }
 }

@@ -118,6 +118,10 @@ namespace QuanLyNhanSu.Classes
         {
             MaNhanVien = manv;
         }
+        public void UpdatePaidLeave(int soNgayNghiPhep)
+        {
+            SoNgayNghiPhep = soNgayNghiPhep;
+        }
 
     }
     public class ChamCong

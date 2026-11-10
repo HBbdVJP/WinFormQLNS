@@ -298,7 +298,7 @@ namespace QuanLyNhanSu.Forms
             btnLuuBangCong.TabIndex = 3;
             btnLuuBangCong.Text = "Lưu bảng công";
             btnLuuBangCong.UseVisualStyleBackColor = true;
-            btnLuuBangCong.Click += btnLuuBangCong_Click_1;
+            btnLuuBangCong.Click += btnLuuBangCong_Click;
             // 
             // lblTong
             // 
