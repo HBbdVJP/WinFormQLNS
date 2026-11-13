@@ -102,17 +102,15 @@ namespace QuanLyNhanSu.Forms
             panelTop.Controls.Add(lblThang);
             panelTop.Dock = DockStyle.Top;
             panelTop.Location = new Point(0, 0);
-            panelTop.Margin = new Padding(6, 7, 6, 7);
             panelTop.Name = "panelTop";
-            panelTop.Size = new Size(2464, 143);
+            panelTop.Size = new Size(898, 58);
             panelTop.TabIndex = 0;
             // 
             // btnXem
             // 
-            btnXem.Location = new Point(1414, 37);
-            btnXem.Margin = new Padding(6, 7, 6, 7);
+            btnXem.Location = new Point(660, 15);
             btnXem.Name = "btnXem";
-            btnXem.Size = new Size(321, 74);
+            btnXem.Size = new Size(150, 30);
             btnXem.TabIndex = 6;
             btnXem.Text = "Xem bảng lương";
             btnXem.UseVisualStyleBackColor = true;
@@ -121,40 +119,36 @@ namespace QuanLyNhanSu.Forms
             // 
             cboPhong.DropDownStyle = ComboBoxStyle.DropDownList;
             cboPhong.FormattingEnabled = true;
-            cboPhong.Location = new Point(900, 44);
-            cboPhong.Margin = new Padding(6, 7, 6, 7);
+            cboPhong.Location = new Point(420, 18);
             cboPhong.Name = "cboPhong";
-            cboPhong.Size = new Size(467, 45);
+            cboPhong.Size = new Size(220, 23);
             cboPhong.TabIndex = 5;
             // 
             // lblPhong
             // 
             lblPhong.AutoSize = true;
-            lblPhong.Location = new Point(736, 47);
-            lblPhong.Margin = new Padding(6, 0, 6, 0);
+            lblPhong.Location = new Point(343, 19);
             lblPhong.Name = "lblPhong";
-            lblPhong.Size = new Size(152, 37);
+            lblPhong.Size = new Size(68, 15);
             lblPhong.TabIndex = 4;
             lblPhong.Text = "Phòng ban:";
             // 
             // nudNam
             // 
-            nudNam.Location = new Point(514, 44);
-            nudNam.Margin = new Padding(6, 7, 6, 7);
+            nudNam.Location = new Point(240, 18);
             nudNam.Maximum = new decimal(new int[] { 2100, 0, 0, 0 });
             nudNam.Minimum = new decimal(new int[] { 2000, 0, 0, 0 });
             nudNam.Name = "nudNam";
-            nudNam.Size = new Size(193, 43);
+            nudNam.Size = new Size(90, 23);
             nudNam.TabIndex = 3;
             nudNam.Value = new decimal(new int[] { 2026, 0, 0, 0 });
             // 
             // lblNam
             // 
             lblNam.AutoSize = true;
-            lblNam.Location = new Point(410, 47);
-            lblNam.Margin = new Padding(6, 0, 6, 0);
+            lblNam.Location = new Point(191, 19);
             lblNam.Name = "lblNam";
-            lblNam.Size = new Size(80, 37);
+            lblNam.Size = new Size(36, 15);
             lblNam.TabIndex = 2;
             lblNam.Text = "Năm:";
             // 
@@ -162,19 +156,17 @@ namespace QuanLyNhanSu.Forms
             // 
             cboThang.DropDownStyle = ComboBoxStyle.DropDownList;
             cboThang.FormattingEnabled = true;
-            cboThang.Location = new Point(154, 44);
-            cboThang.Margin = new Padding(6, 7, 6, 7);
+            cboThang.Location = new Point(72, 18);
             cboThang.Name = "cboThang";
-            cboThang.Size = new Size(210, 45);
+            cboThang.Size = new Size(100, 23);
             cboThang.TabIndex = 1;
             // 
             // lblThang
             // 
             lblThang.AutoSize = true;
-            lblThang.Location = new Point(32, 54);
-            lblThang.Margin = new Padding(6, 0, 6, 0);
+            lblThang.Location = new Point(15, 22);
             lblThang.Name = "lblThang";
-            lblThang.Size = new Size(97, 37);
+            lblThang.Size = new Size(44, 15);
             lblThang.TabIndex = 0;
             lblThang.Text = "Tháng:";
             // 
@@ -184,11 +176,10 @@ namespace QuanLyNhanSu.Forms
             lvLuong.Dock = DockStyle.Fill;
             lvLuong.FullRowSelect = true;
             lvLuong.GridLines = true;
-            lvLuong.Location = new Point(0, 143);
-            lvLuong.Margin = new Padding(6, 7, 6, 7);
+            lvLuong.Location = new Point(0, 58);
             lvLuong.MultiSelect = false;
             lvLuong.Name = "lvLuong";
-            lvLuong.Size = new Size(2464, 1441);
+            lvLuong.Size = new Size(898, 314);
             lvLuong.TabIndex = 1;
             lvLuong.UseCompatibleStateImageBehavior = false;
             lvLuong.View = View.Details;
@@ -200,48 +191,43 @@ namespace QuanLyNhanSu.Forms
             panelBottom.Controls.Add(btnXuatPhieuLuong);
             panelBottom.Controls.Add(btnTinhLuong);
             panelBottom.Dock = DockStyle.Bottom;
-            panelBottom.Location = new Point(0, 1584);
-            panelBottom.Margin = new Padding(6, 7, 6, 7);
+            panelBottom.Location = new Point(0, 372);
             panelBottom.Name = "panelBottom";
-            panelBottom.Size = new Size(2464, 143);
+            panelBottom.Size = new Size(898, 58);
             panelBottom.TabIndex = 2;
             // 
             // lblThongTin
             // 
             lblThongTin.AutoSize = true;
-            lblThongTin.Location = new Point(1371, 57);
-            lblThongTin.Margin = new Padding(6, 0, 6, 0);
+            lblThongTin.Location = new Point(640, 23);
             lblThongTin.Name = "lblThongTin";
-            lblThongTin.Size = new Size(203, 37);
+            lblThongTin.Size = new Size(90, 15);
             lblThongTin.TabIndex = 3;
             lblThongTin.Text = "Chưa có dữ liệu";
             // 
             // btnXuatBangLuong
             // 
-            btnXuatBangLuong.Location = new Point(836, 30);
-            btnXuatBangLuong.Margin = new Padding(6, 7, 6, 7);
+            btnXuatBangLuong.Location = new Point(390, 12);
             btnXuatBangLuong.Name = "btnXuatBangLuong";
-            btnXuatBangLuong.Size = new Size(471, 84);
+            btnXuatBangLuong.Size = new Size(220, 34);
             btnXuatBangLuong.TabIndex = 2;
             btnXuatBangLuong.Text = "Xuất Bảng Lương (CSV)...";
             btnXuatBangLuong.UseVisualStyleBackColor = true;
             // 
             // btnXuatPhieuLuong
             // 
-            btnXuatPhieuLuong.Location = new Point(354, 30);
-            btnXuatPhieuLuong.Margin = new Padding(6, 7, 6, 7);
+            btnXuatPhieuLuong.Location = new Point(165, 12);
             btnXuatPhieuLuong.Name = "btnXuatPhieuLuong";
-            btnXuatPhieuLuong.Size = new Size(461, 84);
+            btnXuatPhieuLuong.Size = new Size(215, 34);
             btnXuatPhieuLuong.TabIndex = 1;
             btnXuatPhieuLuong.Text = "Xuất Phiếu Lương (TXT)...";
             btnXuatPhieuLuong.UseVisualStyleBackColor = true;
             // 
             // btnTinhLuong
             // 
-            btnTinhLuong.Location = new Point(32, 30);
-            btnTinhLuong.Margin = new Padding(6, 7, 6, 7);
+            btnTinhLuong.Location = new Point(15, 12);
             btnTinhLuong.Name = "btnTinhLuong";
-            btnTinhLuong.Size = new Size(300, 84);
+            btnTinhLuong.Size = new Size(140, 34);
             btnTinhLuong.TabIndex = 0;
             btnTinhLuong.Text = "Tính lương";
             btnTinhLuong.UseVisualStyleBackColor = true;
@@ -252,14 +238,13 @@ namespace QuanLyNhanSu.Forms
             // 
             // frmSalary
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(2464, 1727);
+            ClientSize = new Size(898, 430);
             Controls.Add(lvLuong);
             Controls.Add(panelBottom);
             Controls.Add(panelTop);
-            Margin = new Padding(6, 7, 6, 7);
             Name = "frmSalary";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tính lương và phiếu lương";

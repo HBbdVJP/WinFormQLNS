@@ -261,6 +261,19 @@ namespace QuanLyNhanSu.Forms
 
             string maChucVu = lvChucVu.SelectedItems[0].Text;
 
+            ChucVu cvChon = DSChucVu.FirstOrDefault(
+                x => x.MaChucVu == maChucVu);
+
+            if (cvChon != null && cvChon.QuyenCRUD)
+            {
+                MessageBox.Show(
+                    "Không thể xóa chức vụ này vì nó đang có quyền truy cập đặc biệt.",
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             bool coNhanVien = DSNhanVien.Any(
                 nv => nv.MaChucVu == maChucVu);
 

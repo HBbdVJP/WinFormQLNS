@@ -25,6 +25,7 @@ PhuCap: 1900000
 MaChucVu: CVJrDevOps
 TenChucVu: Junior DevOps Engineer
 PhuCap: 1300000
+QuyenHan: true
 ---
 MaChucVu: CVSrDevOps
 TenChucVu: Senior DevOps Engineer

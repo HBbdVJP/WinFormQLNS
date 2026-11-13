@@ -64,3 +64,508 @@ SoNgayNghiPhep: 0
 LuongCoBan: 35000000
 AnhNhanVien: Resources/Image/BMTruongPhong.png
 ---
+MaNhanVien: MNV07
+TenNhanVien: Nguyễn Minh Backend
+GioiTinh: Nam
+NgaySinh: 03-03-1995
+MaChucVu: CVJrBE
+MaPhongBan: PBIT001
+MaTaiKhoan: TKDN04
+SoNgayNghiPhep: 2
+LuongCoBan: 12000000
+AnhNhanVien: Resources/Image/SaoBienLamIT.png
+---
+MaNhanVien: MNV08
+TenNhanVien: Trần Hoàng Frontend
+GioiTinh: Nữ
+NgaySinh: 27-07-1996
+MaChucVu: CVJrFE
+MaPhongBan: PBIT001
+MaTaiKhoan: TKDN05
+SoNgayNghiPhep: 1
+LuongCoBan: 11000000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV09
+TenNhanVien: Lê Quốc Kế Toán
+GioiTinh: Nam
+NgaySinh: 12-01-1993
+MaChucVu: CVKT
+MaPhongBan: PBTC001B
+MaTaiKhoan: TKDN08
+SoNgayNghiPhep: 3
+LuongCoBan: 15000000
+AnhNhanVien: Resources/Image/BMTruongPhong.png
+---
+MaNhanVien: MNV10
+TenNhanVien: Phạm Thu Ngân
+GioiTinh: Nữ
+NgaySinh: 21-06-1997
+MaChucVu: CVKTT
+MaPhongBan: PBTC001B
+MaTaiKhoan: TKDN08
+SoNgayNghiPhep: 1
+LuongCoBan: 18000000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV11
+TenNhanVien: Võ Ngọc Nhân Sự
+GioiTinh: Nữ
+NgaySinh: 09-11-1994
+MaChucVu: CVNS
+MaPhongBan: PBHR031
+MaTaiKhoan: TKDN06
+SoNgayNghiPhep: 2
+LuongCoBan: 14000000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV12
+TenNhanVien: Đặng Minh Marketing
+GioiTinh: Nam
+NgaySinh: 16-08-1996
+MaChucVu: CVJrMKT
+MaPhongBan: PBMK7F01
+MaTaiKhoan: TKDN09
+SoNgayNghiPhep: 2
+LuongCoBan: 13000000
+AnhNhanVien: Resources/Image/SaoBienLenPM.png
+---
+MaNhanVien: MNV13
+TenNhanVien: Nguyễn Lan Marketing
+GioiTinh: Nữ
+NgaySinh: 25-04-1992
+MaChucVu: CVSrMKT
+MaPhongBan: PBMK7F01
+MaTaiKhoan: TKDN09
+SoNgayNghiPhep: 4
+LuongCoBan: 19000000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV14
+TenNhanVien: Bùi Thanh Marketing
+GioiTinh: Nam
+NgaySinh: 02-12-1998
+MaChucVu: CVJrMKT
+MaPhongBan: PBMK7F02
+MaTaiKhoan: TKDN09
+SoNgayNghiPhep: 1
+LuongCoBan: 12500000
+AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+---
+MaNhanVien: MNV15
+TenNhanVien: Hoàng Anh Quan Hệ Công Chúng
+GioiTinh: Nữ
+NgaySinh: 14-10-1995
+MaChucVu: CVJrPR
+MaPhongBan: PBPR001
+MaTaiKhoan: TKDN09
+SoNgayNghiPhep: 2
+LuongCoBan: 13500000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV16
+TenNhanVien: Trịnh Quang PR
+GioiTinh: Nam
+NgaySinh: 30-05-1991
+MaChucVu: CVSrPR
+MaPhongBan: PBPR001
+MaTaiKhoan: TKDN09
+SoNgayNghiPhep: 3
+LuongCoBan: 20000000
+AnhNhanVien: Resources/Image/SaoBienLenPM.png
+---
+MaNhanVien: MNV17
+TenNhanVien: Đỗ Anh Database
+GioiTinh: Nam
+NgaySinh: 19-09-1994
+MaChucVu: CVJrDB
+MaPhongBan: PBIT005E
+MaTaiKhoan: TKDN01
+SoNgayNghiPhep: 2
+LuongCoBan: 13000000
+AnhNhanVien: Resources/Image/SaoBienLamIT.png
+---
+MaNhanVien: MNV18
+TenNhanVien: Phạm Minh Backend
+GioiTinh: Nam
+NgaySinh: 08-02-1996
+MaChucVu: CVSrBE
+MaPhongBan: PBIT001
+MaTaiKhoan: TKDN11
+SoNgayNghiPhep: 1
+LuongCoBan: 18000000
+AnhNhanVien: Resources/Image/SaoBienLamIT.png
+---
+MaNhanVien: MNV19
+TenNhanVien: Lý Thu QA
+GioiTinh: Nữ
+NgaySinh: 17-05-1997
+MaChucVu: CVJrQA
+MaPhongBan: PBIT001
+MaTaiKhoan: TKDN12
+SoNgayNghiPhep: 2
+LuongCoBan: 11500000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV20
+TenNhanVien: Nguyễn Đức DevOps
+GioiTinh: Nam
+NgaySinh: 24-10-1993
+MaChucVu: CVJrDevOps
+MaPhongBan: PBIT001
+MaTaiKhoan: TKDN13
+SoNgayNghiPhep: 2
+LuongCoBan: 13500000
+AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+---
+MaNhanVien: MNV21
+TenNhanVien: Trần Ngọc Phân Tích
+GioiTinh: Nữ
+NgaySinh: 06-12-1995
+MaChucVu: CVBA
+MaPhongBan: PBIT001
+MaTaiKhoan: TKDN14
+SoNgayNghiPhep: 1
+LuongCoBan: 16000000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV22
+TenNhanVien: Hồ Quốc Frontend
+GioiTinh: Nam
+NgaySinh: 29-03-1998
+MaChucVu: CVJrFE
+MaPhongBan: PBIT001
+MaTaiKhoan: TKDN15
+SoNgayNghiPhep: 3
+LuongCoBan: 11000000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV23
+TenNhanVien: Nguyễn Hà Phân Tích
+GioiTinh: Nữ
+NgaySinh: 13-07-1995
+MaChucVu: CVBA
+MaPhongBan: PBTC001B
+MaTaiKhoan: TKDN16
+SoNgayNghiPhep: 2
+LuongCoBan: 16000000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV24
+TenNhanVien: Lê Minh Business
+GioiTinh: Nam
+NgaySinh: 22-01-1994
+MaChucVu: CVBA
+MaPhongBan: PBTC001B
+MaTaiKhoan: TKDN17
+SoNgayNghiPhep: 1
+LuongCoBan: 17000000
+AnhNhanVien: Resources/Image/SaoBienLenPM.png
+---
+MaNhanVien: MNV25
+TenNhanVien: Phan Thùy Kiểm Tra
+GioiTinh: Nữ
+NgaySinh: 05-09-1996
+MaChucVu: CVJrQA
+MaPhongBan: PBTC001B
+MaTaiKhoan: TKDN18
+SoNgayNghiPhep: 2
+LuongCoBan: 11500000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV26
+TenNhanVien: Vũ Anh Database
+GioiTinh: Nam
+NgaySinh: 18-11-1992
+MaChucVu: CVSrDB
+MaPhongBan: PBTC001B
+MaTaiKhoan: TKDN19
+SoNgayNghiPhep: 3
+LuongCoBan: 19000000
+AnhNhanVien: Resources/Image/SaoBienLamIT.png
+---
+MaNhanVien: MNV27
+TenNhanVien: Đỗ Mai Backend
+GioiTinh: Nữ
+NgaySinh: 26-04-1997
+MaChucVu: CVJrBE
+MaPhongBan: PBTC001B
+MaTaiKhoan: TKDN20
+SoNgayNghiPhep: 1
+LuongCoBan: 12000000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV28
+TenNhanVien: Nguyễn An Nhân Sự
+GioiTinh: Nữ
+NgaySinh: 11-02-1996
+MaChucVu: CVBA
+MaPhongBan: PBHR031
+MaTaiKhoan: TKDN21
+SoNgayNghiPhep: 2
+LuongCoBan: 16000000
+AnhNhanVien: Resources/Image/BMinhHR.png
+---
+MaNhanVien: MNV29
+TenNhanVien: Trần Mai Tuyển Dụng
+GioiTinh: Nữ
+NgaySinh: 20-06-1998
+MaChucVu: CVJrQA
+MaPhongBan: PBHR031
+MaTaiKhoan: TKDN22
+SoNgayNghiPhep: 1
+LuongCoBan: 11500000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV30
+TenNhanVien: Phạm Quốc Hỗ Trợ
+GioiTinh: Nam
+NgaySinh: 09-08-1994
+MaChucVu: CVJrBE
+MaPhongBan: PBHR031
+MaTaiKhoan: TKDN23
+SoNgayNghiPhep: 2
+LuongCoBan: 12000000
+AnhNhanVien: Resources/Image/SaoBienLamIT.png
+---
+MaNhanVien: MNV31
+TenNhanVien: Lê Thu Phân Tích
+GioiTinh: Nữ
+NgaySinh: 15-12-1995
+MaChucVu: CVBA
+MaPhongBan: PBHR031
+MaTaiKhoan: TKDN24
+SoNgayNghiPhep: 3
+LuongCoBan: 15500000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV32
+TenNhanVien: Bùi Minh Kiểm Thử
+GioiTinh: Nam
+NgaySinh: 03-05-1997
+MaChucVu: CVSrQA
+MaPhongBan: PBHR031
+MaTaiKhoan: TKDN25
+SoNgayNghiPhep: 1
+LuongCoBan: 17000000
+AnhNhanVien: Resources/Image/SaoBienLenPM.png
+---
+MaNhanVien: MNV33
+TenNhanVien: Hoàng Minh Marketing
+GioiTinh: Nam
+NgaySinh: 07-01-1996
+MaChucVu: CVJrMKT
+MaPhongBan: PBMK7F01
+MaTaiKhoan: TKDN26
+SoNgayNghiPhep: 2
+LuongCoBan: 13000000
+AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+---
+MaNhanVien: MNV34
+TenNhanVien: Đinh Ngọc Marketing
+GioiTinh: Nữ
+NgaySinh: 18-03-1995
+MaChucVu: CVSrMKT
+MaPhongBan: PBMK7F01
+MaTaiKhoan: TKDN27
+SoNgayNghiPhep: 1
+LuongCoBan: 19000000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV35
+TenNhanVien: Phan Anh Phân Tích
+GioiTinh: Nam
+NgaySinh: 23-08-1994
+MaChucVu: CVBA
+MaPhongBan: PBMK7F01
+MaTaiKhoan: TKDN28
+SoNgayNghiPhep: 3
+LuongCoBan: 16000000
+AnhNhanVien: Resources/Image/SaoBienLenPM.png
+---
+MaNhanVien: MNV36
+TenNhanVien: Nguyễn Thảo QA
+GioiTinh: Nữ
+NgaySinh: 30-10-1997
+MaChucVu: CVJrQA
+MaPhongBan: PBMK7F01
+MaTaiKhoan: TKDN29
+SoNgayNghiPhep: 2
+LuongCoBan: 11500000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV37
+TenNhanVien: Võ Thành PR Marketing
+GioiTinh: Nam
+NgaySinh: 12-06-1993
+MaChucVu: CVJrPR
+MaPhongBan: PBMK7F01
+MaTaiKhoan: TKDN30
+SoNgayNghiPhep: 1
+LuongCoBan: 14000000
+AnhNhanVien: Resources/Image/BMinhHR.png
+---
+MaNhanVien: MNV38
+TenNhanVien: Trương Gia Marketing
+GioiTinh: Nữ
+NgaySinh: 14-02-1998
+MaChucVu: CVJrMKT
+MaPhongBan: PBMK7F02
+MaTaiKhoan: TKDN31
+SoNgayNghiPhep: 2
+LuongCoBan: 12500000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV39
+TenNhanVien: Nguyễn Hoài Marketing
+GioiTinh: Nam
+NgaySinh: 21-05-1996
+MaChucVu: CVSrMKT
+MaPhongBan: PBMK7F02
+MaTaiKhoan: TKDN32
+SoNgayNghiPhep: 1
+LuongCoBan: 18500000
+AnhNhanVien: Resources/Image/SaoBienLenPM.png
+---
+MaNhanVien: MNV40
+TenNhanVien: Lâm Phương Business
+GioiTinh: Nữ
+NgaySinh: 28-09-1994
+MaChucVu: CVBA
+MaPhongBan: PBMK7F02
+MaTaiKhoan: TKDN33
+SoNgayNghiPhep: 3
+LuongCoBan: 16000000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV41
+TenNhanVien: Đặng Quang QA
+GioiTinh: Nam
+NgaySinh: 04-04-1997
+MaChucVu: CVJrQA
+MaPhongBan: PBMK7F02
+MaTaiKhoan: TKDN34
+SoNgayNghiPhep: 2
+LuongCoBan: 11500000
+AnhNhanVien: Resources/Image/SaoBienLamIT.png
+---
+MaNhanVien: MNV42
+TenNhanVien: Phạm Ngọc PR
+GioiTinh: Nữ
+NgaySinh: 16-11-1995
+MaChucVu: CVJrPR
+MaPhongBan: PBMK7F02
+MaTaiKhoan: TKDN35
+SoNgayNghiPhep: 1
+LuongCoBan: 14000000
+AnhNhanVien: Resources/Image/BMinhHR.png
+---
+MaNhanVien: MNV43
+TenNhanVien: Lê Minh Quan Hệ Công Chúng
+GioiTinh: Nam
+NgaySinh: 10-03-1994
+MaChucVu: CVJrPR
+MaPhongBan: PBPR001
+MaTaiKhoan: TKDN36
+SoNgayNghiPhep: 2
+LuongCoBan: 14000000
+AnhNhanVien: Resources/Image/SaoBienLenPM.png
+---
+MaNhanVien: MNV44
+TenNhanVien: Nguyễn Hạ Truyền Thông
+GioiTinh: Nữ
+NgaySinh: 27-07-1996
+MaChucVu: CVJrMKT
+MaPhongBan: PBPR001
+MaTaiKhoan: TKDN37
+SoNgayNghiPhep: 1
+LuongCoBan: 13000000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV45
+TenNhanVien: Trần Đức Phân Tích
+GioiTinh: Nam
+NgaySinh: 08-12-1993
+MaChucVu: CVBA
+MaPhongBan: PBPR001
+MaTaiKhoan: TKDN38
+SoNgayNghiPhep: 3
+LuongCoBan: 16000000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV46
+TenNhanVien: Đỗ Ngọc QA
+GioiTinh: Nữ
+NgaySinh: 19-01-1997
+MaChucVu: CVJrQA
+MaPhongBan: PBPR001
+MaTaiKhoan: TKDN39
+SoNgayNghiPhep: 2
+LuongCoBan: 11500000
+AnhNhanVien: Resources/Image/BMinhHR.png
+---
+MaNhanVien: MNV47
+TenNhanVien: Vũ Hoàng PR
+GioiTinh: Nam
+NgaySinh: 25-05-1992
+MaChucVu: CVJrPR
+MaPhongBan: PBPR001
+MaTaiKhoan: TKDN40
+SoNgayNghiPhep: 1
+LuongCoBan: 14000000
+AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+---
+MaNhanVien: MNV48
+TenNhanVien: Nguyễn Hải Database
+GioiTinh: Nam
+NgaySinh: 06-06-1995
+MaChucVu: CVSrDB
+MaPhongBan: PBIT005E
+MaTaiKhoan: TKDN41
+SoNgayNghiPhep: 2
+LuongCoBan: 19000000
+AnhNhanVien: Resources/Image/SaoBienLamIT.png
+---
+MaNhanVien: MNV49
+TenNhanVien: Phạm Linh Backend
+GioiTinh: Nữ
+NgaySinh: 17-09-1996
+MaChucVu: CVJrBE
+MaPhongBan: PBIT005E
+MaTaiKhoan: TKDN42
+SoNgayNghiPhep: 1
+LuongCoBan: 12000000
+AnhNhanVien: Resources/Image/BMinhVjp.png
+---
+MaNhanVien: MNV50
+TenNhanVien: Lê Anh DevOps
+GioiTinh: Nam
+NgaySinh: 29-11-1994
+MaChucVu: CVJrDevOps
+MaPhongBan: PBIT005E
+MaTaiKhoan: TKDN43
+SoNgayNghiPhep: 3
+LuongCoBan: 13500000
+AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+---
+MaNhanVien: MNV51
+TenNhanVien: Trần Vy QA
+GioiTinh: Nữ
+NgaySinh: 13-04-1997
+MaChucVu: CVSrQA
+MaPhongBan: PBIT005E
+MaTaiKhoan: TKDN44
+SoNgayNghiPhep: 2
+LuongCoBan: 17000000
+AnhNhanVien: Resources/Image/BMinhUI.png
+---
+MaNhanVien: MNV52
+TenNhanVien: Nguyễn Phúc Frontend
+GioiTinh: Nam
+NgaySinh: 22-08-1998
+MaChucVu: CVJrFE
+MaPhongBan: PBIT005E
+MaTaiKhoan: TKDN45
+SoNgayNghiPhep: 1
+LuongCoBan: 11000000
+AnhNhanVien: Resources/Image/SaoBienLenPM.png---

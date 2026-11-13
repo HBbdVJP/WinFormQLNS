@@ -35,6 +35,20 @@ namespace QuanLyNhanSu.Classes
         public string? Email { get; private set; }
         public string? DiaChi { get; private set; }
 
+        private static Image? LoadImageOrFallback(string imagePath)
+        {
+            string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagePath);
+            if (File.Exists(fullPath))
+            {
+                return Image.FromFile(fullPath);
+            }
+
+            string fallbackPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "Resources", "Image", "BMinhVjp.png");
+            return File.Exists(fallbackPath) ? Image.FromFile(fallbackPath) : null;
+        }
+
         //contructor simple
         public NhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime ngaySinh, string maChucVu, string maPhongBan, string maTaiKhoan, int soNgayNghiPhep, decimal luongCoBan, string duongdananh)
         {
@@ -47,7 +61,7 @@ namespace QuanLyNhanSu.Classes
             MaTaiKhoan = maTaiKhoan;
             SoNgayNghiPhep = soNgayNghiPhep;
             LuongCoBan = luongCoBan;
-            AnhNhanVien = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongdananh));
+            AnhNhanVien = LoadImageOrFallback(duongdananh);
             DuongDanAnh = duongdananh;
             DienThoai = "";
             Email = "";
@@ -83,7 +97,7 @@ namespace QuanLyNhanSu.Classes
             MaTaiKhoan = maTaiKhoan;
             SoNgayNghiPhep = soNgayNghiPhep;
             LuongCoBan = luongCoBan;
-            AnhNhanVien = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongdananh)); DuongDanAnh = duongdananh;
+            AnhNhanVien = LoadImageOrFallback(duongdananh); DuongDanAnh = duongdananh;
             DienThoai = dienThoai;
             Email = email;
             DiaChi = diaChi;
@@ -106,7 +120,7 @@ namespace QuanLyNhanSu.Classes
         }
         public void UpdateAnhNV(string duongdananh)
         {
-            AnhNhanVien = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, duongdananh));
+            AnhNhanVien = LoadImageOrFallback(duongdananh);
             DuongDanAnh = duongdananh;
         }
         public void RemoveAnhNV()

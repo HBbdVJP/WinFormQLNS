@@ -269,7 +269,7 @@ namespace QuanLyNhanSu.Forms
             departmentForm.MdiParent = this;
             departmentForm.Hide();
 
-            frmEmployee employeeForm = new frmEmployee(nhanVienList, chucVuList, phongBanList, chamCongComp, nvdangnhap);
+            frmEmployee employeeForm = new frmEmployee(nhanVienList, chucVuList, phongBanList, chamCongComp, nvdangnhap, maTaiKhoan);
             employeeForm.MdiParent = this;
             employeeForm.Show();
 

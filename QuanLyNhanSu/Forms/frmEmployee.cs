@@ -13,7 +13,7 @@ namespace QuanLyNhanSu.Forms
 {
     public partial class frmEmployee : Form
     {
-        public frmEmployee(List<NhanVien> danhsachNV, List<ChucVu> danhsachCV, List<PhongBan> danhsachPB, List<ChamCong> danhsachCC, SessionLogin sessionlogin)
+        public frmEmployee(List<NhanVien> danhsachNV, List<ChucVu> danhsachCV, List<PhongBan> danhsachPB, List<ChamCong> danhsachCC, SessionLogin sessionlogin, string maTaiKhoanDangNhap)
         {
             InitializeComponent();
             DanhSachNhanVien = danhsachNV;
@@ -21,6 +21,65 @@ namespace QuanLyNhanSu.Forms
             DanhSachPhongBan = danhsachPB;
             DanhSachChamCong = danhsachCC;
             NVDangNhap = sessionlogin;
+            this.maTaiKhoanDangNhap = maTaiKhoanDangNhap;
+            KeyPreview = true;
+            KeyDown += frmEmployee_KeyDown;
+            TaoPhimTat();
+        }
+
+        private void TaoPhimTat()
+        {
+            shortcutToolTip.SetToolTip(btnThem, "Thêm (Ctrl+N)");
+            shortcutToolTip.SetToolTip(btnXoa, "Xóa (Delete)");
+            shortcutToolTip.SetToolTip(btnLuu, "Lưu (Ctrl+S)");
+            shortcutToolTip.SetToolTip(btnSaveImediately, "Lưu vào file (Ctrl+Shift+S)");
+            shortcutToolTip.SetToolTip(btnHuy, "Hủy (Esc)");
+            shortcutToolTip.SetToolTip(btnLamMoi, "Làm mới (F5)");
+            shortcutToolTip.SetToolTip(btnLoadFromFile, "Nạp dữ liệu (Ctrl+O)");
+            shortcutToolTip.SetToolTip(btnExport, "Xuất thành file (Ctrl+E)");
+        }
+
+        private void frmEmployee_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                btnXoa.PerformClick();
+            }
+            else if (e.Control && e.KeyCode == Keys.N)
+            {
+                btnThem.PerformClick();
+            }
+            else if (e.Control && e.Shift && e.KeyCode == Keys.S)
+            {
+                btnSaveImediately.PerformClick();
+            }
+            else if (e.Control && e.KeyCode == Keys.S)
+            {
+                btnLuu.PerformClick();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                btnHuy.PerformClick();
+            }
+            else if (e.KeyCode == Keys.F5)
+            {
+                btnLamMoi.PerformClick();
+            }
+            else if (e.Control && e.KeyCode == Keys.O)
+            {
+                btnLoadFromFile.PerformClick();
+            }
+            else if (e.Control && e.KeyCode == Keys.E)
+            {
+                btnExport.PerformClick();
+            }
+            else
+            {
+                return;
+            }
+
+            e.SuppressKeyPress = true;
+            e.Handled = true;
         }
         private readonly string nhanVienFilePath = Path.Combine(
         AppDomain.CurrentDomain.BaseDirectory,
@@ -32,6 +91,8 @@ namespace QuanLyNhanSu.Forms
         public List<PhongBan> DanhSachPhongBan { get; private set; } = new List<PhongBan>();
         public List<ChamCong> DanhSachChamCong { get; private set; } = new List<ChamCong>();
         public SessionLogin NVDangNhap { get; private set; } = new SessionLogin();
+        private readonly ToolTip shortcutToolTip = new ToolTip();
+        private readonly string maTaiKhoanDangNhap;
 
 
         private void frmEmployee_Load(object sender, EventArgs e)
@@ -195,7 +256,7 @@ namespace QuanLyNhanSu.Forms
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
-        {   
+        {
             if (string.IsNullOrWhiteSpace(txtHoTen.Text) || txtHoTen.Text.Any(c => !char.IsLetter(c) && c != ' '))
             {
                 MessageBox.Show("Hãy khai báo Họ tên hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -366,6 +427,46 @@ namespace QuanLyNhanSu.Forms
 
             // Đổ dữ liệu vào các controller
             HienTTLenTxtBox(nv);
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (!NVDangNhap.nvDangNhapQuyenHan || string.IsNullOrWhiteSpace(txtMaNV.Text))
+            {
+                return;
+            }
+
+            NhanVien? nhanVien = DanhSachNhanVien.FirstOrDefault(x => x.MaNhanVien == txtMaNV.Text);
+            if (nhanVien == null)
+            {
+                return;
+            }
+
+            // Ngăn không cho xóa tài khoản đang đăng nhập hoặc nhân viên có chức vụ quản trị viên
+            if (nhanVien.MaTaiKhoan.Equals(maTaiKhoanDangNhap, StringComparison.OrdinalIgnoreCase) ||
+                DanhSachChucVu.Any(cv => cv.MaChucVu == nhanVien.MaChucVu && cv.QuyenCRUD))
+            {
+                MessageBox.Show(
+                    "Không thể xóa tài khoản đang đăng nhập hoặc nhân viên có chức vụ quản trị viên.",
+                    "Cảnh báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult xacNhan = MessageBox.Show(
+                $"Bạn có chắc muốn xóa nhân viên {nhanVien.TenNhanVien}?",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+            if (xacNhan != DialogResult.Yes)
+            {
+                return;
+            }
+
+            DanhSachNhanVien.Remove(nhanVien);
+            DanhSachChamCong.RemoveAll(x => x.MaNhanVien == nhanVien.MaNhanVien);
+            btnLamMoi_Click(btnLamMoi, EventArgs.Empty);
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
@@ -1004,5 +1105,6 @@ namespace QuanLyNhanSu.Forms
 
             txtRemainingPaidLeave.Text = phepConLai < 0 ? "0" : phepConLai.ToString("0");
         }
+
     }
 }
