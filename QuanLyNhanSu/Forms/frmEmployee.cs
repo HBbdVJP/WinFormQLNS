@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using System.ComponentModel;
 using System.Windows.Forms;
 using QuanLyNhanSu.Classes;
 using System.Linq;
@@ -86,10 +87,22 @@ namespace QuanLyNhanSu.Forms
         "Resources", "DummyData", "NhanVien.txt"
         );
 
+        [Browsable(false)]
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+
         public List<NhanVien> DanhSachNhanVien { get; private set; } = new List<NhanVien>();
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<ChucVu> DanhSachChucVu { get; private set; } = new List<ChucVu>();
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<PhongBan> DanhSachPhongBan { get; private set; } = new List<PhongBan>();
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<ChamCong> DanhSachChamCong { get; private set; } = new List<ChamCong>();
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SessionLogin NVDangNhap { get; private set; } = new SessionLogin();
         private readonly ToolTip shortcutToolTip = new ToolTip();
         private readonly string maTaiKhoanDangNhap;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.Forms
@@ -16,8 +17,16 @@ namespace QuanLyNhanSu.Forms
         private string? _maPhongBanDangSua;
         private string? _tenPhongBanCu;
 
+        [Browsable(false)]
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+
         public List<PhongBan> DSPhongBan { get; private set; } = new List<PhongBan>();
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<NhanVien> DSNhanVien { get; private set; } = new List<NhanVien>();
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SessionLogin NVDangNhap { get; private set; } = new SessionLogin();
 
         public frmDepartment(List<PhongBan> DSPB, List<NhanVien> DSNV, SessionLogin sessionlogin)

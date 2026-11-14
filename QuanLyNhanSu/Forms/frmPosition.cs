@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace QuanLyNhanSu.Forms
@@ -15,8 +16,16 @@ namespace QuanLyNhanSu.Forms
         private bool _dangSua = false;
         private string? _maChucVuDangSua = null;
 
+        [Browsable(false)]
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+
         public List<ChucVu> DSChucVu { get; private set; } = new List<ChucVu>();
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<NhanVien> DSNhanVien { get; private set; } = new List<NhanVien>();
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SessionLogin NVDangNhap { get; private set; } = new SessionLogin();
 
         public frmPosition(List<ChucVu> DSCV, List<NhanVien> DSNV, SessionLogin sessionlogin)
