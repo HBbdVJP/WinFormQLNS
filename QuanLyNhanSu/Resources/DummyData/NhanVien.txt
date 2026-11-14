@@ -8,6 +8,9 @@ MaTaiKhoan: TKDN02
 SoNgayNghiPhep: 1
 LuongCoBan: 20000000
 AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+DienThoai: 0900000001
+Email: mnv01@abc.com.vn
+DiaChi: TP. H? Ch? Minh
 ---
 MaNhanVien: MNV02
 TenNhanVien: Sao Biển Làm IT
@@ -19,6 +22,9 @@ MaTaiKhoan: TKDN01
 SoNgayNghiPhep: 1
 LuongCoBan: 18000000
 AnhNhanVien: Resources/Image/SaoBienLamIT.png
+DienThoai: 0900000002
+Email: mnv02@abc.com.vn
+DiaChi: H? N?i
 ---
 MaNhanVien: MNV03
 TenNhanVien: Sao Biển Thích PM
@@ -30,6 +36,9 @@ MaTaiKhoan: TKDN07
 SoNgayNghiPhep: 0
 LuongCoBan: 25000000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000003
+Email: mnv03@abc.com.vn
+DiaChi: ?? N?ng
 ---
 MaNhanVien: MNV04
 TenNhanVien: Bảo Minh HR
@@ -41,6 +50,9 @@ MaTaiKhoan: TKDN06
 SoNgayNghiPhep: 8
 LuongCoBan: 19000000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000004
+Email: mnv04@abc.com.vn
+DiaChi: C?n Th?
 ---
 MaNhanVien: MNV05
 TenNhanVien: Bảo Minh làm UI
@@ -52,6 +64,9 @@ MaTaiKhoan: TKDN05
 SoNgayNghiPhep: 3
 LuongCoBan: 14500000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000005
+Email: mnv05@abc.com.vn
+DiaChi: H?i Ph?ng
 ---
 MaNhanVien: MNV06
 TenNhanVien: Bảo Minh múc Trưởng Phòng
@@ -63,6 +78,9 @@ MaTaiKhoan: TKDN10
 SoNgayNghiPhep: 0
 LuongCoBan: 35000000
 AnhNhanVien: Resources/Image/BMTruongPhong.png
+DienThoai: 0900000006
+Email: mnv06@abc.com.vn
+DiaChi: B?nh D??ng
 ---
 MaNhanVien: MNV07
 TenNhanVien: Nguyễn Minh Backend
@@ -74,6 +92,9 @@ MaTaiKhoan: TKDN04
 SoNgayNghiPhep: 2
 LuongCoBan: 12000000
 AnhNhanVien: Resources/Image/SaoBienLamIT.png
+DienThoai: 0900000007
+Email: mnv07@abc.com.vn
+DiaChi: ??ng Nai
 ---
 MaNhanVien: MNV08
 TenNhanVien: Trần Hoàng Frontend
@@ -85,6 +106,9 @@ MaTaiKhoan: TKDN05
 SoNgayNghiPhep: 1
 LuongCoBan: 11000000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000008
+Email: mnv08@abc.com.vn
+DiaChi: Hu?
 ---
 MaNhanVien: MNV09
 TenNhanVien: Lê Quốc Kế Toán
@@ -96,6 +120,9 @@ MaTaiKhoan: TKDN08
 SoNgayNghiPhep: 3
 LuongCoBan: 15000000
 AnhNhanVien: Resources/Image/BMTruongPhong.png
+DienThoai: 0900000009
+Email: mnv09@abc.com.vn
+DiaChi: Nha Trang
 ---
 MaNhanVien: MNV10
 TenNhanVien: Phạm Thu Ngân
@@ -107,6 +134,9 @@ MaTaiKhoan: TKDN08
 SoNgayNghiPhep: 1
 LuongCoBan: 18000000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000010
+Email: mnv10@abc.com.vn
+DiaChi: V?ng T?u
 ---
 MaNhanVien: MNV11
 TenNhanVien: Võ Ngọc Nhân Sự
@@ -118,6 +148,9 @@ MaTaiKhoan: TKDN06
 SoNgayNghiPhep: 2
 LuongCoBan: 14000000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000011
+Email: mnv11@abc.com.vn
+DiaChi: TP. H? Ch? Minh
 ---
 MaNhanVien: MNV12
 TenNhanVien: Đặng Minh Marketing
@@ -129,6 +162,9 @@ MaTaiKhoan: TKDN09
 SoNgayNghiPhep: 2
 LuongCoBan: 13000000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000012
+Email: mnv12@abc.com.vn
+DiaChi: H? N?i
 ---
 MaNhanVien: MNV13
 TenNhanVien: Nguyễn Lan Marketing
@@ -140,6 +176,9 @@ MaTaiKhoan: TKDN09
 SoNgayNghiPhep: 4
 LuongCoBan: 19000000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000013
+Email: mnv13@abc.com.vn
+DiaChi: ?? N?ng
 ---
 MaNhanVien: MNV14
 TenNhanVien: Bùi Thanh Marketing
@@ -151,6 +190,9 @@ MaTaiKhoan: TKDN09
 SoNgayNghiPhep: 1
 LuongCoBan: 12500000
 AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+DienThoai: 0900000014
+Email: mnv14@abc.com.vn
+DiaChi: C?n Th?
 ---
 MaNhanVien: MNV15
 TenNhanVien: Hoàng Anh Quan Hệ Công Chúng
@@ -162,6 +204,9 @@ MaTaiKhoan: TKDN09
 SoNgayNghiPhep: 2
 LuongCoBan: 13500000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000015
+Email: mnv15@abc.com.vn
+DiaChi: H?i Ph?ng
 ---
 MaNhanVien: MNV16
 TenNhanVien: Trịnh Quang PR
@@ -173,6 +218,9 @@ MaTaiKhoan: TKDN09
 SoNgayNghiPhep: 3
 LuongCoBan: 20000000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000016
+Email: mnv16@abc.com.vn
+DiaChi: B?nh D??ng
 ---
 MaNhanVien: MNV17
 TenNhanVien: Đỗ Anh Database
@@ -184,6 +232,9 @@ MaTaiKhoan: TKDN01
 SoNgayNghiPhep: 2
 LuongCoBan: 13000000
 AnhNhanVien: Resources/Image/SaoBienLamIT.png
+DienThoai: 0900000017
+Email: mnv17@abc.com.vn
+DiaChi: ??ng Nai
 ---
 MaNhanVien: MNV18
 TenNhanVien: Phạm Minh Backend
@@ -195,6 +246,9 @@ MaTaiKhoan: TKDN11
 SoNgayNghiPhep: 1
 LuongCoBan: 18000000
 AnhNhanVien: Resources/Image/SaoBienLamIT.png
+DienThoai: 0900000018
+Email: mnv18@abc.com.vn
+DiaChi: Hu?
 ---
 MaNhanVien: MNV19
 TenNhanVien: Lý Thu QA
@@ -206,6 +260,9 @@ MaTaiKhoan: TKDN12
 SoNgayNghiPhep: 2
 LuongCoBan: 11500000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000019
+Email: mnv19@abc.com.vn
+DiaChi: Nha Trang
 ---
 MaNhanVien: MNV20
 TenNhanVien: Nguyễn Đức DevOps
@@ -217,6 +274,9 @@ MaTaiKhoan: TKDN13
 SoNgayNghiPhep: 2
 LuongCoBan: 13500000
 AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+DienThoai: 0900000020
+Email: mnv20@abc.com.vn
+DiaChi: V?ng T?u
 ---
 MaNhanVien: MNV21
 TenNhanVien: Trần Ngọc Phân Tích
@@ -228,6 +288,9 @@ MaTaiKhoan: TKDN14
 SoNgayNghiPhep: 1
 LuongCoBan: 16000000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000021
+Email: mnv21@abc.com.vn
+DiaChi: TP. H? Ch? Minh
 ---
 MaNhanVien: MNV22
 TenNhanVien: Hồ Quốc Frontend
@@ -239,6 +302,9 @@ MaTaiKhoan: TKDN15
 SoNgayNghiPhep: 3
 LuongCoBan: 11000000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000022
+Email: mnv22@abc.com.vn
+DiaChi: H? N?i
 ---
 MaNhanVien: MNV23
 TenNhanVien: Nguyễn Hà Phân Tích
@@ -250,6 +316,9 @@ MaTaiKhoan: TKDN16
 SoNgayNghiPhep: 2
 LuongCoBan: 16000000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000023
+Email: mnv23@abc.com.vn
+DiaChi: ?? N?ng
 ---
 MaNhanVien: MNV24
 TenNhanVien: Lê Minh Business
@@ -261,6 +330,9 @@ MaTaiKhoan: TKDN17
 SoNgayNghiPhep: 1
 LuongCoBan: 17000000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000024
+Email: mnv24@abc.com.vn
+DiaChi: C?n Th?
 ---
 MaNhanVien: MNV25
 TenNhanVien: Phan Thùy Kiểm Tra
@@ -272,6 +344,9 @@ MaTaiKhoan: TKDN18
 SoNgayNghiPhep: 2
 LuongCoBan: 11500000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000025
+Email: mnv25@abc.com.vn
+DiaChi: H?i Ph?ng
 ---
 MaNhanVien: MNV26
 TenNhanVien: Vũ Anh Database
@@ -283,6 +358,9 @@ MaTaiKhoan: TKDN19
 SoNgayNghiPhep: 3
 LuongCoBan: 19000000
 AnhNhanVien: Resources/Image/SaoBienLamIT.png
+DienThoai: 0900000026
+Email: mnv26@abc.com.vn
+DiaChi: B?nh D??ng
 ---
 MaNhanVien: MNV27
 TenNhanVien: Đỗ Mai Backend
@@ -294,6 +372,9 @@ MaTaiKhoan: TKDN20
 SoNgayNghiPhep: 1
 LuongCoBan: 12000000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000027
+Email: mnv27@abc.com.vn
+DiaChi: ??ng Nai
 ---
 MaNhanVien: MNV28
 TenNhanVien: Nguyễn An Nhân Sự
@@ -305,6 +386,9 @@ MaTaiKhoan: TKDN21
 SoNgayNghiPhep: 2
 LuongCoBan: 16000000
 AnhNhanVien: Resources/Image/BMinhHR.png
+DienThoai: 0900000028
+Email: mnv28@abc.com.vn
+DiaChi: Hu?
 ---
 MaNhanVien: MNV29
 TenNhanVien: Trần Mai Tuyển Dụng
@@ -316,6 +400,9 @@ MaTaiKhoan: TKDN22
 SoNgayNghiPhep: 1
 LuongCoBan: 11500000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000029
+Email: mnv29@abc.com.vn
+DiaChi: Nha Trang
 ---
 MaNhanVien: MNV30
 TenNhanVien: Phạm Quốc Hỗ Trợ
@@ -327,6 +414,9 @@ MaTaiKhoan: TKDN23
 SoNgayNghiPhep: 2
 LuongCoBan: 12000000
 AnhNhanVien: Resources/Image/SaoBienLamIT.png
+DienThoai: 0900000030
+Email: mnv30@abc.com.vn
+DiaChi: V?ng T?u
 ---
 MaNhanVien: MNV31
 TenNhanVien: Lê Thu Phân Tích
@@ -338,6 +428,9 @@ MaTaiKhoan: TKDN24
 SoNgayNghiPhep: 3
 LuongCoBan: 15500000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000031
+Email: mnv31@abc.com.vn
+DiaChi: TP. H? Ch? Minh
 ---
 MaNhanVien: MNV32
 TenNhanVien: Bùi Minh Kiểm Thử
@@ -349,6 +442,9 @@ MaTaiKhoan: TKDN25
 SoNgayNghiPhep: 1
 LuongCoBan: 17000000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000032
+Email: mnv32@abc.com.vn
+DiaChi: H? N?i
 ---
 MaNhanVien: MNV33
 TenNhanVien: Hoàng Minh Marketing
@@ -360,6 +456,9 @@ MaTaiKhoan: TKDN26
 SoNgayNghiPhep: 2
 LuongCoBan: 13000000
 AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+DienThoai: 0900000033
+Email: mnv33@abc.com.vn
+DiaChi: ?? N?ng
 ---
 MaNhanVien: MNV34
 TenNhanVien: Đinh Ngọc Marketing
@@ -371,6 +470,9 @@ MaTaiKhoan: TKDN27
 SoNgayNghiPhep: 1
 LuongCoBan: 19000000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000034
+Email: mnv34@abc.com.vn
+DiaChi: C?n Th?
 ---
 MaNhanVien: MNV35
 TenNhanVien: Phan Anh Phân Tích
@@ -382,6 +484,9 @@ MaTaiKhoan: TKDN28
 SoNgayNghiPhep: 3
 LuongCoBan: 16000000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000035
+Email: mnv35@abc.com.vn
+DiaChi: H?i Ph?ng
 ---
 MaNhanVien: MNV36
 TenNhanVien: Nguyễn Thảo QA
@@ -393,6 +498,9 @@ MaTaiKhoan: TKDN29
 SoNgayNghiPhep: 2
 LuongCoBan: 11500000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000036
+Email: mnv36@abc.com.vn
+DiaChi: B?nh D??ng
 ---
 MaNhanVien: MNV37
 TenNhanVien: Võ Thành PR Marketing
@@ -404,6 +512,9 @@ MaTaiKhoan: TKDN30
 SoNgayNghiPhep: 1
 LuongCoBan: 14000000
 AnhNhanVien: Resources/Image/BMinhHR.png
+DienThoai: 0900000037
+Email: mnv37@abc.com.vn
+DiaChi: ??ng Nai
 ---
 MaNhanVien: MNV38
 TenNhanVien: Trương Gia Marketing
@@ -415,6 +526,9 @@ MaTaiKhoan: TKDN31
 SoNgayNghiPhep: 2
 LuongCoBan: 12500000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000038
+Email: mnv38@abc.com.vn
+DiaChi: Hu?
 ---
 MaNhanVien: MNV39
 TenNhanVien: Nguyễn Hoài Marketing
@@ -426,6 +540,9 @@ MaTaiKhoan: TKDN32
 SoNgayNghiPhep: 1
 LuongCoBan: 18500000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000039
+Email: mnv39@abc.com.vn
+DiaChi: Nha Trang
 ---
 MaNhanVien: MNV40
 TenNhanVien: Lâm Phương Business
@@ -437,6 +554,9 @@ MaTaiKhoan: TKDN33
 SoNgayNghiPhep: 3
 LuongCoBan: 16000000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000040
+Email: mnv40@abc.com.vn
+DiaChi: V?ng T?u
 ---
 MaNhanVien: MNV41
 TenNhanVien: Đặng Quang QA
@@ -448,6 +568,9 @@ MaTaiKhoan: TKDN34
 SoNgayNghiPhep: 2
 LuongCoBan: 11500000
 AnhNhanVien: Resources/Image/SaoBienLamIT.png
+DienThoai: 0900000041
+Email: mnv41@abc.com.vn
+DiaChi: TP. H? Ch? Minh
 ---
 MaNhanVien: MNV42
 TenNhanVien: Phạm Ngọc PR
@@ -459,6 +582,9 @@ MaTaiKhoan: TKDN35
 SoNgayNghiPhep: 1
 LuongCoBan: 14000000
 AnhNhanVien: Resources/Image/BMinhHR.png
+DienThoai: 0900000042
+Email: mnv42@abc.com.vn
+DiaChi: H? N?i
 ---
 MaNhanVien: MNV43
 TenNhanVien: Lê Minh Quan Hệ Công Chúng
@@ -470,6 +596,9 @@ MaTaiKhoan: TKDN36
 SoNgayNghiPhep: 2
 LuongCoBan: 14000000
 AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000043
+Email: mnv43@abc.com.vn
+DiaChi: ?? N?ng
 ---
 MaNhanVien: MNV44
 TenNhanVien: Nguyễn Hạ Truyền Thông
@@ -481,6 +610,9 @@ MaTaiKhoan: TKDN37
 SoNgayNghiPhep: 1
 LuongCoBan: 13000000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000044
+Email: mnv44@abc.com.vn
+DiaChi: C?n Th?
 ---
 MaNhanVien: MNV45
 TenNhanVien: Trần Đức Phân Tích
@@ -492,6 +624,9 @@ MaTaiKhoan: TKDN38
 SoNgayNghiPhep: 3
 LuongCoBan: 16000000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000045
+Email: mnv45@abc.com.vn
+DiaChi: H?i Ph?ng
 ---
 MaNhanVien: MNV46
 TenNhanVien: Đỗ Ngọc QA
@@ -503,6 +638,9 @@ MaTaiKhoan: TKDN39
 SoNgayNghiPhep: 2
 LuongCoBan: 11500000
 AnhNhanVien: Resources/Image/BMinhHR.png
+DienThoai: 0900000046
+Email: mnv46@abc.com.vn
+DiaChi: B?nh D??ng
 ---
 MaNhanVien: MNV47
 TenNhanVien: Vũ Hoàng PR
@@ -514,6 +652,9 @@ MaTaiKhoan: TKDN40
 SoNgayNghiPhep: 1
 LuongCoBan: 14000000
 AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+DienThoai: 0900000047
+Email: mnv47@abc.com.vn
+DiaChi: ??ng Nai
 ---
 MaNhanVien: MNV48
 TenNhanVien: Nguyễn Hải Database
@@ -525,6 +666,9 @@ MaTaiKhoan: TKDN41
 SoNgayNghiPhep: 2
 LuongCoBan: 19000000
 AnhNhanVien: Resources/Image/SaoBienLamIT.png
+DienThoai: 0900000048
+Email: mnv48@abc.com.vn
+DiaChi: Hu?
 ---
 MaNhanVien: MNV49
 TenNhanVien: Phạm Linh Backend
@@ -536,6 +680,9 @@ MaTaiKhoan: TKDN42
 SoNgayNghiPhep: 1
 LuongCoBan: 12000000
 AnhNhanVien: Resources/Image/BMinhVjp.png
+DienThoai: 0900000049
+Email: mnv49@abc.com.vn
+DiaChi: Nha Trang
 ---
 MaNhanVien: MNV50
 TenNhanVien: Lê Anh DevOps
@@ -547,6 +694,9 @@ MaTaiKhoan: TKDN43
 SoNgayNghiPhep: 3
 LuongCoBan: 13500000
 AnhNhanVien: Resources/Image/SaoBienThichDevOps.png
+DienThoai: 0900000050
+Email: mnv50@abc.com.vn
+DiaChi: V?ng T?u
 ---
 MaNhanVien: MNV51
 TenNhanVien: Trần Vy QA
@@ -558,6 +708,9 @@ MaTaiKhoan: TKDN44
 SoNgayNghiPhep: 2
 LuongCoBan: 17000000
 AnhNhanVien: Resources/Image/BMinhUI.png
+DienThoai: 0900000051
+Email: mnv51@abc.com.vn
+DiaChi: TP. H? Ch? Minh
 ---
 MaNhanVien: MNV52
 TenNhanVien: Nguyễn Phúc Frontend
@@ -568,4 +721,8 @@ MaPhongBan: PBIT005E
 MaTaiKhoan: TKDN45
 SoNgayNghiPhep: 1
 LuongCoBan: 11000000
-AnhNhanVien: Resources/Image/SaoBienLenPM.png---
+AnhNhanVien: Resources/Image/SaoBienLenPM.png
+DienThoai: 0900000052
+Email: mnv52@abc.com.vn
+DiaChi: H? N?i
+---
